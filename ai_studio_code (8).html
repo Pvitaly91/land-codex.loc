@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Репетитор англійської мови - [Ім'я Репетитора] | Індивідуальні заняття</title>
+    <meta name="description" content="Професійний репетитор англійської мови. Індивідуальні онлайн-уроки для дорослих та дітей. Підготовка до ЗНО/НМТ, IELTS, TOEFL та розмовна англійська. Запишіться на безкоштовну консультацію!">
+    <meta name="keywords" content="репетитор англійської, англійська мова, вивчення англійської, онлайн уроки, підготовка до ЗНО, IELTS, розмовна англійська">
+    
+    <!-- TailwindCSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts (Optional) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Optional: Add custom styles or overrides here */
+        body {
+            font-family: 'Montserrat', sans-serif;
+        }
+        /* Smooth scrolling for anchor links */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- =========== Header =========== -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-800">English with [Ім'я]</a>
+            <div class="hidden md:flex space-x-6 items-center">
+                <a href="#about" class="text-gray-600 hover:text-blue-500">Про мене</a>
+                <a href="#services" class="text-gray-600 hover:text-blue-500">Послуги</a>
+                <a href="#benefits" class="text-gray-600 hover:text-blue-500">Переваги</a>
+                <a href="#reviews" class="text-gray-600 hover:text-blue-500">Відгуки</a>
+                <a href="#contact" class="text-gray-600 hover:text-blue-500">Контакти</a>
+            </div>
+            <a href="#contact" class="hidden md:block bg-blue-500 text-white py-2 px-4 rounded-full hover:bg-blue-600 transition duration-300">
+                Записатись на урок
+            </a>
+            <!-- Mobile Menu Button (optional) -->
+            <button class="md:hidden text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        <!-- =========== Hero Section =========== -->
+        <section class="bg-blue-50 py-20">
+            <div class="container mx-auto px-6 text-center">
+                <h1 class="text-4xl md:text-6xl font-bold text-gray-800 mb-4">Англійська, яка відкриває світ</h1>
+                <p class="text-lg md:text-xl text-gray-600 mb-8">Індивідуальні заняття з досвідченим репетитором для досягнення ваших цілей</p>
+                <div class="flex justify-center items-center space-x-4">
+                    <a href="#contact" class="bg-yellow-400 text-gray-800 font-bold py-3 px-8 rounded-full hover:bg-yellow-500 transition duration-300">
+                        Безкоштовна консультація
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== About Me Section =========== -->
+        <section id="about" class="py-16 bg-white">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <!-- Replace with actual photo URL -->
+                    <img src="https://images.pexels.com/photos/3769021/pexels-photo-3769021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Фото репетитора [Ім'я]" class="rounded-full shadow-lg mx-auto">
+                </div>
+                <div class="md:w-2/3 md:pl-12">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Привіт, я [Ім'я]!</h2>
+                    <p class="text-gray-600 mb-4">
+                        Маю понад [Кількість] років досвіду у викладанні англійської мови. Моя мета — не просто навчити вас граматиці, а надихнути на вільне спілкування та допомогти досягти ваших особистих і професійних цілей.
+                    </p>
+                    <p class="text-gray-600">
+                        Я використовую комунікативну методику та сучасні інтерактивні інструменти, щоб зробити кожне заняття ефективним та цікавим. Маю сертифікат [Назва сертифікату, напр. TESOL].
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== Services Section =========== -->
+        <section id="services" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6 text-center">
+                <h2 class="text-3xl font-bold text-gray-800 mb-10">Послуги та напрямки навчання</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Service 1 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-2">Загальна англійська</h3>
+                        <p class="text-gray-600">Для тих, хто хоче впевнено спілкуватися у повсякденному житті та подорожах.</p>
+                    </div>
+                    <!-- Service 2 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-2">Підготовка до іспитів</h3>
+                        <p class="text-gray-600">Ефективна підготовка до ЗНО/НМТ, IELTS, TOEFL та інших міжнародних іспитів.</p>
+                    </div>
+                    <!-- Service 3 -->
+                    <div class="bg-white p-8 rounded-lg shadow-md">
+                        <h3 class="text-xl font-bold mb-2">Бізнес-англійська</h3>
+                        <p class="text-gray-600">Для професійного спілкування, ведення переговорів та ділової переписки.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== Benefits Section =========== -->
+        <section id="benefits" class="py-16 bg-white">
+            <div class="container mx-auto px-6 text-center">
+                 <h2 class="text-3xl font-bold text-gray-800 mb-10">Чому обирають мене?</h2>
+                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Benefit 1 -->
+                    <div class="text-center">
+                        <div class="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                            <!-- Icon Placeholder -->
+                            <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Індивідуальна програма</h3>
+                        <p class="text-gray-600">План навчання розробляється під ваші унікальні цілі та рівень.</p>
+                    </div>
+                     <!-- Benefit 2 -->
+                    <div class="text-center">
+                         <div class="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Гнучкий графік</h3>
+                        <p class="text-gray-600">Ви можете обрати зручний час та інтенсивність занять.</p>
+                    </div>
+                     <!-- Benefit 3 -->
+                    <div class="text-center">
+                        <div class="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Сучасні методики</h3>
+                        <p class="text-gray-600">Використання інтерактивних платформ та актуальних матеріалів.</p>
+                    </div>
+                     <!-- Benefit 4 -->
+                    <div class="text-center">
+                         <div class="bg-blue-100 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+                           <svg class="w-10 h-10 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                        </div>
+                        <h3 class="text-lg font-semibold">Гарантований результат</h3>
+                        <p class="text-gray-600">Фокус на ваших цілях та відстеження прогресу після кожного етапу.</p>
+                    </div>
+                 </div>
+            </div>
+        </section>
+
+        <!-- =========== Reviews Section =========== -->
+        <section id="reviews" class="py-16 bg-gray-50">
+            <div class="container mx-auto px-6">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Відгуки учнів</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Review 1 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-gray-600 mb-4">"Завдяки заняттям я успішно склав IELTS на 7.5 і вступив до омріяного університету. Дуже рекомендую!"</p>
+                        <div class="flex items-center">
+                             <div>
+                                <p class="font-semibold text-gray-800">Олександр</p>
+                                <p class="text-sm text-gray-500">Студент</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Review 2 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-gray-600 mb-4">"Нарешті подолала мовний бар'єр! Тепер вільно спілкуюся в подорожах. Заняття завжди цікаві та динамічні."</p>
+                        <div class="flex items-center">
+                            <div>
+                                <p class="font-semibold text-gray-800">Марія</p>
+                                <p class="text-sm text-gray-500">Менеджерка проєктів</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Review 3 -->
+                    <div class="bg-white p-6 rounded-lg shadow-md">
+                        <p class="text-gray-600 mb-4">"Готувалися до ЗНО з нуля, син склав на 190+ балів. Дуже задоволені результатом та індивідуальним підходом."</p>
+                        <div class="flex items-center">
+                            <div>
+                                <p class="font-semibold text-gray-800">Ірина</p>
+                                <p class="text-sm text-gray-500">Мама учня</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =========== Contact Form Section =========== -->
+        <section id="contact" class="py-20 bg-white">
+            <div class="container mx-auto px-6">
+                <div class="max-w-2xl mx-auto text-center">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">Запишіться на безкоштовну консультацію</h2>
+                    <p class="text-gray-600 mb-8">Залиште заявку, і я зв'яжуся з вами, щоб обговорити ваші цілі та підібрати ідеальну програму.</p>
+                </div>
+                <form action="#" method="POST" class="max-w-2xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md">
+                    <div class="mb-4">
+                        <label for="name" class="block text-gray-700 font-semibold mb-2">Ім'я*</label>
+                        <input type="text" id="name" name="name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="contact_info" class="block text-gray-700 font-semibold mb-2">Телефон або Email*</label>
+                        <input type="text" id="contact_info" name="contact_info" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" required>
+                    </div>
+                    <div class="mb-4">
+                        <label for="level" class="block text-gray-700 font-semibold mb-2">Ваш рівень англійської</label>
+                        <select id="level" name="level" class="w-full px-4 py-2 border rounded-lg bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option>Початківець (Beginner)</option>
+                            <option>Середній (Intermediate)</option>
+                            <option>Просунутий (Advanced)</option>
+                            <option>Не впевнений/а</option>
+                        </select>
+                    </div>
+                    <div class="mb-6">
+                        <label for="goal" class="block text-gray-700 font-semibold mb-2">Ваша мета навчання</label>
+                        <textarea id="goal" name="goal" rows="4" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="bg-blue-500 text-white font-bold py-3 px-8 rounded-full hover:bg-blue-600 transition duration-300">
+                            Відправити заявку
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- =========== Footer =========== -->
+    <footer class="bg-gray-800 text-white py-10">
+        <div class="container mx-auto px-6 text-center">
+            <p class="text-xl font-bold mb-4">[Ім'я Репетитора]</p>
+            <div class="flex justify-center space-x-6 mb-6">
+                <!-- Replace with actual social media links -->
+                <a href="#" class="text-gray-400 hover:text-white">Instagram</a>
+                <a href="#" class="text-gray-400 hover:text-white">Telegram</a>
+                <a href="#" class="text-gray-400 hover:text-white">Facebook</a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; 2025 [Ім'я Репетитора]. Всі права захищено.</p>
+            <a href="#" class="text-gray-500 text-sm hover:text-white mt-2 inline-block">Політика конфіденційності</a>
+        </div>
+    </footer>
+    
+    <!-- Lazy loading images script (if needed) -->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let lazyImages = [].slice.call(document.querySelectorAll("img.lazy"));
+            if ("IntersectionObserver" in window) {
+                let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
+                    entries.forEach(function(entry) {
+                        if (entry.isIntersecting) {
+                            let lazyImage = entry.target;
+                            lazyImage.src = lazyImage.dataset.src;
+                            lazyImage.classList.remove("lazy");
+                            lazyImageObserver.unobserve(lazyImage);
+                        }
+                    });
+                });
+                lazyImages.forEach(function(lazyImage) {
+                    lazyImageObserver.observe(lazyImage);
+                });
+            } else {
+                // Fallback for older browsers
+            }
+        });
+    </script>
+</body>
+</html>
