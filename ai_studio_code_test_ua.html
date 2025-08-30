@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cappuc - Репетитор англійської</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Manrope', sans-serif;
+        }
+    </style>
+     <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'cream': '#f4efe9',
+                        'beige': '#e8d8c3',
+                        'soft-brown': '#b39f7a',
+                        'mocha': '#8c7a6d',
+                        'light-amber': '#ffd7a6',
+                    },
+                    fontFamily: {
+                        'serif': ['Lora', 'serif'],
+                        'sans': ['Montserrat', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'xl': '1rem',
+                    },
+                    boxShadow: {
+                        'soft': '0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Заголовок -->
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <h1 class="text-3xl font-bold">Cappuc</h1>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#" class="hover:text-gray-500">Головна</a>
+                <a href="#" class="hover:text-gray-500">Послуги</a>
+                <a href="#" class="hover:text-gray-500">Про мене</a>
+                <a href="#" class="hover:text-gray-500">Відгуки</a>
+                <a href="#" class="hover:text-gray-500">Контакти</a>
+            </nav>
+            <div class="hidden md:flex items-center space-x-2">
+                <button class="bg-gray-200 px-6 py-2 rounded-full font-semibold hover:bg-gray-300">Забронювати</a>
+                <button class="bg-gray-800 text-white px-6 py-2 rounded-full font-semibold hover:bg-gray-700">Почати</a>
+            </div>
+            <div class="md:hidden">
+                <button class="text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Головний розділ -->
+    <main class="bg-gray-100">
+        <div class="relative bg-beige/50 ">
+            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 text-center md:text-left">
+                    <h2 class="text-5xl md:text-7xl font-extrabold text-gray-900 leading-tight">Зустрічайте вашого репетитора з англійської</h2>
+                    <p class="mt-4 text-xl text-gray-600">Допомагаю вам опанувати англійську.</p>
+                </div>
+                 <div class="md:w-1/2 mt-10 md:mt-0">
+                    <img src="Image1.png" alt="Репетитор у кафе" class="rounded-lg shadow-2xl w-full h-full object-cover">
+                </div>
+            </div>
+        </div>
+
+        <!-- Розділ "Мій шлях" -->
+        <section class="py-24 bg-cream">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-4xl font-bold mb-4">Мій шлях</h3>
+                <p class="max-w-3xl mx-auto text-gray-600 mb-12">
+                    Як пристрасний ентузіаст мов, я перетворила свою любов до викладання на повноцінну кар'єру, допомагаючи студентам досягти вільного володіння англійською та впевненості у собі.
+                </p>
+                <img src="Image.png" alt="Кава та записник" class="rounded-lg shadow-xl mx-auto w-full max-w-4xl h-auto">
+            </div>
+        </section>
+
+        <!-- Розділ "Досягнення" -->
+        <section class="bg-beige/50 py-24">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-4xl font-bold mb-12">Мої досягнення</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <p class="text-6xl font-extrabold text-gray-900">2021</p>
+                        <p class="text-gray-600 mt-2">Рік заснування</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-6xl font-extrabold text-gray-900">500+</p>
+                        <p class="text-gray-600 mt-2">Студентів довіряють Cappuccino</p>
+                    </div>
+                    <div class="text-center">
+                        <p class="text-6xl font-extrabold text-gray-900">100%</p>
+                        <p class="text-gray-600 mt-2">В процесі</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Розділ "Послуги" -->
+        <section class="py-24 bg-cream">
+             <div class="container mx-auto px-6 text-center">
+                <h3 class="text-4xl font-bold mb-4">Наші послуги</h3>
+                <p class="max-w-2xl mx-auto text-gray-600 mb-12">
+                    Приєднуйтесь до дружньої та підтримуючої подорожі у вивченні англійської мови з персоналізованими уроками!
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center">
+                        <h4 class="text-2xl font-bold mb-4">Розмовна англійська</h4>
+                        <p class="text-gray-600 mb-6">Беріть участь у реальних діалогах, щоб покращити свої розмовні навички.</p>
+                        <button class="bg-white border border-gray-200 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 w-full">Дізнатися більше</button>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center">
+                        <h4 class="text-2xl font-bold mb-4">Граматичний коучинг</h4>
+                        <p class="text-gray-600 mb-6">Опануйте правила граматики за допомогою індивідуальних вправ та відгуків.</p>
+                         <button class="bg-white border border-gray-200 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 w-full">Дізнатися більше</button>
+                    </div>
+                    <div class="bg-gray-50 p-8 rounded-lg shadow-lg text-center">
+                        <h4 class="text-2xl font-bold mb-4">Допомога з письмом</h4>
+                        <p class="text-gray-600 mb-6">Отримайте поради щодо написання есе, електронних листів та творчих робіт.</p>
+                        <button class="bg-white border border-gray-200 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 w-full">Дізнатися більше</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Інформаційні/контактні сніпети -->
+        <section class="bg-beige/50 py-24">
+             <div class="container mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                     <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h4 class="text-2xl font-bold mb-4">Відгуки</h4>
+                        <p class="text-gray-600 mb-6">Послухайте відгуки наших задоволених студентів про їхній досвід навчання.</p>
+                        <button class="bg-soft-brown text-white font-bold px-8 py-3 rounded-full hover:bg-mocha transition-colors shadow-soft">Читати більше</button>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h4 class="text-2xl font-bold mb-4">Переваги</h4>
+                        <p class="text-gray-600 mb-6">Дізнайтеся про переваги вивчення англійської мови з нами.</p>
+                        <button class="bg-soft-brown text-white font-bold px-8 py-3 rounded-full hover:bg-mocha transition-colors shadow-soft">Дізнатися більше</button>
+                    </div>
+                    <div class="bg-white p-8 rounded-lg shadow-lg">
+                        <h4 class="text-2xl font-bold mb-4">?</h4>
+                        <p class="text-gray-600 mb-6"><Не можете знайти те, що вам потрібно? Звертайтеся!></p>
+                        <button class="bg-soft-brown text-white font-bold px-8 py-3 rounded-full hover:bg-mocha transition-colors shadow-soft">Зв'яжіться з нами</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Зв'яжіться з нами -->
+        <section class="py-24 bg-cream">
+            <div class="container mx-auto px-6 text-center">
+                <h3 class="text-4xl font-bold mb-4">Зв'яжіться з нами</h3>
+                <p class="text-gray-600 mb-12">Ми тут, щоб допомогти вам розпочати вашу мовну подорож!</p>
+                <div class="flex flex-col md:flex-row justify-center gap-8">
+                    <div class="bg-gray-100 p-8 rounded-lg shadow-md w-full md:w-1/3">
+                        <h4 class="text-2xl font-bold">Нью-Йорк</h4>
+                        <p class="text-gray-600 mt-2">вул. Мовна 123, Нью-Йорк, NY 10001</p>
+                    </div>
+                    <div class="bg-gray-100 p-8 rounded-lg shadow-md w-full md:w-1/3">
+                        <h4 class="text-2xl font-bold">Лондон</h4>
+                        <p class="text-gray-600 mt-2">пр. Репетитора 456, Лондон, SW1A 1AA</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Форма зворотного зв'язку -->
+        <section class="bg-beige/50 py-24">
+            <div class="container mx-auto px-6 max-w-3xl">
+                <h3 class="text-4xl font-bold text-center mb-8">Форма зворотного зв'язку</h3>
+                <form class="space-y-6">
+                    <div>
+                        <input type="text" placeholder="Ваше ім'я" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                    </div>
+                     <div>
+                        <input type="email" placeholder="Ваш Email" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400">
+                    </div>
+                    <div>
+                        <textarea placeholder="Ваш відгук" rows="6" class="w-full p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="bg-soft-brown text-white font-bold px-8 py-3 rounded-full hover:bg-mocha transition-colors shadow-soft">Надіслати</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+ 
+    </main>
+
+    <!-- Підвал -->
+    <footer class="bg-beige/50 py-24 border-t border-gray-200 py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div class="md:col-span-2">
+                    <h4 class="text-2xl font-bold">Cappuccino</h4>
+                    <p class="text-gray-500 mt-2">2023 © Cappuccino</p>
+                    <p class="text-gray-500">Репетитор Всі права</p>
+                </div>
+                 <div>
+                    <h5 class="font-bold mb-4">Меню</h5>
+                    <nav class="space-y-2">
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Головна</a>
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Послуги</a>
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Про мене</a>
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Контакти</a>
+                    </nav>
+                </div>
+                <div>
+                    <h5 class="font-bold mb-4">Соціальні мережі</h5>
+                    <nav class="space-y-2">
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Facebook</a>
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Instagram</a>
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Twitter</a>
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Linkedin</a>
+                    </nav>
+                </div>
+                 <div>
+                    <h5 class="font-bold mb-4">Юридична інформація</h5>
+                    <nav class="space-y-2">
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Політика конфіденційності</a>
+                        <a href="#" class="block text-gray-500 hover:text-gray-900">Умови надання послуг</a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
