@@ -299,15 +299,28 @@
           display: none !important ;
         }
       }
-  @media (max-width: 920px) { 
-     .card {
-   
-  
-    width: 90%;
-  
+  @media (max-width: 922px) {
+    .blocks {
+      display: flex;
+      overflow-x: auto;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      gap: 16px;
+      padding-left: 16px;
+      padding-right: 16px;
     }
-      }
-       @media (max-width: 590px) { 
+    .blocks::-webkit-scrollbar {
+      display: none;
+    }
+    .card {
+      flex: 0 0 80%;
+      display: block;
+      width: auto;
+      margin-right: 16px;
+      scroll-snap-align: start;
+    }
+  }
+       @media (max-width: 590px) {
         #main-block-text{
               
               width: 100% ;
