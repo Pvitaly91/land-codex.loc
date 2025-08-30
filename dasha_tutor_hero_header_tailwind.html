@@ -189,7 +189,11 @@
       padding-left: 62px;
       padding-bottom: 62px;
     }
-    @media (max-width: 1280px) { 
+    .slider-arrow,
+    .slider-dots {
+      display: none;
+    }
+    @media (max-width: 1280px) {
       header{
         width: 100%;
       }
@@ -300,11 +304,15 @@
         }
       }
   @media (max-width: 922px) {
+    .slider-container {
+      position: relative;
+    }
     .blocks {
       display: flex;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
       -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
       gap: 16px;
       padding-left: 16px;
       padding-right: 16px;
@@ -318,6 +326,42 @@
       width: auto;
       margin-right: 16px;
       scroll-snap-align: start;
+    }
+    .slider-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.8);
+      border: none;
+      border-radius: 9999px;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #7a555b;
+      font-size: 20px;
+    }
+    .slider-arrow.left { left: 4px; }
+    .slider-arrow.right { right: 4px; }
+    .slider-dots {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 6px;
+    }
+    .slider-dots button {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      background: #d1d5db;
+      padding: 0;
+    }
+    .slider-dots button.active {
+      background: #7a555b;
     }
   }
        @media (max-width: 590px) {
@@ -422,6 +466,7 @@
     <section class="features" >
       <h2 class="title">Що чекає на вас на наших заняттях?</h2>
       <p class="text">Комплексний підхід до ваших цілей.</p>
+      <div class="slider-container">
       <div class="blocks">
         <div class="card">
           
@@ -552,8 +597,90 @@
           <p>Можливість займатися індивідуально або в парі з другом.</p>
         </div>
       </div>
+      <button class="slider-arrow left" aria-label="Попередній">&#10094;</button>
+      <button class="slider-arrow right" aria-label="Наступний">&#10095;</button>
+      <div class="slider-dots"></div>
+      </div>
     </section>
 
   </main>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const container = document.querySelector('.features .blocks');
+      if (!container) return;
+      const cards = container.querySelectorAll('.card');
+      const prevBtn = document.querySelector('.features .slider-arrow.left');
+      const nextBtn = document.querySelector('.features .slider-arrow.right');
+      const dotsWrapper = document.querySelector('.features .slider-dots');
+
+      let current = 0;
+
+      cards.forEach((_, i) => {
+        const dot = document.createElement('button');
+        if (i === 0) dot.classList.add('active');
+        dot.addEventListener('click', () => {
+          current = i;
+          scrollToCurrent();
+          resetAuto();
+        });
+        dotsWrapper.appendChild(dot);
+      });
+
+      function scrollToCurrent() {
+        container.scrollTo({
+          left: cards[current].offsetLeft,
+          behavior: 'smooth'
+        });
+        updateDots();
+      }
+
+      function updateDots() {
+        dotsWrapper.querySelectorAll('button').forEach((dot, i) => {
+          dot.classList.toggle('active', i === current);
+        });
+      }
+
+      function nextSlide() {
+        current = (current + 1) % cards.length;
+        scrollToCurrent();
+      }
+
+      function prevSlide() {
+        current = (current - 1 + cards.length) % cards.length;
+        scrollToCurrent();
+      }
+
+      nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAuto();
+      });
+      prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAuto();
+      });
+
+      let auto = setInterval(nextSlide, 10000);
+      function resetAuto() {
+        clearInterval(auto);
+        auto = setInterval(nextSlide, 10000);
+      }
+
+      let scrollTimeout;
+      container.addEventListener('scroll', () => {
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(() => {
+          let scrollLeft = container.scrollLeft;
+          let closest = 0;
+          let min = Infinity;
+          cards.forEach((card, i) => {
+            const diff = Math.abs(card.offsetLeft - scrollLeft);
+            if (diff < min) { min = diff; closest = i; }
+          });
+          current = closest;
+          updateDots();
+        }, 100);
+      });
+    });
+  </script>
 </body>
 </html>
