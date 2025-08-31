@@ -37,6 +37,7 @@
 html, body{
   font-family: "Montserrat", sans-serif !important;
   background-color: var(--bg-page);
+  scroll-behavior: smooth;
 }
 
 /* опціональні класи */
@@ -583,7 +584,7 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
               Давайте досягати ваших мовних цілей разом!
             </p>
  
-            <a href="#trial" id="try-first-leson">
+            <a href="#signup" id="try-first-leson">
               Спробувати перший урок безкоштовно
             </a>
             
@@ -596,11 +597,11 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
        
       </div>
     </section>
-    <section class="about" >
+    <section id="about" class="about" >
       <h2 class="title">Кілька слів про мене</h2>
       <p class="text">Моя головна мета — не просто навчити вас граматики, а закохати в англійську мову. Я вірю, що навчання має бути комфортним та надихаючим. Саме тому я створюю на уроках невимушену та дружню атмосферу, де кожен учень почувається впевнено, не боїться ставити питання та робити помилки, адже вони — невід'ємна частина прогресу.</p>
     </section>
-    <section class="features" >
+    <section id="services" class="features" >
       <h2 class="title">Що чекає на вас на наших заняттях?</h2>
       <p class="text">Комплексний підхід до ваших цілей.</p>
       <div class="slider-container">
@@ -740,7 +741,7 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
       </div>
     </section>
   
-<section class="result bg-white py-12 md:py-20">
+<section id="approach" class="result bg-white py-12 md:py-20">
   <div class="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center md:items-start gap-10">
     <!-- Ліва колонка -->
     <div class="w-full md:w-2/5 text-center md:text-left">
@@ -812,7 +813,7 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
   </div>
 </section>
 
-<section class="form bg-white py-16 text-center">
+<section id="signup" class="form bg-white py-16 text-center">
   <div class="mx-auto max-w-3xl px-4">
     <h3 class="text-[#030303] text-[32px] sm:text-[48px] lg:text-[60px] font-medium leading-tight mb-4">
       Готові розпочати?
@@ -866,6 +867,19 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
   </main>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href').substring(1);
+          const target = document.getElementById(targetId);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+            const mobileNav = document.getElementById('mnav');
+            if (mobileNav) mobileNav.classList.remove('open');
+          }
+        });
+      });
+
       const container = document.querySelector('.features .blocks');
       if (!container) return;
       const cards = container.querySelectorAll('.card');
