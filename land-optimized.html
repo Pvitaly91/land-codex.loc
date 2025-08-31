@@ -9,639 +9,517 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  <style>
-   :root { --brand: #d6b7ae; }
+<style>
+  /* =========================
+   Base & Variables
+========================= */
+:root{
+  --brand:        #d6b7ae;
+  --bg-page:      #634956;
+  --ink:          #030303;
+  --ink-muted:    #4b5563;
+  --ink-accent:   #6A8793;
+  --rose:         #7a555b;
+  --rose-200:     #FFEBEC;
+  --amber-50:     #fef6db;
+  --sand-50:      rgba(255,244,231,0.82);
+  --card-bg:      #e5d0ed;
+  --primary:      #7a555b;
+  --primary-weak: #d28e70;
+  --footer-bg:    #d6e2eb;
 
-html, body {
-  font-family: "Montserrat" !important;
-  background-color: #634956;
+  --radius:       8px;
+  --radius-lg:    12px;
+  --shadow-sm:    0 0 10px rgba(0,0,0,0.1);
+  --shadow-md:    0 10px 15px rgba(0,0,0,0.1);
 }
 
-/* за бажанням: класи */
-.font-display, .font-sans {
-  font-family: "Montserrat", sans-serif;
+html, body{
+  font-family: "Montserrat", sans-serif !important;
+  background-color: var(--bg-page);
 }
 
-    header, #mnav {
-      background-color: rgba(255,244,231,0.82);
-      box-shadow: 2px -2px 10px rgba(3,3,3,0.1);
+/* опціональні класи */
+.font-display, .font-sans{ font-family: "Montserrat", sans-serif; }
 
-      color: #7a555b;
-      font-size: 24px;
-    
-      line-height: 31px;
-      margin: auto !important;
-    }
-    #mnav {
-      opacity: 0;
-      transform: translateY(-10px);
-      transition: opacity 0.3s ease, transform 0.3s ease;
-      pointer-events: none;
-    }
-    #mnav.open {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    #main-photo{
-      position: absolute;
-      top: -85px;
-      left:50%;
-      width: 50%;
-      height: 900px;
-   
-      background-image: url(img/main.jpg);
-      background-position: -20px ;
-      background-size: cover;
-      background-repeat: no-repeat;
+/* =========================
+   Header / Nav
+========================= */
+header, #mnav{
+  background-color: var(--sand-50);
+  box-shadow: 2px -2px 10px rgba(3,3,3,0.1);
+  color: #7a555b;
+  font-size: 24px;
+  line-height: 31px;
+  margin: auto !important;
+}
 
-    }
-    .order-lesson{
-     
-      cursor: pointer;
-      top: 29px;
-      left: 1043px;
-      width: 206px;
-      height: 52px;
-      padding: 0px 8px;
-      border: 0;
-      box-sizing: border-box;
-      border-radius: 8px;
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-      background-color: #d28e70;
-      color: rgba(250,250,248,0.83);
-      font-size: 18px;
-      font-family: "Roboto";
-      font-weight: 500;
-      line-height: 23px;
-      outline: none;
-      text-align: center;
-      padding-top: 1rem;
+#mnav{
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity .3s ease, transform .3s ease;
+  pointer-events: none;
+}
+#mnav.open{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
 
-    }
-    nav{
-      color: #030303;
-      font-size: 24px;
-    
-      line-height: 19px;
-    }
-    h1.main {
-      color: #AF6B38;
-      font-size: 52px;
-    
-      font-weight: 500;
-      line-height: 68px;
-    }
-      h1.main span{
-        color: #6A8793;
-      }
-    h1.main strong{
-      font-weight: 600;
-    }
+nav{
+  color: var(--ink);
+  font-size: 24px;
+  line-height: 19px;
+}
 
-    .text-block{
-      margin-top: 50px;
-      color: #7a555b;
-      font-size: 24px;
-      line-height: 31px;
-    }
-    #manu-button-burger{
-      display: none;
-    }
-    #try-first-leson{
-      
-      text-align: center;
-      display: inline-block;
-      cursor: pointer;
-      top: 657px;
-      left: 91px;
-      width: 571px;
-      height: 65px;
-      padding: 0px 8px;
-      border: 0;
-      box-sizing: border-box;
-      border-radius: 8px;
-      box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-      background-color: #7a555b;
-      color: #ffffff;
-      font-size: 24px;
-      font-family: "Roboto";
-      font-weight: 500;
-      line-height: 61px;
-      outline: none;
-      margin-top: 60px;
-    }
-  section.about{
- background-color: white;
+/* =========================
+   Hero
+========================= */
+#main-photo{
+  position: absolute;
+  top: -85px;
+  left: 50%;
+  width: 50%;
+  height: 900px;
+  background: url(img/main.jpg) -20px center / cover no-repeat;
+}
+
+h1.main{
+  color: #AF6B38;
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 68px;
+}
+h1.main span{ color: var(--ink-accent); }
+h1.main strong{ font-weight: 600; }
+
+.text-block{
+  margin-top: 50px;
+  color: #7a555b;
+  font-size: 24px;
+  line-height: 31px;
+}
+
+/* кнопка у хедері */
+.order-lesson{
+  cursor: pointer;
+  position: relative; /* зберігаємо положення, якщо залежало від top/left */
+  width: 206px;
+  height: 52px;
+  padding: 1rem 8px 0; /* збережено відступ зверху */
+  border: 0;
+  box-sizing: border-box;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  background-color: var(--primary-weak);
+  color: rgba(250,250,248,0.83);
+  font: 500 18px/23px "Roboto", sans-serif;
+  text-align: center;
+  outline: none;
+}
+
+/* CTA в геро */
+#try-first-leson{
+  display: inline-block;
+  cursor: pointer;
+  text-align: center;
+  width: 571px;
+  height: 65px;
+  margin-top: 60px;
+  padding: 0 8px;
+  border: 0;
+  box-sizing: border-box;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  background-color: var(--primary);
+  color: #fff;
+  font: 500 24px/61px "Roboto", sans-serif;
+  outline: none;
+}
+
+#manu-button-burger{ display: none; }
+
+/* =========================
+   About
+========================= */
+section.about{
+  background-color: #fff;
   min-height: 450px;
-   padding-top: 60px;
-  }  
-  
- .title {
-  color: #030303;
+  padding-top: 60px;
+}
+
+.title{
+  color: var(--ink);
   font-size: 42px;
   font-weight: 500;
   line-height: 52px;
   text-align: center;
-  margin:  0px auto 60px;
+  margin: 0 auto 60px;
 }
-.text {
-  color: #4b5563;
+
+.text{
+  color: var(--ink-muted);
   font-size: 24px;
   line-height: 31px;
   text-align: center;
   max-width: 950px;
-  margin: 0px auto 40px;;
-} 
+  margin: 0 auto 40px;
+}
 
-
+/* =========================
+   Features
+========================= */
 .features{
-  background-color: #FFEBEC;
-   min-height: 450px;
-    padding-top: 60px;
+  background-color: var(--rose-200);
+  min-height: 450px;
+  padding-top: 60px;
+}
+.features .title{ color: #7A555B; }
+.features .text{ color: var(--ink-accent); }
+
+.blocks{
+  padding: 0 0 62px 62px;
 }
 
-.features .title {
-  color: #7A555B;
-  
+.card{
+  display: inline-block;
+  width: 30%;
+  height: 156px;
+  margin-top: 32px;
+  margin-right: 32px;
+  background-color: var(--card-bg);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
 }
-.features .text {
-  color: #6A8793;
- 
-} 
-  .card {
-    margin-top: 32px;
-    margin-right: 32px;
-    display: inline-block;
-  
-    left: 59px;
-    width: 30%;
-    height: 156px;
-    background-color: #e5d0ed;
-    border-radius: 12px;
-    box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
-  } 
-  .card h3{
-    margin-top: 24px;
-    margin-left: 17px;
-  color: #030303;
-    font-size: 20px;
-    font-family: "Roboto";
-    font-weight: 500;
-    line-height: 28px;
-    }
-
-  .card p{
-    margin-top: 8px;
-    margin-left: 62px;
-      color: #4b5563;
-      font-size: 16px;
-      font-family: "Roboto";
-      font-weight: 500;
-      line-height: 24px;
-      width: 70%;
-  }
-    .blocks{
-      padding-left: 62px;
-    
-      padding-bottom: 62px;
-    }
-    .slider-arrow,
-    .slider-dots {
-      display: none;
-    }
-    @media (max-width: 1280px) {
-      header{
-        width: 100%;
-      }
-      #main-photo{
-        left:52%;
-        width: 48%;
-      }
-      #main-block-text{
-  
-        margin-left: 30px;
-      }
-  
-    .card {
-      width: 45%;
-    }
-  }
-   #main-block-text div{
-    padding-right: 20px;
-   }
-
-      .result{
-        background-color: white;
-        display: flex;
-        min-height: 450px;
-        align-items: center;  
-      
-      }
-   .result .first {
-
-        
-        justify-content: center; /* горизонтально по центру (можна забрати) */
-        width: 39%;
-
-      }
-
-      .result h3, .trevel h3{
-         color: #000000;
-        font-size: 52px;
-      
-        font-weight: 500;
-        line-height: 68px;
-        margin-left: 82px;
-        
-      }
-      .result .second{
-         vertical-align: middle;
-        
-         width: 60%;
-        margin-left: 4%;
-      }
-.result .second p:first-of-type {
-  margin-top: 0;
+.card h3{
+  margin: 24px 0 0 17px;
+  color: var(--ink);
+  font: 500 20px/28px "Roboto", sans-serif;
 }
-       .result .second p {
-        color: #6a8793;
-          font-size: 24px;
-          margin-top: 4%;
-          line-height: 31px;
-          margin-right: 10%;;
-          
-       }
-       .result .second p span{
-        color:black;
-       }
+.card p{
+  width: 70%;
+  margin: 8px 0 0 62px;
+  color: var(--ink-muted);
+  font: 500 16px/24px "Roboto", sans-serif;
+}
 
-       .trevel{
-        padding-top: 126px;
-        padding-bottom: 98px;
-       
-  background-color: #fef6db;
-       }
-       .trevel .first, .trevel .second{
+/* слайдер на мобі */
+.slider-arrow, .slider-dots{ display: none; }
+
+/* =========================
+   Result
+========================= */
+.result{
   display: flex;
-       }
-       .trevel img{
-        width: 570px;
-        height: auto;
-        margin-right: 74px;
-        margin-left: 91px;
-        
-       }
-       .trevel div h3{
-        margin-left: 0px;
-        color: #595236;
-        font-size: 42px;
-        font-weight: 500;
-        line-height: 52px;
-        
-       }
-       .trevel div{
-          margin-right: 60px;
-       }
+  align-items: center;
+  min-height: 450px;
+  background-color: #fff;
+}
+.result .first{ width: 39%; justify-content: center; }
+.result .second{ width: 60%; margin-left: 4%; vertical-align: middle; }
+.result h3, .trevel h3{
+  color: #000;
+  font-size: 52px;
+  font-weight: 500;
+  line-height: 68px;
+}
+.result .second p:first-of-type{ margin-top: 0; }
+.result .second p{
+  margin-top: 4%;
+  margin-right: 10%;
+  color: var(--ink-accent);
+  font-size: 24px;
+  line-height: 31px;
+}
+.result .second p span{ color: #000; }
 
-       .trevel div p {
-        margin-top: 40px;
-        color: #4b5563;
-        font-size: 24px;
-        line-height: 31px;
+/* =========================
+   Travel
+========================= */
+.trevel{
+  padding: 126px 0 98px;
+  background-color: var(--amber-50);
+}
+.trevel .first, .trevel .second{ display: flex; }
+.trevel img{
+  width: 570px;
+  height: auto;
+  margin: 0 74px 0 91px;
+}
+.trevel div h3{
+  margin-left: 0;
+  color: #595236;
+  font-size: 42px;
+  font-weight: 500;
+  line-height: 52px;
+}
+.trevel div{ margin-right: 60px; }
+.trevel div p{
+  margin-top: 40px;
+  color: var(--ink-muted);
+  font-size: 24px;
+  line-height: 31px;
+}
+.trevel .second{ margin-top: -200px; }
+.trevel .second div{
+  margin-left: 91px;
+  padding-top: 250px;
+}
 
-       }
-       .trevel .second{
-        margin-top: -200px;
-       }
-      .trevel .second div{
-         margin-left: 91px;
-          padding-top: 250px;
-         
-      }
-      
-      footer{
-          height: 290.21239458815126px;
-          background-color: #d6e2eb;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          padding-right: 100px;
-      }
-      footer img{
-        margin-left: 100px;
-        width: 300px;
-        height: 70px;
-     
-      }
-      footer p, footer h5 {
-          color: #212225;
-          font-size: 18px;
-          
+/* =========================
+   Footer
+========================= */
+footer{
+  display: grid;
+  grid-template-columns: auto 1fr auto; /* ліво-центр-право */
+  align-items: center;
+  min-height: 240px;
+  padding: 24px 100px;                  /* 100px зліва/справа на десктопі */
+  background-color: var(--footer-bg);
+  gap: 16px;
+}
+footer img{
+  width: 250px;
+  height: 50px;
+  margin-left: 0;                        /* забираємо старий margin */
+}
+footer p, footer h5{
+  color: #212225;
+  font-size: 18px;
+  line-height: 24px;
+  margin: 0;
+}
+footer p{
+  text-align: center;
+}
+footer h5{ font-weight: 500; margin-bottom: 8px; text-align: right; }
+footer div p{ margin-top: 6px; width: 250px; text-align: right; }
 
-          line-height: 24px;
-      }
-      footer h5{
-          font-weight: 500;
-          margin-bottom: 0px;
-      }
-      footer div p{
-        margin-top: 10px;
-      }
+/* =========================
+   Contact Form
+========================= */
+section.form{
+  background-color: #fff;
+  padding-top: 132px;
+  text-align: center;
+}
+.form{ padding-bottom: 120px; }
 
-      section.form{
-        background-color: white;
-        padding-top: 132px;
-        text-align: center;
-      }
-
-      .form{
-        padding-bottom: 120px;
-      }
-      .form h3 {
-  color: #030303;
+.form h3{
+  color: var(--ink);
   font-size: 60px;
-
   font-weight: 500;
   line-height: 70px;
   text-align: center;
-   margin-bottom: 20px;
+  margin-bottom: 20px;
 }
-.form p {
-    color: #4b5563;
+.form p{
+  max-width: 700px;
+  margin: 0 auto;
+  color: var(--ink-muted);
   font-size: 24px;
-
   line-height: 31px;
   text-align: center;
- 
-  max-width: 700px;
-  margin: auto;
 }
-.form form{
-  margin-top: 50px;
-}
-.form form input{
+.form form{ margin-top: 50px; }
 
-    width: 35%;
-    height: 52px;
-    padding: 0px 8px;
-    border: 1px solid #d3d3d3;
-    box-sizing: border-box;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 16px;
-    font-family: "Roboto";
-    line-height: 20px;
-    outline: none;
-    display: block;
-    margin: 20px auto;
-  }
-  .form textarea{
-  
-    width:  35%;
-    height: 108px;
-    padding: 0px 8px;
-    border: 1px solid #d3d3d3;
-    box-sizing: border-box;
-    border-radius: 8px;
-    box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-    background-color: #ffffff;
-    color: #000000;
-    font-size: 14px;
-    font-family: "Roboto";
-    line-height: 24px;
-    outline: none;
-    display: block;
-     margin: 0px auto 20px;
-  }
-
-  button {
-  cursor: pointer;
- width:  35%;
-  height: 59px;
-  padding: 0px 8px;
-  border: 0;
+.form form input,
+.form textarea{
   box-sizing: border-box;
-  border-radius: 8px;
-  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
-  background-color: #7a555b;
-  color: #ffffff;
-  font-size: 20px;
-  font-family: "Roboto";
-  font-weight: 500;
-  line-height: 26px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  background-color: #fff;
+  color: #000;
   outline: none;
-    display: block;
-margin-left: auto;
-margin-right: auto;
-
-}
-     @media (max-width: 1200px) { 
-      h1.main {
-        font-size: 42px;
-        line-height: 52px;
-      }
-      #main-block-text{
-        width: 530px;
-    
-      }
-       #main-photo{
-        left:54%;
-        width: 46%;
-      }
-      #try-first-leson{
-        width: 471px;
-        height: 65px;
-        font-size: 24px;
-        font-weight: 500;
-        line-height: 61px;
-        margin-top: 60px;
-      }
-      .text-block{
-        margin-top: 35px;
-        font-size: 22px;
-        line-height: 28px;
-      }
-    }
-   @media (max-width: 1100px) { 
-      #main-block-text div{
-        max-width: 500px ;
-    
-      }
-    }
-
-      @media (max-width: 1024px) { 
-    
-      #main-block-text{
-        position: absolute; 
-        top:30px;
-        background-color: rgba(255,255,255,0.6);
-        width: 70% ;
-        height: 100%; 
-        margin-left: 0px ;
-          
-        right: 0%; 
-      }
-      #main-block-text div{
-        text-align: center;
-        margin-top: 150px;
-        max-width: 80% ;
-        margin-left: 10% ;
-      }
-      #main-left-block{
-        background-image: url(img/main.jpg);
-        background-position: -40px 10px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-size: 108%;
-      }
-
-
-   .about-text {
-    padding: 5%;
- 
- 
+  display: block;
+  margin: 20px auto;
+  border: 1px solid #d3d3d3;
+  padding: 0 8px;
+  font-family: "Roboto", sans-serif;
 }
 
-      #main-photo{ display: none;  }
-    }
-     @media (max-width: 930px) { 
-   
-        #try-first-leson{
-          width: auto;
-          height: auto;
-          font-size: 16px;
-          font-weight: 500;
-          line-height: 31px;
-          margin-top: 60px;
-          padding: 2% 5%;
-        }
-        #manu-button-burger{
-          display: block;
-        }
-         nav{
-          display: none !important ;
-        }
-       
-      }
-  @media (max-width: 888px) {
-    .slider-container {
-      position: relative;
-    }
-    .blocks {
-      display: flex;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scroll-behavior: smooth;
-      padding: 0 16px;
-    }
-    .blocks::-webkit-scrollbar {
-      display: none;
-    }
-    .blocks{
-              margin-left: 32px;
-    }
-    .card {
-      flex: 0 0 100%;
-      display: block;
-      width: 100%;
-      scroll-snap-align: start;
-    }
-    .slider-arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255,255,255,0.8);
-      border: none;
-      border-radius: 9999px;
-      width: 32px;
-      height: 32px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #7a555b;
-      font-size: 20px;
-    }
-    .slider-arrow.left { left: 4px; }
-    .slider-arrow.right { right: 4px; }
-    .slider-dots {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 6px;
-    }
-    .slider-dots button {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      border: none;
-      background: #d1d5db;
-      padding: 0;
-    }
-    .slider-dots button.active {
-      background: #7a555b;
-    }
+.form form input{
+  height: 52px;
+  font-size: 16px;
+  line-height: 20px;
+}
+.form textarea{
+  height: 108px;
+  font-size: 14px;
+  line-height: 24px;
+  margin-bottom: 20px;
+}
+
+/* глобальна кнопка (залишаю як у вас, щоб не ламати інші місця) */
+button.form-btn{
+  cursor: pointer;
+  width: 35%;
+  height: 59px;
+  margin-left: auto;
+  margin-right: auto;
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-sm);
+  background-color: var(--primary);
+  color: #fff;
+  font: 500 20px/26px "Roboto", sans-serif;
+  padding: 0 8px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+/* =========================
+   Media Queries
+========================= */
+@media (max-width: 1280px){
+  header{ width: 100%; }
+  #main-photo{ left: 52%; width: 48%; }
+  #main-block-text{ margin-left: 30px; }
+  .card{ width: 45%; }
+}
+
+#main-block-text div{ padding-right: 20px; }
+
+@media (max-width: 1200px){
+  h1.main{ font-size: 42px; line-height: 52px; }
+  #main-block-text{ width: 530px; }
+  #main-photo{ left: 54%; width: 46%; }
+  #try-first-leson{
+    width: 471px; height: 65px;
+    font-size: 24px; font-weight: 500; line-height: 61px;
+    margin-top: 60px;
   }
-   @media (max-width: 703px) {
-   section.about {
-            background-color: white;
-            min-height: 370px;
-            padding: 30px 30px;
-        }
+  .text-block{ margin-top: 35px; font-size: 22px; line-height: 28px; }
+}
 
-        .text, .text-block {
+@media (max-width: 1100px){
+  #main-block-text div{ max-width: 500px; }
+}
 
-          font-size: 18px;
-          line-height: 24px;
-         
-        }
-         h1.main {
-            font-size: 32px;
-            line-height: 42px;
-        }
-        #main-left-block{
-          height: 615px;
-        }
-   }
-   @media (max-width: 609px) {
-      #try-first-leson{
-        margin-top:30px
-      }
-    
-   }
-       @media (max-width: 590px) {
-        #main-block-text{
-              
-              width: 100% ;
-            
-            }
+@media (max-width: 1024px){
+  #main-block-text{
+    position: absolute;
+    top: 30px;
+    right: 0;
+    width: 70%;
+    height: 100%;
+    margin-left: 0;
+    background-color: rgba(255,255,255,0.6);
+  }
+  #main-block-text div{
+    max-width: 80%;
+    margin: 150px 0 0 10%;
+    text-align: center;
+  }
+  #main-left-block{
+    background: url(img/main.jpg) -40px 10px / 108% no-repeat;
+  }
+  .about-text{ padding: 5%; }
+  #main-photo{ display: none; }
+  footer h5{ font-weight: 500; margin-bottom: 8px; text-align: center; }
+footer div p{ margin-top: 6px; width: 250px; text-align: center; }
+}
+@media (max-width: 1024px){
+  footer{
+    grid-template-columns: 1fr;          /* колона на планшет/мобілку */
+    justify-items: center;
+    text-align: center;
+    padding: 24px 20px;                  /* менші бокові відступи */
+    row-gap: 12px;
+  }
+  footer img{
+    width: 220px; height: auto;
+  }
+}
+@media (max-width: 930px){
+  #try-first-leson{
+    width: auto; height: auto;
+    padding: 2% 5%;
+    font-size: 16px; font-weight: 500; line-height: 31px;
+    margin-top: 60px;
+  }
+  #manu-button-burger{ display: block; }
+  nav{ display: none !important; }
+}
 
-          #main-block-text div{
-              
-             max-width: 90% ;
-              margin-left: 5%;            
-            }
-         h1.main {
-          font-size: 36px;
-          line-height: 48px;
-        }
-        #try-first-leson{
-        margin-top:60px
-      }
-    
-      }
-       @media (max-width: 530px) { 
-           #main-left-block{
-       
-            background-size: 138%;
-      }
-    }
-  </style>
+/* мобільний слайдер для .features */
+@media (max-width: 888px){
+  .slider-container{ position: relative; }
+  .blocks{
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+    padding: 0 16px;
+    margin-left: 32px;
+            padding-bottom: 60px;
+  }
+  .blocks::-webkit-scrollbar{ display: none; }
+  .card{
+    flex: 0 0 100%;
+    display: block;
+    width: 100%;
+    scroll-snap-align: start;
+  }
+  .slider-arrow{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border: none; border-radius: 9999px;
+    background: rgba(255,255,255,0.8);
+    color: var(--primary);
+    font-size: 20px;
+  }
+  .slider-arrow.left{ left: 4px; }
+  .slider-arrow.right{ right: 4px; }
+  .slider-dots{
+    position: absolute;
+    left: 50%; bottom: 8px;
+    transform: translateX(-50%);
+    display: flex; gap: 6px;
+    margin-bottom: 30px;
+  }
+  .slider-dots button{
+    width: 8px; height: 8px; padding: 0;
+    border: none; border-radius: 50%;
+    background: #d1d5db;
+  }
+  .slider-dots button.active{ background: var(--primary); }
+}
+
+@media (max-width: 703px){
+  section.about{
+    background-color: #fff;
+    min-height: 370px;
+    padding: 30px;
+  }
+  .text, .text-block{ font-size: 18px; line-height: 24px; }
+  h1.main{ font-size: 32px; line-height: 42px; }
+  #main-left-block{ height: 615px; }
+}
+
+@media (max-width: 609px){
+  #try-first-leson{ margin-top: 30px; }
+}
+
+@media (max-width: 590px){
+  #main-block-text{ width: 100%; }
+  #main-block-text div{
+    max-width: 90%;
+    margin-left: 5%;
+  }
+  h1.main{ font-size: 36px; line-height: 48px; }
+  #try-first-leson{ margin-top: 60px; }
+}
+
+@media (max-width: 530px){
+  #main-left-block{ background-size: 138%; }
+}
+
+</style>
 </head>
 <body class="font-sans text-stone-800 antialiased">
   
@@ -862,52 +740,129 @@ margin-right: auto;
       </div>
     </section>
   
-    <section class="result" >
-    <div class="first">
-      <h3>Мій підхід — ваш результат</h3>
+<section class="result bg-white py-12 md:py-20">
+  <div class="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center md:items-start gap-10">
+    <!-- Ліва колонка -->
+    <div class="w-full md:w-2/5 text-center md:text-left">
+      <h3 class="text-black text-[32px] sm:text-[42px] lg:text-[52px] font-medium leading-tight">
+        Мій підхід — ваш результат
+      </h3>
     </div>
-    <div class="second">
-      <p><span>✓ Індивідуальний план:</span> Програма формується на основі вашого рівня, цілей та побажань.</p>
-      <p><span>✓ Дружня атмосфера:</span> Заняття проходять у невимушеній обстановці.</p>
-      <p><span>✓ Гнучкість:</span> Займаємося онлайн у зручний час. Можливі індивідуальні та парні уроки.</p>
-    </div>
-  </section>
 
-  <section class="trevel" >
-    <div class="first">
-      <img src="img/Dasha-Paris-marge.jpg">
+    <!-- Права колонка -->
+    <div class="w-full md:w-3/5 space-y-5 text-center md:text-left">
+      <p class="text-[#6a8793] text-[18px] sm:text-[20px] lg:text-[24px] leading-relaxed">
+        <span class="text-black font-medium">✓ Індивідуальний план:</span>
+        Програма формується на основі вашого рівня, цілей та побажань.
+      </p>
+      <p class="text-[#6a8793] text-[18px] sm:text-[20px] lg:text-[24px] leading-relaxed">
+        <span class="text-black font-medium">✓ Дружня атмосфера:</span>
+        Заняття проходять у невимушеній обстановці.
+      </p>
+      <p class="text-[#6a8793] text-[18px] sm:text-[20px] lg:text-[24px] leading-relaxed">
+        <span class="text-black font-medium">✓ Гнучкість:</span>
+        Займаємося онлайн у зручний час. Можливі індивідуальні та парні уроки.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- Travels (responsive, matches screenshot layout) -->
+<section id="travels" class="bg-[#FEF6DB] py-12 sm:py-16">
+  <div class="mx-auto w-full xl:w-[1300px] px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10">
+    <!-- Left column: top image, bottom title + text -->
+    <div class="flex flex-col gap-6">
+      <img
+        src="img/Dasha-Paris-marge.jpg"
+        alt="Даша у Парижі біля Ейфелевої вежі"
+        class="w-full h-auto rounded-md shadow-md"
+      />
       <div>
-          <h3>Відчуйте впевненість у кожному кроці</h3>
-          <p>Забудьте про мовні бар'єри та невпевненість. З англійською ви зможете легко забронювати готель, замовити саме ту страву, яку хочеться, чи просто запитати дорогу у перехожого. Це дарує відчуття справжньої незалежності та спокою в будь-якій країні.</p>
+        <h3 class="text-[#595236] text-[26px] sm:text-[32px] leading-[1.25] font-medium">
+          Занурюйтесь у культуру, а не просто будьте туристом
+        </h3>
+        <p class="mt-4 text-[#4B5563] text-[18px] sm:text-[20px] leading-[1.55]">
+          Англійська дозволяє вийти за межі стандартних маршрутів. Розумійте розповіді
+          місцевих гідів, спілкуйтеся з новими людьми, дізнавайтеся про їхні традиції
+          та отримуйте поради, яких не знайти в путівниках. Саме так народжуються
+          найяскравіші спогади.
+        </p>
       </div>
     </div>
-    <div class="second">
+
+    <!-- Right column: top title + text, bottom image -->
+    <div class="flex flex-col gap-6 md:pt-4">
       <div>
-        <h3>Занурюйтесь у культуру, а не просто будьте туристом</h3>
-        <p>Англійська дозволяє вийти за межі стандартних маршрутів. Розумійте розповіді місцевих гідів, спілкуйтеся з новими людьми, дізнавайтеся про їхні традиції та отримуйте поради, яких не знайти в путівниках. Саме так народжуються найяскравіші спогади.</p>
-     </div>
-        <img src="img/efes.jpg">
+        <h3 class="text-[#595236] text-[26px] sm:text-[32px] leading-[1.25] font-medium">
+          Відчуйте впевненість у кожному кроці
+        </h3>
+        <p class="mt-4 text-[#4B5563] text-[18px] sm:text-[20px] leading-[1.55]">
+          Забудьте про мовні бар'єри та невпевненість. З англійською ви зможете легко
+          забронювати готель, замовити саме ту страву, яку хочеться, чи просто запитати
+          дорогу у перехожого. Це дарує відчуття справжньої незалежності та спокою в будь-якій країні.
+        </p>
+      </div>
+      <img
+        src="img/efes.jpg"
+        alt="Подорож Ефес"
+        class="w-full h-auto rounded-md shadow-md md:max-w-[570px] "
+      />
     </div>
-  </section>
-    <section class="form">
-    <h3>Готові розпочати?</h3>
-    <p>Запишіться на перший пробний урок безкоштовно! Просто заповніть форму, і я зв'яжуся з вами.</p>
-    <form>
-      <input type="text" placeholder="Ваше ім'я">
-      <input type="text" placeholder="Ваш Viber або Telegram">
-      <textarea placeholder="Ваше повідомлення (необов'язково)"></textarea>
-      <button>Надіслати заявка</button>
+  </div>
+</section>
+
+<section class="form bg-white py-16 text-center">
+  <div class="mx-auto max-w-3xl px-4">
+    <h3 class="text-[#030303] text-[32px] sm:text-[48px] lg:text-[60px] font-medium leading-tight mb-4">
+      Готові розпочати?
+    </h3>
+    <p class="text-[#4b5563] text-[18px] sm:text-[20px] lg:text-[24px] leading-[1.4] max-w-2xl mx-auto mb-10">
+      Запишіться на перший пробний урок безкоштовно! Просто заповніть форму, і я зв'яжуся з вами.
+    </p>
+
+    <form class="space-y-5">
+      <input
+        type="text"
+        placeholder="Ваше ім'я"
+        class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[52px] px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[16px]"
+      />
+      <input
+        type="text"
+        placeholder="Ваш Viber або Telegram"
+        class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[52px] px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[16px]"
+      />
+      <textarea
+        placeholder="Ваше повідомлення (необов'язково)"
+        class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[108px] px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[14px]"
+      ></textarea>
+      <button
+        type="submit"
+        class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[59px] bg-[#7a555b] text-white text-[18px] lg:text-[20px] font-medium rounded-lg shadow-md hover:bg-[#6b4950] transition"
+      >
+        Надіслати заявку
+      </button>
     </form>
-  </section>
-  <footer>
-    <img src="img/logo-3.png">
-    <p>© 2025 Даша | English Tutor. Усі права захищено.</p>
-    <div>
-      <h5>Contact Us</h5>
-      <p>Instagram</p>
-      <p>Telegram</p>
-    </div>
-  </footer>
+  </div>
+</section>
+
+<footer>
+  <!-- Лого (зліва, відступ дає сам footer через padding: 0 100px) -->
+  <img src="img/logo-3.png" alt="Logo">
+
+  <!-- Копірайт (насередині завдяки grid: auto 1fr auto) -->
+  <p>© 2025 Даша | English Tutor. Усі права захищено.</p>
+
+  <!-- Меню/контакти (справа, з тим самим 100px через padding контейнера) -->
+  <div>
+    <h5>Contact Us</h5>
+    <p>Instagram</p>
+    <p>Telegram</p>
+  </div>
+</footer>
+
+
+
   </main>
   <script>
     document.addEventListener('DOMContentLoaded', function () {
