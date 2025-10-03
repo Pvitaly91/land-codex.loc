@@ -65,8 +65,8 @@ header, #mnav{
   background-color: var(--sand-50);
   box-shadow: 2px -2px 10px rgba(3,3,3,0.1);
   color: #7a555b;
-  font-size: 24px;
-  line-height: 31px;
+  font-size: clamp(18px, 4vw, 24px);
+  line-height: 1.35;
   margin: auto !important;
 }
 
@@ -84,8 +84,8 @@ header, #mnav{
 
 nav{
   color: var(--ink);
-  font-size: 24px;
-  line-height: 19px;
+  font-size: clamp(16px, 3vw, 18px);
+  line-height: 1.4;
 }
 
 /* =========================
@@ -102,9 +102,9 @@ nav{
 
 h1.main{
   color: #AF6B38;
-  font-size: 52px;
+  font-size: clamp(32px, 7vw, 52px);
   font-weight: 500;
-  line-height: 68px;
+  line-height: clamp(38px, 8vw, 68px);
 }
 h1.main span{ color: var(--ink-accent); }
 h1.main strong{ font-weight: 600; }
@@ -112,24 +112,30 @@ h1.main strong{ font-weight: 600; }
 .text-block{
   margin-top: 50px;
   color: #7a555b;
-  font-size: 24px;
-  line-height: 31px;
+  font-size: clamp(18px, 4.5vw, 24px);
+  line-height: 1.5;
 }
 
 /* кнопка у хедері */
 .order-lesson{
   cursor: pointer;
   position: relative; /* зберігаємо положення, якщо залежало від top/left */
-  width: 206px;
-  height: 52px;
-  padding: 1rem 8px 0; /* збережено відступ зверху */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  min-height: 52px;
+  padding: 0.75rem 1.5rem; /* збережено відступ зверху */
   border: 0;
   box-sizing: border-box;
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   background-color: var(--primary-weak);
   color: rgba(250,250,248,0.83);
-  font: 500 18px/23px "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: clamp(16px, 3.5vw, 18px);
+  line-height: 1.4;
   text-align: center;
   outline: none;
 }
@@ -139,17 +145,20 @@ h1.main strong{ font-weight: 600; }
   display: inline-block;
   cursor: pointer;
   text-align: center;
-  width: 571px;
-  height: 65px;
+  width: min(100%, 571px);
+  min-height: 60px;
   margin-top: 60px;
-  padding: 0 8px;
+  padding: 0.75rem 1.5rem;
   border: 0;
   box-sizing: border-box;
   border-radius: var(--radius);
   box-shadow: var(--shadow-sm);
   background-color: var(--primary);
   color: #fff;
-  font: 500 24px/61px "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: clamp(18px, 5vw, 24px);
+  line-height: 1.4;
   outline: none;
 }
 
@@ -166,17 +175,17 @@ section.about{
 
 .title{
   color: var(--ink);
-  font-size: 42px;
+  font-size: clamp(28px, 6vw, 42px);
   font-weight: 500;
-  line-height: 52px;
+  line-height: clamp(36px, 7vw, 52px);
   text-align: center;
   margin: 0 auto 60px;
 }
 
 .text{
   color: var(--ink-muted);
-  font-size: 24px;
-  line-height: 31px;
+  font-size: clamp(16px, 4.5vw, 24px);
+  line-height: 1.55;
   text-align: center;
   max-width: 950px;
   margin: 0 auto 40px;
@@ -210,13 +219,19 @@ section.about{
 .card h3{
   margin: 24px 0 0 17px;
   color: var(--ink);
-  font: 500 20px/28px "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: clamp(18px, 3.5vw, 22px);
+  line-height: 1.4;
 }
 .card p{
   width: 70%;
   margin: 8px 0 0 62px;
   color: var(--ink-muted);
-  font: 500 16px/24px "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: clamp(14px, 3.5vw, 16px);
+  line-height: 1.5;
 }
 
 /* слайдер на мобі */
@@ -235,17 +250,17 @@ section.about{
 .result .second{ width: 60%; margin-left: 4%; vertical-align: middle; }
 .result h3, .trevel h3{
   color: #000;
-  font-size: 52px;
+  font-size: clamp(28px, 6vw, 52px);
   font-weight: 500;
-  line-height: 68px;
+  line-height: clamp(36px, 7vw, 68px);
 }
 .result .second p:first-of-type{ margin-top: 0; }
 .result .second p{
   margin-top: 4%;
   margin-right: 10%;
   color: var(--ink-accent);
-  font-size: 24px;
-  line-height: 31px;
+  font-size: clamp(18px, 4.5vw, 24px);
+  line-height: 1.5;
 }
 .result .second p span{ color: #000; }
 
@@ -265,16 +280,16 @@ section.about{
 .trevel div h3{
   margin-left: 0;
   color: #595236;
-  font-size: 42px;
+  font-size: clamp(26px, 6vw, 42px);
   font-weight: 500;
-  line-height: 52px;
+  line-height: clamp(32px, 7vw, 52px);
 }
 .trevel div{ margin-right: 60px; }
 .trevel div p{
   margin-top: 40px;
   color: var(--ink-muted);
-  font-size: 24px;
-  line-height: 31px;
+  font-size: clamp(16px, 4.5vw, 24px);
+  line-height: 1.55;
 }
 .trevel .second{ margin-top: -200px; }
 .trevel .second div{
@@ -301,8 +316,8 @@ footer img{
 }
 footer p, footer h5{
   color: #212225;
-  font-size: 18px;
-  line-height: 24px;
+  font-size: clamp(14px, 3.3vw, 18px);
+  line-height: 1.5;
   margin: 0;
 }
 footer p{
@@ -323,9 +338,9 @@ section.form{
 
 .form h3{
   color: var(--ink);
-  font-size: 60px;
+  font-size: clamp(32px, 7vw, 60px);
   font-weight: 500;
-  line-height: 70px;
+  line-height: clamp(38px, 8vw, 70px);
   text-align: center;
   margin-bottom: 20px;
 }
@@ -333,8 +348,8 @@ section.form{
   max-width: 700px;
   margin: 0 auto;
   color: var(--ink-muted);
-  font-size: 24px;
-  line-height: 31px;
+  font-size: clamp(16px, 4.5vw, 24px);
+  line-height: 1.6;
   text-align: center;
 }
 .form form{ margin-top: 50px; }
@@ -351,6 +366,7 @@ section.form{
   margin: 20px auto;
   border: 1px solid #d3d3d3;
   padding: 0 8px;
+  width: min(100%, 520px);
   font-family: "Roboto", sans-serif;
 }
 
@@ -369,7 +385,7 @@ section.form{
 /* глобальна кнопка (залишаю як у вас, щоб не ламати інші місця) */
 button.form-btn{
   cursor: pointer;
-  width: 35%;
+  width: min(100%, 420px);
   height: 59px;
   margin-left: auto;
   margin-right: auto;
@@ -378,7 +394,10 @@ button.form-btn{
   box-shadow: var(--shadow-sm);
   background-color: var(--primary);
   color: #fff;
-  font: 500 20px/26px "Roboto", sans-serif;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-size: clamp(16px, 3.8vw, 20px);
+  line-height: 1.4;
   padding: 0 8px;
   outline: none;
   box-sizing: border-box;
@@ -397,15 +416,8 @@ button.form-btn{
 #main-block-text div{ padding-right: 20px; }
 
 @media (max-width: 1200px){
-  h1.main{ font-size: 42px; line-height: 52px; }
-  #main-block-text{ width: 530px; }
-  #main-photo{ left: 54%; width: 46%; }
-  #try-first-leson{
-    width: 471px; height: 65px;
-    font-size: 24px; font-weight: 500; line-height: 61px;
-    margin-top: 60px;
-  }
-  .text-block{ margin-top: 35px; font-size: 22px; line-height: 28px; }
+  #main-block-text{ width: 520px; }
+  #main-photo{ left: 55%; width: 45%; }
 }
 
 @media (max-width: 1100px){
@@ -413,53 +425,53 @@ button.form-btn{
 }
 
 @media (max-width: 1024px){
+  #manu-button-burger{ display: inline-flex; }
+  nav{ display: none !important; }
+  #main-left-block{
+    height: auto;
+    padding: 110px 24px 60px;
+    background: linear-gradient(180deg, rgba(235,220,214,0.95) 0%, rgba(235,220,214,0.75) 100%);
+  }
+  #main-photo{
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: min(70vw, 420px);
+    margin: 0 auto 32px;
+    display: block;
+    background-position: center top;
+    border-radius: var(--radius-lg);
+  }
   #main-block-text{
-    position: absolute;
-    top: 30px;
-    right: 0;
-    width: 70%;
-    height: 100%;
+    position: static;
+    width: 100%;
+    height: auto;
     margin-left: 0;
-    background-color: rgba(255,255,255,0.6);
+    background-color: transparent;
   }
   #main-block-text div{
-    max-width: 80%;
-    margin: 150px 0 0 10%;
+    max-width: 640px;
+    margin: 0 auto;
+    padding-right: 0;
     text-align: center;
   }
-  #main-left-block{
-    background: url(img/main.jpg) -40px 10px / 108% no-repeat;
-  }
-  .about-text{ padding: 5%; }
-  #main-photo{ display: none; }
-  footer h5{ font-weight: 500; margin-bottom: 8px; text-align: center; }
-footer div p{ margin-top: 6px; width: 250px; text-align: center; }
-}
-@media (max-width: 1024px){
+  .text-block{ margin-top: 24px; }
+  #try-first-leson{ margin-top: 32px; }
   footer{
-    grid-template-columns: 1fr;          /* колона на планшет/мобілку */
+    grid-template-columns: 1fr;
     justify-items: center;
     text-align: center;
-    padding: 24px 20px;                  /* менші бокові відступи */
+    padding: 24px 20px;
     row-gap: 12px;
   }
-  footer img{
-    width: 220px; height: auto;
-  }
-}
-@media (max-width: 930px){
-  #try-first-leson{
-    width: auto; height: auto;
-    padding: 2% 5%;
-    font-size: 16px; font-weight: 500; line-height: 31px;
-    margin-top: 60px;
-  }
-  #manu-button-burger{ display: block; }
-  nav{ display: none !important; }
+  footer img{ width: 220px; height: auto; }
+  footer h5,
+  footer div p{ text-align: center; width: auto; }
 }
 
 /* мобільний слайдер для .features */
-@media (max-width: 888px){
+@media (max-width: 880px){
   .slider-container{ position: relative; }
   .blocks{
     display: flex;
@@ -467,15 +479,16 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    padding: 0 16px;
-    margin-left: 32px;
-            padding-bottom: 60px;
+    padding: 0 16px 48px;
+    margin-left: 0;
+    gap: 24px;
   }
   .blocks::-webkit-scrollbar{ display: none; }
   .card{
-    flex: 0 0 100%;
-    display: block;
-    width: 100%;
+    flex: 0 0 85%;
+    width: auto;
+    height: auto;
+    margin-right: 0;
     scroll-snap-align: start;
   }
   .slider-arrow{
@@ -485,7 +498,7 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
     width: 32px; height: 32px;
     display: flex; align-items: center; justify-content: center;
     border: none; border-radius: 9999px;
-    background: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.85);
     color: var(--primary);
     font-size: 20px;
   }
@@ -493,10 +506,9 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
   .slider-arrow.right{ right: 4px; }
   .slider-dots{
     position: absolute;
-    left: 50%; bottom: 8px;
+    left: 50%; bottom: 12px;
     transform: translateX(-50%);
     display: flex; gap: 6px;
-    margin-bottom: 30px;
   }
   .slider-dots button{
     width: 8px; height: 8px; padding: 0;
@@ -506,33 +518,89 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
   .slider-dots button.active{ background: var(--primary); }
 }
 
-@media (max-width: 703px){
+@media (max-width: 768px){
   section.about{
-    background-color: #fff;
-    min-height: 370px;
-    padding: 30px;
+    padding: 40px 20px;
   }
-  .text, .text-block{ font-size: 18px; line-height: 24px; }
-  h1.main{ font-size: 32px; line-height: 42px; }
-  #main-left-block{ height: 615px; }
-}
-
-@media (max-width: 609px){
-  #try-first-leson{ margin-top: 30px; }
-}
-
-@media (max-width: 590px){
-  #main-block-text{ width: 100%; }
-  #main-block-text div{
-    max-width: 90%;
-    margin-left: 5%;
+  .card{
+    margin-top: 24px;
   }
-  h1.main{ font-size: 36px; line-height: 48px; }
-  #try-first-leson{ margin-top: 60px; }
+  .card h3{ margin: 24px 24px 0; }
+  .card p{ margin: 12px 24px 24px; width: auto; }
+  .result{
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+    gap: 32px;
+    text-align: center;
+  }
+  .result .first,
+  .result .second{
+    width: 100%;
+    margin: 0;
+  }
+  .result .second p{ margin-right: 0; }
+  .trevel{
+    padding: 72px 0;
+  }
+  .trevel .first,
+  .trevel .second{
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 32px;
+  }
+  .trevel img{
+    width: 100%;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .trevel div{
+    margin-right: 0;
+    padding: 0 16px;
+  }
+  .trevel .second{ margin-top: 0; }
+  .trevel .second div{
+    margin-left: 0;
+    padding-top: 0;
+  }
+  button.form-btn{ width: min(100%, 320px); }
 }
 
-@media (max-width: 530px){
-  #main-left-block{ background-size: 138%; }
+@media (max-width: 640px){
+  #main-left-block{
+    padding: 96px 20px 48px;
+  }
+  #main-photo{
+    height: 320px;
+    margin-bottom: 24px;
+  }
+  .order-lesson{
+    width: 100%;
+    max-width: 240px;
+  }
+  #try-first-leson{
+    width: 100%;
+  }
+  .text-block{ margin-top: 20px; }
+  .form{ padding-bottom: 64px; }
+  .form form input,
+  .form textarea{ width: 100%; }
+}
+
+@media (max-width: 480px){
+  #main-photo{ height: 260px; }
+  .blocks{
+    flex-direction: column;
+    gap: 16px;
+    padding: 0 8px 32px;
+  }
+  .card{
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .slider-arrow{ display: none; }
+  .slider-dots{ bottom: 0; }
 }
 
 </style>
@@ -584,10 +652,10 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
 
     <!-- Hero -->
     <!-- Keep the original negative offset ONLY on desktop to match exact layout -->
-    <section id="main-left-block" class="relative -mt-0 -mt-[110px] h-[815px]" style="background-color: #ebdcd6;" >
-      <div class="mx-auto max-w-7xl grid lg:grid-cols-2" >
+    <section id="main-left-block" class="relative -mt-0 -mt-[110px] lg:h-[815px]" style="background-color: #ebdcd6;" >
+      <div class="mx-auto max-w-7xl grid gap-10 lg:grid-cols-2" >
       
-        <div class=" lg:mt-[200px]" id="main-block-text" >
+        <div class="px-4 sm:px-6 lg:mt-[200px]" id="main-block-text" >
           <div>
             <h1 class="main">
               <strong>Відкрийте світ англійської</strong>
