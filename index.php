@@ -66,7 +66,7 @@ header, #mnav{
   box-shadow: 2px -2px 10px rgba(3,3,3,0.1);
   color: #7a555b;
   font-size: clamp(18px, 4vw, 24px);
-  line-height: 1.35;
+  line-height: clamp(24px, 4.8vw, 31px);
   margin: auto !important;
 }
 
@@ -84,7 +84,7 @@ header, #mnav{
 
 nav{
   color: var(--ink);
-  font-size: clamp(16px, 3vw, 18px);
+  font-size: clamp(16px, 3vw, 24px);
   line-height: 1.4;
 }
 
@@ -104,7 +104,7 @@ h1.main{
   color: #AF6B38;
   font-size: clamp(32px, 7vw, 52px);
   font-weight: 500;
-  line-height: clamp(38px, 8vw, 68px);
+  line-height: clamp(40px, 8vw, 68px);
 }
 h1.main span{ color: var(--ink-accent); }
 h1.main strong{ font-weight: 600; }
@@ -112,7 +112,7 @@ h1.main strong{ font-weight: 600; }
 .text-block{
   margin-top: 50px;
   color: #7a555b;
-  font-size: clamp(18px, 4.5vw, 24px);
+  font-size: clamp(16px, 4.5vw, 24px);
   line-height: 1.5;
 }
 
@@ -120,12 +120,9 @@ h1.main strong{ font-weight: 600; }
 .order-lesson{
   cursor: pointer;
   position: relative; /* зберігаємо положення, якщо залежало від top/left */
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 180px;
-  min-height: 52px;
-  padding: 0.75rem 1.5rem; /* збережено відступ зверху */
+  width: 206px;
+  height: 52px;
+  padding: 1rem 8px 0; /* збережено відступ зверху */
   border: 0;
   box-sizing: border-box;
   border-radius: var(--radius);
@@ -145,10 +142,10 @@ h1.main strong{ font-weight: 600; }
   display: inline-block;
   cursor: pointer;
   text-align: center;
-  width: min(100%, 571px);
-  min-height: 60px;
+  width: 571px;
+  height: 65px;
   margin-top: 60px;
-  padding: 0.75rem 1.5rem;
+  padding: 0 8px;
   border: 0;
   box-sizing: border-box;
   border-radius: var(--radius);
@@ -366,7 +363,6 @@ section.form{
   margin: 20px auto;
   border: 1px solid #d3d3d3;
   padding: 0 8px;
-  width: min(100%, 520px);
   font-family: "Roboto", sans-serif;
 }
 
@@ -385,7 +381,7 @@ section.form{
 /* глобальна кнопка (залишаю як у вас, щоб не ламати інші місця) */
 button.form-btn{
   cursor: pointer;
-  width: min(100%, 420px);
+  width: 35%;
   height: 59px;
   margin-left: auto;
   margin-right: auto;
@@ -416,8 +412,15 @@ button.form-btn{
 #main-block-text div{ padding-right: 20px; }
 
 @media (max-width: 1200px){
-  #main-block-text{ width: 520px; }
-  #main-photo{ left: 55%; width: 45%; }
+  h1.main{ font-size: clamp(32px, 6vw, 42px); line-height: clamp(40px, 7vw, 52px); }
+  #main-block-text{ width: 530px; }
+  #main-photo{ left: 54%; width: 46%; }
+  #try-first-leson{
+    width: 471px; height: 65px;
+    font-size: clamp(18px, 4.8vw, 22px); font-weight: 500; line-height: 1.4;
+    margin-top: 60px;
+  }
+  .text-block{ margin-top: 35px; font-size: clamp(16px, 4vw, 22px); line-height: 1.5; }
 }
 
 @media (max-width: 1100px){
@@ -425,53 +428,53 @@ button.form-btn{
 }
 
 @media (max-width: 1024px){
-  #manu-button-burger{ display: inline-flex; }
-  nav{ display: none !important; }
-  #main-left-block{
-    height: auto;
-    padding: 110px 24px 60px;
-    background: linear-gradient(180deg, rgba(235,220,214,0.95) 0%, rgba(235,220,214,0.75) 100%);
-  }
-  #main-photo{
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: min(70vw, 420px);
-    margin: 0 auto 32px;
-    display: block;
-    background-position: center top;
-    border-radius: var(--radius-lg);
-  }
   #main-block-text{
-    position: static;
-    width: 100%;
-    height: auto;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    width: 70%;
+    height: 100%;
     margin-left: 0;
-    background-color: transparent;
+    background-color: rgba(255,255,255,0.6);
   }
   #main-block-text div{
-    max-width: 640px;
-    margin: 0 auto;
-    padding-right: 0;
+    max-width: 80%;
+    margin: 150px 0 0 10%;
     text-align: center;
   }
-  .text-block{ margin-top: 24px; }
-  #try-first-leson{ margin-top: 32px; }
+  #main-left-block{
+    background: url(img/main.jpg) -40px 10px / 108% no-repeat;
+  }
+  .about-text{ padding: 5%; }
+  #main-photo{ display: none; }
+  footer h5{ font-weight: 500; margin-bottom: 8px; text-align: center; }
+footer div p{ margin-top: 6px; width: 250px; text-align: center; }
+}
+@media (max-width: 1024px){
   footer{
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr;          /* колона на планшет/мобілку */
     justify-items: center;
     text-align: center;
-    padding: 24px 20px;
+    padding: 24px 20px;                  /* менші бокові відступи */
     row-gap: 12px;
   }
-  footer img{ width: 220px; height: auto; }
-  footer h5,
-  footer div p{ text-align: center; width: auto; }
+  footer img{
+    width: 220px; height: auto;
+  }
+}
+@media (max-width: 930px){
+  #try-first-leson{
+    width: auto; height: auto;
+    padding: 2% 5%;
+    font-size: clamp(16px, 4.5vw, 18px); font-weight: 500; line-height: 1.4;
+    margin-top: 60px;
+  }
+  #manu-button-burger{ display: block; }
+  nav{ display: none !important; }
 }
 
 /* мобільний слайдер для .features */
-@media (max-width: 880px){
+@media (max-width: 888px){
   .slider-container{ position: relative; }
   .blocks{
     display: flex;
@@ -479,16 +482,15 @@ button.form-btn{
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    padding: 0 16px 48px;
-    margin-left: 0;
-    gap: 24px;
+    padding: 0 16px;
+    margin-left: 32px;
+            padding-bottom: 60px;
   }
   .blocks::-webkit-scrollbar{ display: none; }
   .card{
-    flex: 0 0 85%;
-    width: auto;
-    height: auto;
-    margin-right: 0;
+    flex: 0 0 100%;
+    display: block;
+    width: 100%;
     scroll-snap-align: start;
   }
   .slider-arrow{
@@ -498,7 +500,7 @@ button.form-btn{
     width: 32px; height: 32px;
     display: flex; align-items: center; justify-content: center;
     border: none; border-radius: 9999px;
-    background: rgba(255,255,255,0.85);
+    background: rgba(255,255,255,0.8);
     color: var(--primary);
     font-size: 20px;
   }
@@ -506,9 +508,10 @@ button.form-btn{
   .slider-arrow.right{ right: 4px; }
   .slider-dots{
     position: absolute;
-    left: 50%; bottom: 12px;
+    left: 50%; bottom: 8px;
     transform: translateX(-50%);
     display: flex; gap: 6px;
+    margin-bottom: 30px;
   }
   .slider-dots button{
     width: 8px; height: 8px; padding: 0;
@@ -518,89 +521,33 @@ button.form-btn{
   .slider-dots button.active{ background: var(--primary); }
 }
 
-@media (max-width: 768px){
+@media (max-width: 703px){
   section.about{
-    padding: 40px 20px;
+    background-color: #fff;
+    min-height: 370px;
+    padding: 30px;
   }
-  .card{
-    margin-top: 24px;
-  }
-  .card h3{ margin: 24px 24px 0; }
-  .card p{ margin: 12px 24px 24px; width: auto; }
-  .result{
-    flex-direction: column;
-    align-items: center;
-    padding: 60px 20px;
-    gap: 32px;
-    text-align: center;
-  }
-  .result .first,
-  .result .second{
-    width: 100%;
-    margin: 0;
-  }
-  .result .second p{ margin-right: 0; }
-  .trevel{
-    padding: 72px 0;
-  }
-  .trevel .first,
-  .trevel .second{
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 32px;
-  }
-  .trevel img{
-    width: 100%;
-    max-width: 420px;
-    margin: 0 auto;
-  }
-  .trevel div{
-    margin-right: 0;
-    padding: 0 16px;
-  }
-  .trevel .second{ margin-top: 0; }
-  .trevel .second div{
-    margin-left: 0;
-    padding-top: 0;
-  }
-  button.form-btn{ width: min(100%, 320px); }
+  .text, .text-block{ font-size: clamp(16px, 4.5vw, 20px); line-height: 1.5; }
+  h1.main{ font-size: clamp(28px, 8vw, 36px); line-height: clamp(34px, 9vw, 46px); }
+  #main-left-block{ height: 615px; }
 }
 
-@media (max-width: 640px){
-  #main-left-block{
-    padding: 96px 20px 48px;
-  }
-  #main-photo{
-    height: 320px;
-    margin-bottom: 24px;
-  }
-  .order-lesson{
-    width: 100%;
-    max-width: 240px;
-  }
-  #try-first-leson{
-    width: 100%;
-  }
-  .text-block{ margin-top: 20px; }
-  .form{ padding-bottom: 64px; }
-  .form form input,
-  .form textarea{ width: 100%; }
+@media (max-width: 609px){
+  #try-first-leson{ margin-top: 30px; }
 }
 
-@media (max-width: 480px){
-  #main-photo{ height: 260px; }
-  .blocks{
-    flex-direction: column;
-    gap: 16px;
-    padding: 0 8px 32px;
+@media (max-width: 590px){
+  #main-block-text{ width: 100%; }
+  #main-block-text div{
+    max-width: 90%;
+    margin-left: 5%;
   }
-  .card{
-    flex: 0 0 auto;
-    width: 100%;
-  }
-  .slider-arrow{ display: none; }
-  .slider-dots{ bottom: 0; }
+  h1.main{ font-size: clamp(26px, 9vw, 34px); line-height: clamp(34px, 10vw, 44px); }
+  #try-first-leson{ margin-top: 60px; }
+}
+
+@media (max-width: 530px){
+  #main-left-block{ background-size: 138%; }
 }
 
 </style>
@@ -652,10 +599,10 @@ button.form-btn{
 
     <!-- Hero -->
     <!-- Keep the original negative offset ONLY on desktop to match exact layout -->
-    <section id="main-left-block" class="relative -mt-0 -mt-[110px] lg:h-[815px]" style="background-color: #ebdcd6;" >
-      <div class="mx-auto max-w-7xl grid gap-10 lg:grid-cols-2" >
+    <section id="main-left-block" class="relative -mt-0 -mt-[110px] h-[815px]" style="background-color: #ebdcd6;" >
+      <div class="mx-auto max-w-7xl grid lg:grid-cols-2" >
       
-        <div class="px-4 sm:px-6 lg:mt-[200px]" id="main-block-text" >
+        <div class=" lg:mt-[200px]" id="main-block-text" >
           <div>
             <h1 class="main">
               <strong>Відкрийте світ англійської</strong>
@@ -1041,7 +988,6 @@ button.form-btn{
   </script>
 </body>
 </html>
-
 HTML;
 
 function createRememberToken(string $username, string $secretKey): string
