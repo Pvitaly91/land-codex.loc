@@ -122,7 +122,7 @@ h1.main strong{ font-weight: 600; }
   position: relative; /* зберігаємо положення, якщо залежало від top/left */
   width: 206px;
   height: 52px;
-  padding: 1rem 8px 0; /* збережено відступ зверху */
+  padding: 1rem 16px 0; /* збережено відступ зверху */
   border: 0;
   box-sizing: border-box;
   border-radius: var(--radius);
@@ -134,8 +134,16 @@ h1.main strong{ font-weight: 600; }
   font-size: clamp(16px, 3.5vw, 18px);
   line-height: 1.4;
   text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   outline: none;
 }
+
+.order-lesson__icon{ display: none; }
+.order-lesson__text{ display: inline; }
+.order-lesson__icon svg{ display: block; }
 
 /* CTA в геро */
 #try-first-leson{
@@ -521,6 +529,20 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
   .slider-dots button.active{ background: var(--primary); }
 }
 
+@media (max-width: 768px){
+  .order-lesson{
+    width: 52px;
+    height: 52px;
+    padding: 0;
+  }
+  .order-lesson__icon{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .order-lesson__text{ display: none; }
+}
+
 @media (max-width: 703px){
   section.about{
     background-color: #fff;
@@ -577,10 +599,15 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
 
           <!-- CTA + Burger -->
           <div class="flex items-center gap-3">
-            <a href="#signup" class="order-lesson">
-              Записатись на урок
+            <a href="#signup" class="order-lesson" aria-label="Записатись на урок">
+              <span class="order-lesson__icon" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5V5.75A1.75 1.75 0 0 1 5.75 4h12.5A1.75 1.75 0 0 1 20 5.75V19.5l-8-3.5-8 3.5Z" />
+                </svg>
+              </span>
+              <span class="order-lesson__text">Записатись на урок</span>
             </a>
-           
+
           </div>
         </div>
       </div>
