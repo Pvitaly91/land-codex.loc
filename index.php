@@ -219,9 +219,17 @@ section.about{
   background-color: var(--card-bg);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-md);
+  position: relative;
+
+}
+.blocks div.card svg{
+  position: absolute;
+  top:20px;
+  left:12px;
 }
 .card h3{
-  margin: 24px 0 0 17px;
+  
+  margin: 14px 0 0 62px;
   color: var(--ink);
   font-family: "Roboto", sans-serif;
   font-weight: 500;
@@ -375,12 +383,12 @@ section.form{
 
 .form form input{
   height: 52px;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 20px;
 }
 .form textarea{
   height: 108px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 24px;
   margin-bottom: 20px;
 }
@@ -458,7 +466,16 @@ button.form-btn{
 footer div p{ margin-top: 6px; width: 250px; text-align: center; }
 }
 @media (max-width: 1024px){
-	
+	.text-block {
+    
+    color: #41393aff;
+  }
+  h1.main span {
+    color: #41393aff;
+}
+h1.main strong {
+    color: #976f00;
+}
   footer{
     grid-template-columns: 1fr;          /* колона на планшет/мобілку */
     justify-items: center;
@@ -544,6 +561,11 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
     justify-content: center;
   }
   .order-lesson__text{ display: none; }
+  section.form {
+ 
+      padding-top: 60px;
+   
+  }
 }
 
 @media (max-width: 703px){
@@ -556,6 +578,10 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
  
     margin: 120px 0 0 10%;
 
+  }
+    .title {
+      
+      margin: 20px auto 30px;
   }
   #try-first-leson{
    
@@ -696,9 +722,9 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
       <div class="slider-container">
       <div class="blocks">
         <div class="card">
-          
-<h3><svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 31 31" width="31" height="31" fill="none">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="31" height="31" fill="#f9c6ce" x="0" y="0" opacity="100%">
+        
+<h3> <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 31 31" width="31" height="31" fill="none">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="31" height="31" fill="#ef7e8f" x="0" y="0" opacity="100%">
     <path d="M416 176C416 78.8 322.9 0 208 0S0 78.8 0 176c0 39.57 15.62 75.96 41.67 105.4c-16.39 32.76-39.23 57.32-39.59 57.68c-2.1 2.205-2.67 5.475-1.441 8.354C1.9 350.3 4.602 352 7.66 352c38.35 0 70.76-11.12 95.74-24.04C134.2 343.1 169.8 352 208 352C322.9 352 416 273.2 416 176zM599.6 443.7C624.8 413.9 640 376.6 640 336C640 238.8 554 160 448 160c-.3145 0-.6191 .041-.9336 .043C447.5 165.3 448 170.6 448 176c0 98.62-79.68 181.2-186.1 202.5C282.7 455.1 357.1 512 448 512c33.69 0 65.32-8.008 92.85-21.98C565.2 502 596.1 512 632.3 512c3.059 0 5.76-1.725 7.02-4.605c1.229-2.879 .6582-6.148-1.441-8.354C637.6 498.7 615.9 475.3 599.6 443.7z"></path>
   </svg>
   <defs>
@@ -713,7 +739,7 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
       <feBlend in="SourceGraphic" in2="bg-fix-filter_dshadow_10_0_2_0000001a" result="shape"></feBlend>
     </filter>
   </defs>
-</svg>Покращення навичок спілкування</h3>
+</svg> Покращення навичок спілкування</h3>
           <p>Акцент на розмовній практиці для подолання мовного бар'єру.</p>
         </div>
          <div class="card" style="background-color: #e5e7eb;">
