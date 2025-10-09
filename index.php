@@ -382,8 +382,10 @@ $landingPageHtml = <<<HTML
     document.documentElement.classList.add('js-ready');
 
     document.addEventListener('DOMContentLoaded', function () {
-      const revealElements = document.querySelectorAll('[data-scroll]');
-      const delayStep = 0.075;
+      const revealElements = Array.from(document.querySelectorAll('[data-scroll]'));
+      const pairDelayStep = 0.18;
+      const intraPairGap = 0.08;
+      const maxDelay = 0.6;
 
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries, obs) => {
@@ -400,7 +402,9 @@ $landingPageHtml = <<<HTML
 
         revealElements.forEach((element, index) => {
           if (!element.style.getPropertyValue('--reveal-delay')) {
-            const delay = Math.min(index * delayStep, 0.45);
+            const pairIndex = Math.floor(index / 2);
+            const withinPairOffset = (index % 2) * intraPairGap;
+            const delay = Math.min(pairIndex * pairDelayStep + withinPairOffset, maxDelay);
             element.style.setProperty('--reveal-delay', delay + 's');
           }
           observer.observe(element);
