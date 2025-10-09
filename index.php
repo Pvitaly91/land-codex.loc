@@ -12,6 +12,8 @@ $rememberCookieName = 'remember_auth';
 $rememberDuration = 30 * 24 * 60 * 60; // 30 days
 $secretKey = 'pRjFf3SxKZq8T0vL2nMhY1wB5cD9eG4u';
 $css = "style";
+$cssFile = __DIR__ . "/{$css}.css";
+$cssVersion = file_exists($cssFile) ? (string) filemtime($cssFile) : (string) time();
 
 $landingPageHtml = <<<HTML
 <!DOCTYPE html>
@@ -26,7 +28,7 @@ $landingPageHtml = <<<HTML
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   
-  <link href="{$css}.css" rel="stylesheet">
+  <link href="{$css}.css?v={$cssVersion}" rel="stylesheet">
 </head>
 <body class="font-sans text-stone-800 antialiased">
   
