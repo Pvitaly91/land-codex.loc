@@ -432,6 +432,7 @@ button.form-btn{
   }
   #main-left-block{
     background: url(img/main.jpg) -40px 10px / 108% no-repeat;
+    background-attachment: fixed;
   }
   .about-text{ padding: 5%; }
   #main-photo{ display: none; }
