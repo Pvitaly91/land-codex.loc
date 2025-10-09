@@ -3,7 +3,7 @@
 ========================= */
 :root{
   --brand:        #d6b7ae;
-  --bg-page:      #634956;
+  --bg-page:      #ebebeb;
   --ink:          #030303;
   --ink-muted:    #4b5563;
   --ink-accent:   #6A8793;
@@ -43,7 +43,10 @@ html.js-ready [data-scroll]{
   transition-delay: var(--reveal-delay, 0s);
   will-change: opacity, transform;
 }
-
+html.js-ready #main-left-block[data-scroll]{
+  transform: none !important;
+  will-change: opacity;
+}
 /* keep fixed backgrounds working on sections that need parallax */
 html.js-ready #main-left-block[data-scroll]{
   transform: none !important;

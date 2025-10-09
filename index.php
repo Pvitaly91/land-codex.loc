@@ -383,9 +383,9 @@ $landingPageHtml = <<<HTML
 
     document.addEventListener('DOMContentLoaded', function () {
       const revealElements = Array.from(document.querySelectorAll('[data-scroll]'));
-      const pairDelayStep = 0.18;
+      const pairDelayStep = 0.12;
       const intraPairGap = 0.08;
-      const maxDelay = 0.6;
+      const maxDelay = 0.1;
 
       if ('IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries, obs) => {
@@ -397,7 +397,7 @@ $landingPageHtml = <<<HTML
           });
         }, {
           threshold: 0.15,
-          rootMargin: '0px 0px -10% 0px'
+          rootMargin: '0px 0px 2% 0px'
         });
 
         revealElements.forEach((element, index) => {
