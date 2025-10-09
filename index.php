@@ -12,6 +12,8 @@ $rememberCookieName = 'remember_auth';
 $rememberDuration = 30 * 24 * 60 * 60; // 30 days
 $secretKey = 'pRjFf3SxKZq8T0vL2nMhY1wB5cD9eG4u';
 $css = "style";
+$cssFile = __DIR__ . "/{$css}.css";
+$cssVersion = file_exists($cssFile) ? (string) filemtime($cssFile) : (string) time();
 
 $landingPageHtml = <<<HTML
 <!DOCTYPE html>
@@ -26,14 +28,14 @@ $landingPageHtml = <<<HTML
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   
-  <link href="{$css}.css" rel="stylesheet">
+  <link href="{$css}.css?v={$cssVersion}" rel="stylesheet">
 </head>
 <body class="font-sans text-stone-800 antialiased">
   
   <!-- Wrapper: fluid on mobile/tablet, exact width on desktop -->
   <main class="w-full xl:w-[1443px] mx-auto">
     <!-- Header: fluid on mobile/tablet, exact width on desktop -->
-    <header class="sticky top-0 z-30 bg-white/22  border-b border-stone-200 mx-auto w-full  xl:w-[1100px] lg:h-[110px]">
+    <header class="sticky top-0 z-30 bg-white/22  border-b border-stone-200 mx-auto w-full  xl:w-[1100px] lg:h-[110px]" data-scroll>
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-[80px] sm:h-[80px] lg:h-[110px]" >
            <button id="manu-button-burger" class=" inline-flex items-center justify-center rounded-xl border px-3 py-2" aria-label="Menu" onclick="document.getElementById('mnav').classList.toggle('open')">
@@ -80,10 +82,10 @@ $landingPageHtml = <<<HTML
 
     <!-- Hero -->
     <!-- Keep the original negative offset ONLY on desktop to match exact layout -->
-    <section id="main-left-block" class="relative -mt-0 -mt-[110px] h-[815px]" style="background-color: #ebdcd6;" >
+    <section id="main-left-block" class="relative -mt-0 -mt-[110px] h-[815px]" style="background-color: #ebdcd6;" data-scroll>
       <div class="mx-auto max-w-7xl grid lg:grid-cols-2" >
       
-        <div class=" lg:mt-[200px]" id="main-block-text" >
+        <div class=" lg:mt-[200px]" id="main-block-text" data-scroll>
           <div>
             <h1 class="main">
               <strong>Відкрийте світ англійської</strong>
@@ -101,23 +103,23 @@ $landingPageHtml = <<<HTML
             
           </div>  
         </div>
-        <div class="relative order-first lg:order-none" id="main-photo">
+        <div class="relative order-first lg:order-none" id="main-photo" data-scroll>
         
         </div>
         <!-- Right (photo) -->
        
       </div>
     </section>
-    <section id="about" class="about" >
+    <section id="about" class="about" data-scroll>
       <h2 class="title">Кілька слів про мене</h2>
       <p class="text">Моя головна мета — не просто навчити вас граматики, а закохати в англійську мову. Я вірю, що навчання має бути комфортним та надихаючим. Саме тому я створюю на уроках невимушену та дружню атмосферу, де кожен учень почувається впевнено, не боїться ставити питання та робити помилки, адже вони — невід'ємна частина прогресу.</p>
     </section>
-    <section id="services" class="features" >
+    <section id="services" class="features" data-scroll>
       <h2 class="title">Що чекає на вас на наших заняттях?</h2>
       <p class="text">Комплексний підхід до ваших цілей.</p>
       <div class="slider-container">
       <div class="blocks">
-        <div class="card">
+        <div class="card" data-scroll>
         
 <h3> <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 31 31" width="31" height="31" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="31" height="31" fill="#ef7e8f" x="0" y="0" opacity="100%">
@@ -138,7 +140,7 @@ $landingPageHtml = <<<HTML
 </svg> Покращення навичок спілкування</h3>
           <p>Акцент на розмовній практиці для подолання мовного бар'єру.</p>
         </div>
-         <div class="card" style="background-color: #e5e7eb;">
+         <div class="card" style="background-color: #e5e7eb;" data-scroll>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34 36" width="34" height="36" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="34" height="34" fill="#b0d0f1" x="0" y="1" opacity="100%">
@@ -159,7 +161,7 @@ $landingPageHtml = <<<HTML
 </svg>Глибокий розбір граматики</h3>
           <p>Просте пояснення складних правил із закріпленням на практиці.</p>
         </div>
-         <div class="card" style="background-color: #E6F5F2;">
+         <div class="card" style="background-color: #E6F5F2;" data-scroll>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg"  style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38 36" width="38" height="36" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="36" height="36" fill="#f9e6a4" x="1" y="0" opacity="100%">
@@ -181,7 +183,7 @@ $landingPageHtml = <<<HTML
           <p>Вивчення актуальної лексики у сферах, що цікавлять саме вас.</p>
         </div>
 
-             <div class="card" style="background-color: #D6EBE4;">
+             <div class="card" style="background-color: #D6EBE4;" data-scroll>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34 34" width="34" height="34" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" height="34" width="34" viewBox="0 0 24 24" fill="#a2d9c9" x="0" y="0" opacity="100%">
@@ -203,7 +205,7 @@ $landingPageHtml = <<<HTML
 </svg>Сприйняття на слух (Auditory)</h3>
           <p>Робота з аудіо- та відеоматеріалами для кращого розуміння мови.</p>
         </div>
-         <div class="card" style="background-color: #F5FBE6;">
+         <div class="card" style="background-color: #F5FBE6;" data-scroll>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38 36" width="38" height="36" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="36" height="36" fill="#f9e6a4" x="1" y="0" opacity="100%">
@@ -224,7 +226,7 @@ $landingPageHtml = <<<HTML
 </svg>Підготовка до НМТ та іспитів</h3>
           <p>Просте пояснення складних правил із закріпленням на практиці.</p>
         </div>
-         <div class="card" style="background-color: #F3DFE0;">
+         <div class="card" style="background-color: #F3DFE0;" data-scroll>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38 36" width="38" height="36" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="36" height="36" fill="#f9b8d1" x="1" y="0" opacity="100%">
@@ -252,7 +254,7 @@ $landingPageHtml = <<<HTML
       </div>
     </section>
   
-<section id="approach" class="result bg-white py-12 md:py-20">
+<section id="approach" class="result bg-white py-12 md:py-20" data-scroll>
   <div class="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center md:items-start gap-10">
     <!-- Ліва колонка -->
     <div class="w-full md:w-2/5 text-center md:text-left">
@@ -281,7 +283,7 @@ $landingPageHtml = <<<HTML
 
 
 <!-- Travels (responsive, matches screenshot layout) -->
-<section id="travels" class="bg-[#FEF6DB] py-12 sm:py-16">
+<section id="travels" class="bg-[#FEF6DB] py-12 sm:py-16" data-scroll>
   <div class="mx-auto w-full xl:w-[1300px] px-6 md:px-8 grid grid-cols-1 md:grid-cols-2 gap-10">
     <!-- Left column: top image, bottom title + text -->
     <div class="flex flex-col gap-6">
@@ -324,7 +326,7 @@ $landingPageHtml = <<<HTML
   </div>
 </section>
 
-<section id="signup" class="form bg-white py-16 text-center">
+<section id="signup" class="form bg-white py-16 text-center" data-scroll>
   <div class="mx-auto max-w-3xl px-4">
     <h3 class="text-[#030303] text-[32px] sm:text-[48px] lg:text-[60px] font-medium leading-tight mb-4">
       Готові розпочати?
@@ -358,7 +360,7 @@ $landingPageHtml = <<<HTML
   </div>
 </section>
 
-<footer>
+<footer data-scroll>
   <!-- Лого (зліва, відступ дає сам footer через padding: 0 100px) -->
   <img src="img/logo-3.png" alt="Logo">
 
@@ -377,7 +379,40 @@ $landingPageHtml = <<<HTML
 
   </main>
   <script>
+    document.documentElement.classList.add('js-ready');
+
     document.addEventListener('DOMContentLoaded', function () {
+      const revealElements = Array.from(document.querySelectorAll('[data-scroll]'));
+      const pairDelayStep = 0.18;
+      const intraPairGap = 0.08;
+      const maxDelay = 0.6;
+
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              obs.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.15,
+          rootMargin: '0px 0px -10% 0px'
+        });
+
+        revealElements.forEach((element, index) => {
+          if (!element.style.getPropertyValue('--reveal-delay')) {
+            const pairIndex = Math.floor(index / 2);
+            const withinPairOffset = (index % 2) * intraPairGap;
+            const delay = Math.min(pairIndex * pairDelayStep + withinPairOffset, maxDelay);
+            element.style.setProperty('--reveal-delay', delay + 's');
+          }
+          observer.observe(element);
+        });
+      } else {
+        revealElements.forEach((element) => element.classList.add('is-visible'));
+      }
+
       document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
           const targetId = this.getAttribute('href').substring(1);

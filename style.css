@@ -28,6 +28,36 @@ html, body{
   scroll-behavior: smooth;
 }
 
+/* =========================
+   Scroll reveal animations
+========================= */
+[data-scroll]{
+  opacity: 1;
+  transform: none;
+}
+
+html.js-ready [data-scroll]{
+  opacity: 0;
+  transform: translateY(var(--reveal-translate, 40px));
+  transition: opacity .6s ease, transform .6s ease;
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+html.js-ready [data-scroll].is-visible{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce){
+  html.js-ready [data-scroll]{
+    opacity: 1 !important;
+    transform: none !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0s !important;
+  }
+}
+
 /* опціональні класи */
 .font-display, .font-sans{ font-family: "Montserrat", sans-serif; }
 
