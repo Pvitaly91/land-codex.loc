@@ -44,6 +44,12 @@ html.js-ready [data-scroll]{
   will-change: opacity, transform;
 }
 
+/* keep fixed backgrounds working on sections that need parallax */
+html.js-ready #main-left-block[data-scroll]{
+  transform: none !important;
+  will-change: opacity;
+}
+
 html.js-ready [data-scroll].is-visible{
   opacity: 1;
   transform: translateY(0);
