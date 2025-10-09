@@ -416,6 +416,10 @@ button.form-btn{
 }
 
 @media (max-width: 1024px){
+  html,
+  body{
+    background-color: transparent;
+  }
   #main-block-text{
     position: absolute;
     top: 30px;
@@ -431,8 +435,19 @@ button.form-btn{
     text-align: center;
   }
   #main-left-block{
+    position: relative;
+    z-index: 0;
+    background: none;
+    background-color: transparent !important;
+  }
+  #main-left-block::before{
+    content: "";
+    position: fixed;
+    inset: 0;
     background: url(img/main.jpg) -40px 10px / 108% no-repeat;
     background-attachment: fixed;
+    z-index: -1;
+    pointer-events: none;
   }
   .about-text{ padding: 5%; }
   #main-photo{ display: none; }
@@ -524,9 +539,6 @@ h1.main strong {
 }
 
 @media (max-width: 768px){
-  body{
-    background: url(img/main.jpg) center / cover no-repeat fixed;
-  }
   .order-lesson{
     width: 52px;
     height: 52px;
