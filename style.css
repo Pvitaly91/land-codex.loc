@@ -524,6 +524,9 @@ h1.main strong {
 }
 
 @media (max-width: 768px){
+  body{
+    background: url(img/main.jpg) center / cover no-repeat fixed;
+  }
   .order-lesson{
     width: 52px;
     height: 52px;
@@ -538,7 +541,7 @@ h1.main strong {
   section.about,
   .result,
   section.form{
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.45);
   }
   section.form {
 
@@ -549,7 +552,7 @@ h1.main strong {
 
 @media (max-width: 703px){
   section.about{
-    background-color: rgba(255,255,255,0.6);
+    background-color: rgba(255,255,255,0.45);
     min-height: 370px;
     padding: 30px;
   }
