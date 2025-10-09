@@ -560,7 +560,7 @@ h1.main strong {
    
     margin-top: 40px;
   }
-  .text, .text-block{ font-size: clamp(16px, 4.5vw, 20px); line-height: 1.5; }
+  .text, .text-block{ font-size: clamp(16px, 4.5vw, 18px); line-height: 1.5; }
   h1.main{ font-size: clamp(28px, 8vw, 36px); line-height: clamp(34px, 9vw, 46px); }
   #main-left-block{ height: 675px; }
 }
@@ -570,14 +570,22 @@ h1.main strong {
 }
 
 @media (max-width: 590px){
-  #main-block-text{ width: 100%; }
+  #main-block-text{ width: 100%; background-color: rgba(255, 255, 255, 0.1); }
   #main-block-text div{
-    max-width: 90%;
-    margin-left: 5%;
+   
+    margin-left: auto;
+    margin-right: auto;
+    margin-top:100px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding-bottom:20px;
+    padding-top:20px;
+    padding-left: 13px;
+    padding-right: 13px;
+    border-radius:8px;
   }
-  #main-block-text div{ padding-right: 2%; }
+ 
   h1.main{ font-size: clamp(26px, 9vw, 28px); line-height: clamp(34px, 10vw, 44px); }
-  #try-first-leson{ margin-top: 60px; }
+  #try-first-leson{ margin-top: 60px; font-size:16px;}
 }
 @media (max-width: 575px){
 	  #main-left-block {
@@ -587,7 +595,7 @@ h1.main strong {
 @media (max-width: 530px){
   #main-left-block{ background-size: 138%; }
     
-	
+
 }
 @media (max-width: 452px){
 	  #main-left-block {
@@ -596,9 +604,9 @@ h1.main strong {
 	    #try-first-leson {
         margin-top: 30px;
     }
-	    #main-block-text div {
+	  /*  #main-block-text div {
         max-width: 98%;
         margin-left: 5%;
     }
-	#main-block-text div{ padding-right: 20px; }
+	#main-block-text div{ padding-right: 20px; }*/
 }

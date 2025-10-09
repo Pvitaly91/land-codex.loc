@@ -11,10 +11,8 @@ $credentials = [
 $rememberCookieName = 'remember_auth';
 $rememberDuration = 30 * 24 * 60 * 60; // 30 days
 $secretKey = 'pRjFf3SxKZq8T0vL2nMhY1wB5cD9eG4u';
-$css = "style-1";
-if(isset($_GET['new'])){
-  $css = "style";
-}
+$css = "style";
+
 $landingPageHtml = <<<HTML
 <!DOCTYPE html>
 <html lang="uk">
