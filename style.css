@@ -43,10 +43,7 @@ html.js-ready [data-scroll]{
   transition-delay: var(--reveal-delay, 0s);
   will-change: opacity, transform;
 }
-html.js-ready #main-left-block[data-scroll]{
-  transform: none !important;
-  will-change: opacity;
-}
+
 /* keep fixed backgrounds working on sections that need parallax */
 html.js-ready #main-left-block[data-scroll]{
   transform: none !important;
@@ -470,7 +467,7 @@ button.form-btn{
     text-align: center;
   }
   #main-left-block{
-    background: url(img/main.jpg) -40px 10px / 108% no-repeat;
+    background: url(img/main.jpg) -40px 0px / 108% no-repeat;
     background-attachment: fixed;
   }/*
   body {
@@ -658,3 +655,9 @@ h1.main strong {
     }
 	#main-block-text div{ padding-right: 20px; }*/
 }
+
+@media (max-width: 412px){
+    #main-block-text div {
+      padding-top: 0px;
+    }
+  }
