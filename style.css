@@ -490,6 +490,10 @@ section.form{
 .contact-status--error{ color: #b91c1c; }
 .contact-status--success{ color: #166534; }
 
+.contact-form--hidden{
+  display: none !important;
+}
+
 /* глобальна кнопка (залишаю як у вас, щоб не ламати інші місця) */
 button.form-btn{
   cursor: pointer;

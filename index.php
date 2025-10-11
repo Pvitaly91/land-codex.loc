@@ -453,6 +453,13 @@ $landingPageHtml = <<<HTML
         </button>
        
       </form>
+      <div
+        id="contact-status"
+        class="contact-status"
+        role="status"
+        aria-live="polite"
+        style="display: none;"
+      ></div>
   </div>
 </section>
 

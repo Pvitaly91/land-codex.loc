@@ -314,7 +314,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         contactForm.reset();
         clearFieldErrors();
-        showStatus(payload.message || 'Дякуємо! Повідомлення успішно відправлено.', 'contact-status--success');
+        contactForm.classList.add('contact-form--hidden');
+
+        const successMessage = payload.message || 'Дякуємо! Повідомлення успішно відправлено.';
+        showStatus(successMessage, 'contact-status--success');
+
+        if (status) {
+          status.setAttribute('tabindex', '-1');
+          status.focus();
+          status.addEventListener('blur', () => {
+            status.removeAttribute('tabindex');
+          }, { once: true });
+        }
       } catch (error) {
         console.error('Contact form submission failed', error);
         showStatus('Не вдалося відправити повідомлення. Перевірте підключення до інтернету.', 'contact-status--error');
