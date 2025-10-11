@@ -158,6 +158,84 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const heroSection = document.getElementById('main-left-block');
+  const heroMediaQuery = window.matchMedia('(max-width: 1024px)');
+
+  if (heroSection) {
+    let rafId = 0;
+    let scrollListenerAttached = false;
+
+    const applyOffset = () => {
+      rafId = 0;
+
+      if (!heroMediaQuery.matches) {
+        return;
+      }
+
+      const rect = heroSection.getBoundingClientRect();
+      const offset = rect.top * -1;
+      heroSection.style.setProperty('--hero-bg-offset', `${offset}px`);
+    };
+
+    const requestOffset = () => {
+      if (!heroMediaQuery.matches) {
+        return;
+      }
+
+      if (rafId !== 0) {
+        return;
+      }
+
+      rafId = window.requestAnimationFrame(applyOffset);
+    };
+
+    const detachScroll = () => {
+      if (!scrollListenerAttached) {
+        return;
+      }
+
+      window.removeEventListener('scroll', requestOffset);
+      scrollListenerAttached = false;
+    };
+
+    const attachScroll = () => {
+      if (scrollListenerAttached) {
+        return;
+      }
+
+      window.addEventListener('scroll', requestOffset, { passive: true });
+      scrollListenerAttached = true;
+    };
+
+    const enableHeroParallax = () => {
+      if (heroMediaQuery.matches) {
+        heroSection.classList.add('hero-fixed-background');
+        attachScroll();
+        applyOffset();
+      } else {
+        heroSection.classList.remove('hero-fixed-background');
+        detachScroll();
+
+        if (rafId !== 0) {
+          window.cancelAnimationFrame(rafId);
+          rafId = 0;
+        }
+
+        heroSection.style.removeProperty('--hero-bg-offset');
+      }
+    };
+
+    enableHeroParallax();
+
+    if (typeof heroMediaQuery.addEventListener === 'function') {
+      heroMediaQuery.addEventListener('change', enableHeroParallax);
+    } else if (typeof heroMediaQuery.addListener === 'function') {
+      heroMediaQuery.addListener(enableHeroParallax);
+    }
+
+    window.addEventListener('resize', requestOffset);
+  }
+
   const contactForm = document.getElementById('contact-form');
 
   if (contactForm) {

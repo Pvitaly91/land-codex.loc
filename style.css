@@ -559,9 +559,17 @@ button.form-btn{
     text-align: center;
   }
   #main-left-block{
-    background: url(img/main.jpg) -40px 0px / 108% no-repeat;
-    background-attachment: fixed;
+    --hero-bg-offset: 0px;
+    --hero-bg-base-y: 0px;
+    background-image: url(img/main.jpg);
+    background-repeat: no-repeat;
+    background-size: 108%;
+    background-position-x: -40px;
+    background-position-y: calc(var(--hero-bg-base-y) + var(--hero-bg-offset));
   }/*
+  #main-left-block.hero-fixed-background{
+    will-change: background-position;
+  }
   body {
     background-color: transparent !important;
     background: url(img/main.jpg) -40px 10px / 108% no-repeat;
@@ -662,8 +670,8 @@ h1.main strong {
 
 @media (max-width: 768px){
   #main-left-block{
-    background-attachment: scroll;
-    background-position: center top;
+    --hero-bg-base-y: 0px;
+    background-position-x: center;
   }
   .order-lesson{
     width: 52px;
