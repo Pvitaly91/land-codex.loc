@@ -14,6 +14,80 @@ $secretKey = 'pRjFf3SxKZq8T0vL2nMhY1wB5cD9eG4u';
 $css = "style";
 $cssFile = __DIR__ . "/{$css}.css";
 $cssVersion = file_exists($cssFile) ? (string) filemtime($cssFile) : (string) time();
+$script = 'script';
+$scriptFile = __DIR__ . "/{$script}.js";
+$scriptVersion = file_exists($scriptFile) ? (string) filemtime($scriptFile) : (string) time();
+
+$contactRecipient = 'tutor@example.com';
+$contactSender = 'no-reply@' . ($_SERVER['SERVER_NAME'] ?? 'example.com');
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
+    $name = trim((string)($_POST['name'] ?? ''));
+    $contact = trim((string)($_POST['contact'] ?? ''));
+    $message = trim((string)($_POST['message'] ?? ''));
+
+    $sanitize = static function (string $value): string {
+        return preg_replace('/[\r\n]+/', ' ', $value);
+    };
+
+    $length = static function (string $value): int {
+        return function_exists('mb_strlen') ? mb_strlen($value) : strlen($value);
+    };
+
+    $errors = [];
+
+    if ($name === '' || $length($name) < 2) {
+        $errors['name'] = "Будь ласка, вкажіть ім'я (мінімум 2 символи).";
+    }
+
+    if ($contact === '' || $length($contact) < 5) {
+        $errors['contact'] = 'Будь ласка, залиште номер телефону, посилання чи нік.';
+    }
+
+    if ($message !== '' && $length($message) > 1500) {
+        $errors['message'] = 'Повідомлення занадто довге. Скоротіть його до 1500 символів.';
+    }
+
+    header('Content-Type: application/json; charset=UTF-8');
+
+    if ($errors !== []) {
+        echo json_encode([
+            'success' => false,
+            'errors' => $errors,
+            'message' => 'Перевірте правильність заповнення форми.',
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    $name = $sanitize($name);
+    $contact = $sanitize($contact);
+    $message = $sanitize($message);
+
+    $subject = 'Нова заявка з сайту Dasha Tutor';
+    $emailBody = "Ім'я: {$name}\nКонтакт: {$contact}\nПовідомлення: " . ($message !== '' ? $message : '—');
+    $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+    $headers = [
+        'Content-Type: text/plain; charset=UTF-8',
+        'From: ' . $contactSender,
+        'Reply-To: ' . $contactSender,
+    ];
+
+    $mailSent = mail($contactRecipient, $encodedSubject, $emailBody, implode("\r\n", $headers));
+
+    if ($mailSent) {
+        echo json_encode([
+            'success' => true,
+            'message' => 'Дякуємо! Я звʼяжуся з вами найближчим часом.',
+        ], JSON_UNESCAPED_UNICODE);
+    } else {
+        echo json_encode([
+            'success' => false,
+            'message' => 'Не вдалося відправити повідомлення. Спробуйте знову пізніше.',
+        ], JSON_UNESCAPED_UNICODE);
+    }
+
+    exit;
+}
 
 $landingPageHtml = <<<HTML
 <!DOCTYPE html>
@@ -27,18 +101,19 @@ $landingPageHtml = <<<HTML
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-  
+
   <link href="{$css}.css?v={$cssVersion}" rel="stylesheet">
+  <script src="script.js?v={$scriptVersion}" defer></script>
 </head>
 <body class="font-sans text-stone-800 antialiased">
-  
+
   <!-- Wrapper: fluid on mobile/tablet, exact width on desktop -->
   <main class="w-full xl:w-[1443px] mx-auto">
     <!-- Header: fluid on mobile/tablet, exact width on desktop -->
     <header class="sticky top-0 z-30 bg-white/22  border-b border-stone-200 mx-auto w-full  xl:w-[1100px] lg:h-[110px]" data-scroll>
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-[80px] sm:h-[80px] lg:h-[110px]" >
-           <button id="manu-button-burger" class=" inline-flex items-center justify-center rounded-xl border px-3 py-2" aria-label="Menu" onclick="document.getElementById('mnav').classList.toggle('open')">
+           <button id="menu-button-burger" type="button" class=" inline-flex items-center justify-center rounded-xl border px-3 py-2" aria-label="Menu" aria-controls="mnav" aria-expanded="false">
               <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h16M3 11h16M3 16h16"/></svg>
             </button>
           <a href="#" class="flex items-center gap-2 group select-none w-[192px] h-[43px]">
@@ -337,28 +412,37 @@ $landingPageHtml = <<<HTML
         Запишіться на перший пробний урок безкоштовно! Просто заповніть форму, і я зв'яжуся з вами.
       </p>
 
-      <form class="space-y-5 reveal-child-zoom" data-scroll-child>
-      <input
-        type="text"
-        placeholder="Ваше ім'я"
-        class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[52px] px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[16px]"
-      />
-      <input
-        type="text"
-        placeholder="Ваш Viber або Telegram"
-        class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[52px] px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[16px]"
-      />
-      <textarea
-        placeholder="Ваше повідомлення (необов'язково)"
-        class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[108px] px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[14px]"
-      ></textarea>
-      <button
-        type="submit"
-        class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[59px] bg-[#7a555b] text-white text-[18px] lg:text-[20px] font-medium rounded-lg shadow-md hover:bg-[#6b4950] transition"
-      >
-        Надіслати заявку
-      </button>
-    </form>
+      <form id="contact-form" class="space-y-5 reveal-child-zoom" data-scroll-child novalidate>
+        <input type="hidden" name="contact_form" value="1" />
+        <input
+          type="text"
+          name="name"
+          placeholder="Ваше ім'я"
+          autocomplete="name"
+          class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[52px] px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[16px]"
+          required
+        />
+        <input
+          type="text"
+          name="contact"
+          placeholder="Ваш Viber або Telegram"
+          autocomplete="tel"
+          class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[52px] px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[16px]"
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Ваше повідомлення (необов'язково)"
+          class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[108px] px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[14px]"
+        ></textarea>
+        <button
+          type="submit"
+          class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[59px] bg-[#7a555b] text-white text-[18px] lg:text-[20px] font-medium rounded-lg shadow-md hover:bg-[#6b4950] transition"
+        >
+          Надіслати заявку
+        </button>
+        <div id="contact-status" class="contact-status" role="status" aria-live="polite"></div>
+      </form>
   </div>
 </section>
 
@@ -380,130 +464,6 @@ $landingPageHtml = <<<HTML
 
 
   </main>
-  <script>
-    document.documentElement.classList.add('js-ready');
-
-    document.addEventListener('DOMContentLoaded', function () {
-      const revealElements = Array.from(document.querySelectorAll('[data-scroll], [data-scroll-child]'));
-      const pairDelayStep = 0.12;
-      const intraPairGap = 0.08;
-      const maxDelay = 0.1;
-
-      if ('IntersectionObserver' in window) {
-        const observer = new IntersectionObserver((entries, obs) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              obs.unobserve(entry.target);
-            }
-          });
-        }, {
-          threshold: 0.15,
-          rootMargin: '0px 0px 2% 0px'
-        });
-
-        revealElements.forEach((element, index) => {
-          if (!element.style.getPropertyValue('--reveal-delay')) {
-            const pairIndex = Math.floor(index / 2);
-            const withinPairOffset = (index % 2) * intraPairGap;
-            const delay = Math.min(pairIndex * pairDelayStep + withinPairOffset, maxDelay);
-            element.style.setProperty('--reveal-delay', delay + 's');
-          }
-          observer.observe(element);
-        });
-      } else {
-        revealElements.forEach((element) => element.classList.add('is-visible'));
-      }
-
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-          const targetId = this.getAttribute('href').substring(1);
-          const target = document.getElementById(targetId);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth' });
-            const mobileNav = document.getElementById('mnav');
-            if (mobileNav) mobileNav.classList.remove('open');
-          }
-        });
-      });
-
-      const container = document.querySelector('.features .blocks');
-      if (!container) return;
-      const cards = container.querySelectorAll('.card');
-      const prevBtn = document.querySelector('.features .slider-arrow.left');
-      const nextBtn = document.querySelector('.features .slider-arrow.right');
-      const dotsWrapper = document.querySelector('.features .slider-dots');
-
-      let current = 0;
-
-      cards.forEach((_, i) => {
-        const dot = document.createElement('button');
-        if (i === 0) dot.classList.add('active');
-        dot.addEventListener('click', () => {
-          current = i;
-          scrollToCurrent();
-          resetAuto();
-        });
-        dotsWrapper.appendChild(dot);
-      });
-
-      function scrollToCurrent() {
-        container.scrollTo({
-          left: cards[current].offsetLeft,
-          behavior: 'smooth'
-        });
-        updateDots();
-      }
-
-      function updateDots() {
-        dotsWrapper.querySelectorAll('button').forEach((dot, i) => {
-          dot.classList.toggle('active', i === current);
-        });
-      }
-
-      function nextSlide() {
-        current = (current + 1) % cards.length;
-        scrollToCurrent();
-      }
-
-      function prevSlide() {
-        current = (current - 1 + cards.length) % cards.length;
-        scrollToCurrent();
-      }
-
-      nextBtn.addEventListener('click', () => {
-        nextSlide();
-        resetAuto();
-      });
-      prevBtn.addEventListener('click', () => {
-        prevSlide();
-        resetAuto();
-      });
-
-      let auto = setInterval(nextSlide, 110000);
-      function resetAuto() {
-        clearInterval(auto);
-        auto = setInterval(nextSlide, 110000);
-      }
-
-      let scrollTimeout;
-      container.addEventListener('scroll', () => {
-        clearTimeout(scrollTimeout);
-        scrollTimeout = setTimeout(() => {
-          let scrollLeft = container.scrollLeft;
-          let closest = 0;
-          let min = Infinity;
-          cards.forEach((card, i) => {
-            const diff = Math.abs(card.offsetLeft - scrollLeft);
-            if (diff < min) { min = diff; closest = i; }
-          });
-          current = closest;
-          updateDots();
-        }, 100);
-      });
-    });
-  </script>
 </body>
 </html>
 HTML;

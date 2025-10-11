@@ -464,6 +464,21 @@ section.form{
   margin-bottom: 20px;
 }
 
+.contact-status{
+  min-height: 24px;
+  margin: 10px auto 0;
+  max-width: min(600px, 90%);
+  color: var(--ink-muted);
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 500;
+  text-align: center;
+  transition: color .2s ease;
+}
+
+.contact-status--error{ color: #b91c1c; }
+.contact-status--success{ color: #166534; }
+
 /* глобальна кнопка (залишаю як у вас, щоб не ламати інші місця) */
 button.form-btn{
   cursor: pointer;
