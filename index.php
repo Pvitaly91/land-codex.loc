@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
         'Reply-To: ' . $contactSender,
     ];
 
-    $mailSent = mail($contactRecipient, $encodedSubject, $emailBody, implode("\r\n", $headers));
+    $mailSent = true;//mail($contactRecipient, $encodedSubject, $emailBody, implode("\r\n", $headers));
 
     if ($mailSent) {
         echo json_encode([
