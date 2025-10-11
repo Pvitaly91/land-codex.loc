@@ -87,17 +87,17 @@ $landingPageHtml = <<<HTML
       
         <div class=" lg:mt-[200px]" id="main-block-text" data-scroll>
           <div>
-            <h1 class="main">
+            <h1 class="main reveal-child-left" data-scroll-child>
               <strong>Відкрийте світ англійської</strong>
               <span>— легко та з задоволенням</span>
             </h1>
 
-            <p class="text-block">
+            <p class="text-block" data-scroll-child>
               Привіт, я — Даша! Пропоную персоналізовані онлайн‑уроки, що допоможуть вам впевнено заговорити англійською.
               Давайте досягати ваших мовних цілей разом!
             </p>
- 
-            <a href="#signup" id="try-first-leson">
+
+            <a href="#signup" id="try-first-leson" class="reveal-child-left" data-scroll-child>
               Спробувати перший урок безкоштовно
             </a>
             
@@ -111,15 +111,15 @@ $landingPageHtml = <<<HTML
       </div>
     </section>
     <section id="about" class="about" data-scroll>
-      <h2 class="title">Кілька слів про мене</h2>
-      <p class="text">Моя головна мета — не просто навчити вас граматики, а закохати в англійську мову. Я вірю, що навчання має бути комфортним та надихаючим. Саме тому я створюю на уроках невимушену та дружню атмосферу, де кожен учень почувається впевнено, не боїться ставити питання та робити помилки, адже вони — невід'ємна частина прогресу.</p>
+      <h2 class="title" data-scroll-child>Кілька слів про мене</h2>
+      <p class="text" data-scroll-child>Моя головна мета — не просто навчити вас граматики, а закохати в англійську мову. Я вірю, що навчання має бути комфортним та надихаючим. Саме тому я створюю на уроках невимушену та дружню атмосферу, де кожен учень почувається впевнено, не боїться ставити питання та робити помилки, адже вони — невід'ємна частина прогресу.</p>
     </section>
     <section id="services" class="features" data-scroll>
-      <h2 class="title">Що чекає на вас на наших заняттях?</h2>
-      <p class="text">Комплексний підхід до ваших цілей.</p>
+      <h2 class="title" data-scroll-child>Що чекає на вас на наших заняттях?</h2>
+      <p class="text" data-scroll-child>Комплексний підхід до ваших цілей.</p>
       <div class="slider-container">
       <div class="blocks">
-        <div class="card" data-scroll>
+        <div class="card reveal-child-zoom" data-scroll-child>
         
 <h3> <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 31 31" width="31" height="31" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="31" height="31" fill="#ef7e8f" x="0" y="0" opacity="100%">
@@ -140,7 +140,7 @@ $landingPageHtml = <<<HTML
 </svg> Покращення навичок спілкування</h3>
           <p>Акцент на розмовній практиці для подолання мовного бар'єру.</p>
         </div>
-         <div class="card" style="background-color: #e5e7eb;" data-scroll>
+         <div class="card reveal-child-zoom" style="background-color: #e5e7eb;" data-scroll-child>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34 36" width="34" height="36" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" width="34" height="34" fill="#b0d0f1" x="0" y="1" opacity="100%">
@@ -161,7 +161,7 @@ $landingPageHtml = <<<HTML
 </svg>Глибокий розбір граматики</h3>
           <p>Просте пояснення складних правил із закріпленням на практиці.</p>
         </div>
-         <div class="card" style="background-color: #E6F5F2;" data-scroll>
+         <div class="card reveal-child-zoom" style="background-color: #E6F5F2;" data-scroll-child>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg"  style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38 36" width="38" height="36" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="36" height="36" fill="#f9e6a4" x="1" y="0" opacity="100%">
@@ -183,7 +183,7 @@ $landingPageHtml = <<<HTML
           <p>Вивчення актуальної лексики у сферах, що цікавлять саме вас.</p>
         </div>
 
-             <div class="card" style="background-color: #D6EBE4;" data-scroll>
+             <div class="card reveal-child-zoom" style="background-color: #D6EBE4;" data-scroll-child>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 34 34" width="34" height="34" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" height="34" width="34" viewBox="0 0 24 24" fill="#a2d9c9" x="0" y="0" opacity="100%">
@@ -205,7 +205,7 @@ $landingPageHtml = <<<HTML
 </svg>Сприйняття на слух (Auditory)</h3>
           <p>Робота з аудіо- та відеоматеріалами для кращого розуміння мови.</p>
         </div>
-         <div class="card" style="background-color: #F5FBE6;" data-scroll>
+         <div class="card reveal-child-zoom" style="background-color: #F5FBE6;" data-scroll-child>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38 36" width="38" height="36" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="36" height="36" fill="#f9e6a4" x="1" y="0" opacity="100%">
@@ -226,7 +226,7 @@ $landingPageHtml = <<<HTML
 </svg>Підготовка до НМТ та іспитів</h3>
           <p>Просте пояснення складних правил із закріпленням на практиці.</p>
         </div>
-         <div class="card" style="background-color: #F3DFE0;" data-scroll>
+         <div class="card reveal-child-zoom" style="background-color: #F3DFE0;" data-scroll-child>
           <h3>
 <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 38 36" width="38" height="36" fill="none">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" width="36" height="36" fill="#f9b8d1" x="1" y="0" opacity="100%">
@@ -258,22 +258,22 @@ $landingPageHtml = <<<HTML
   <div class="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center md:items-start gap-10">
     <!-- Ліва колонка -->
     <div class="w-full md:w-2/5 text-center md:text-left">
-      <h3 class="text-black text-[32px] sm:text-[42px] lg:text-[52px] font-medium leading-tight">
+      <h3 class="text-black text-[32px] sm:text-[42px] lg:text-[52px] font-medium leading-tight reveal-child-left" data-scroll-child>
         Мій підхід — ваш результат
       </h3>
     </div>
 
     <!-- Права колонка -->
     <div class="w-full md:w-3/5 space-y-5 text-center md:text-left">
-      <p class="text-[#6a8793] text-[18px] sm:text-[20px] lg:text-[24px] leading-relaxed">
+      <p class="text-[#6a8793] text-[18px] sm:text-[20px] lg:text-[24px] leading-relaxed" data-scroll-child>
         <span class="text-black font-medium">✓ Індивідуальний план:</span>
         Програма формується на основі вашого рівня, цілей та побажань.
       </p>
-      <p class="text-[#6a8793] text-[18px] sm:text-[20px] lg:text-[24px] leading-relaxed">
+      <p class="text-[#6a8793] text-[18px] sm:text-[20px] lg:text-[24px] leading-relaxed reveal-child-left" data-scroll-child>
         <span class="text-black font-medium">✓ Дружня атмосфера:</span>
         Заняття проходять у невимушеній обстановці.
       </p>
-      <p class="text-[#6a8793] text-[18px] sm:text-[20px] lg:text-[24px] leading-relaxed">
+      <p class="text-[#6a8793] text-[18px] sm:text-[20px] lg:text-[24px] leading-relaxed reveal-child-right" data-scroll-child>
         <span class="text-black font-medium">✓ Гнучкість:</span>
         Займаємося онлайн у зручний час. Можливі індивідуальні та парні уроки.
       </p>
@@ -290,13 +290,14 @@ $landingPageHtml = <<<HTML
       <img
         src="img/Dasha-Paris-marge.jpg"
         alt="Даша у Парижі біля Ейфелевої вежі"
-        class="w-full h-auto rounded-md shadow-md"
+        class="w-full h-auto rounded-md shadow-md reveal-child-zoom"
+        data-scroll-child
       />
       <div>
-        <h3 class="text-[#595236] text-[26px] sm:text-[32px] leading-[1.25] font-medium">
+        <h3 class="text-[#595236] text-[26px] sm:text-[32px] leading-[1.25] font-medium reveal-child-left" data-scroll-child>
           Занурюйтесь у культуру, а не просто будьте туристом
         </h3>
-        <p class="mt-4 text-[#4B5563] text-[18px] sm:text-[20px] leading-[1.55]">
+        <p class="mt-4 text-[#4B5563] text-[18px] sm:text-[20px] leading-[1.55]" data-scroll-child>
           Англійська дозволяє вийти за межі стандартних маршрутів. Розумійте розповіді
           місцевих гідів, спілкуйтеся з новими людьми, дізнавайтеся про їхні традиції
           та отримуйте поради, яких не знайти в путівниках. Саме так народжуються
@@ -307,35 +308,36 @@ $landingPageHtml = <<<HTML
 
     <!-- Right column: top title + text, bottom image -->
     <div class="flex flex-col gap-6 md:pt-4">
-      <div>
-        <h3 class="text-[#595236] text-[26px] sm:text-[32px] leading-[1.25] font-medium">
-          Відчуйте впевненість у кожному кроці
-        </h3>
-        <p class="mt-4 text-[#4B5563] text-[18px] sm:text-[20px] leading-[1.55]">
-          Забудьте про мовні бар'єри та невпевненість. З англійською ви зможете легко
-          забронювати готель, замовити саме ту страву, яку хочеться, чи просто запитати
-          дорогу у перехожого. Це дарує відчуття справжньої незалежності та спокою в будь-якій країні.
-        </p>
-      </div>
-      <img
-        src="img/efes.jpg"
-        alt="Подорож Ефес"
-        class="w-full h-auto rounded-md shadow-md md:max-w-[570px] "
-      />
+        <div>
+          <h3 class="text-[#595236] text-[26px] sm:text-[32px] leading-[1.25] font-medium reveal-child-right" data-scroll-child>
+            Відчуйте впевненість у кожному кроці
+          </h3>
+          <p class="mt-4 text-[#4B5563] text-[18px] sm:text-[20px] leading-[1.55] reveal-child-left" data-scroll-child>
+            Забудьте про мовні бар'єри та невпевненість. З англійською ви зможете легко
+            забронювати готель, замовити саме ту страву, яку хочеться, чи просто запитати
+            дорогу у перехожого. Це дарує відчуття справжньої незалежності та спокою в будь-якій країні.
+          </p>
+        </div>
+        <img
+          src="img/efes.jpg"
+          alt="Подорож Ефес"
+          class="w-full h-auto rounded-md shadow-md md:max-w-[570px] reveal-child-zoom"
+          data-scroll-child
+        />
     </div>
   </div>
 </section>
 
 <section id="signup" class="form bg-white py-16 text-center" data-scroll>
-  <div class="mx-auto max-w-3xl px-4">
-    <h3 class="text-[#030303] text-[32px] sm:text-[48px] lg:text-[60px] font-medium leading-tight mb-4">
-      Готові розпочати?
-    </h3>
-    <p class="text-[#4b5563] text-[18px] sm:text-[20px] lg:text-[24px] leading-[1.4] max-w-2xl mx-auto mb-10">
-      Запишіться на перший пробний урок безкоштовно! Просто заповніть форму, і я зв'яжуся з вами.
-    </p>
+    <div class="mx-auto max-w-3xl px-4">
+      <h3 class="text-[#030303] text-[32px] sm:text-[48px] lg:text-[60px] font-medium leading-tight mb-4" data-scroll-child>
+        Готові розпочати?
+      </h3>
+      <p class="text-[#4b5563] text-[18px] sm:text-[20px] lg:text-[24px] leading-[1.4] max-w-2xl mx-auto mb-10" data-scroll-child>
+        Запишіться на перший пробний урок безкоштовно! Просто заповніть форму, і я зв'яжуся з вами.
+      </p>
 
-    <form class="space-y-5">
+      <form class="space-y-5 reveal-child-zoom" data-scroll-child>
       <input
         type="text"
         placeholder="Ваше ім'я"
@@ -362,13 +364,13 @@ $landingPageHtml = <<<HTML
 
 <footer data-scroll>
   <!-- Лого (зліва, відступ дає сам footer через padding: 0 100px) -->
-  <img src="img/logo-3.png" alt="Logo">
+  <img src="img/logo-3.png" alt="Logo" class="reveal-child-zoom" data-scroll-child>
 
   <!-- Копірайт (насередині завдяки grid: auto 1fr auto) -->
-  <p>© 2025 Даша | English Tutor. Усі права захищено.</p>
+  <p data-scroll-child>© 2025 Даша | English Tutor. Усі права захищено.</p>
 
   <!-- Меню/контакти (справа, з тим самим 100px через padding контейнера) -->
-  <div>
+  <div data-scroll-child class="reveal-child-right">
     <h5>Contact Us</h5>
     <p>Instagram</p>
     <p>Telegram</p>
@@ -382,7 +384,7 @@ $landingPageHtml = <<<HTML
     document.documentElement.classList.add('js-ready');
 
     document.addEventListener('DOMContentLoaded', function () {
-      const revealElements = Array.from(document.querySelectorAll('[data-scroll]'));
+      const revealElements = Array.from(document.querySelectorAll('[data-scroll], [data-scroll-child]'));
       const pairDelayStep = 0.12;
       const intraPairGap = 0.08;
       const maxDelay = 0.1;

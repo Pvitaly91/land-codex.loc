@@ -34,29 +34,91 @@ html, body{
 [data-scroll]{
   opacity: 1;
   transform: none;
+  --reveal-translate-x: 0px;
+  --reveal-translate-y: 40px;
+  --reveal-scale: 1;
+  --reveal-duration: .6s;
+  --reveal-easing: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+section[data-scroll]{
+  --reveal-translate-y: 120px;
+  --reveal-duration: .9s;
+  --reveal-easing: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+#main-left-block[data-scroll]{
+  --reveal-translate-y: 0px;
+  --reveal-translate-x: 0px;
+}
+
+#main-photo[data-scroll]{
+  --reveal-translate-x: 80px;
+  --reveal-translate-y: 0px;
+  --reveal-duration: .85s;
 }
 
 html.js-ready [data-scroll]{
   opacity: 0;
-  transform: translateY(var(--reveal-translate, 40px));
-  transition: opacity .6s ease, transform .6s ease;
+  transform: translate3d(var(--reveal-translate-x), var(--reveal-translate-y), 0) scale(var(--reveal-scale));
+  transition: opacity var(--reveal-duration) var(--reveal-easing), transform var(--reveal-duration) var(--reveal-easing);
   transition-delay: var(--reveal-delay, 0s);
   will-change: opacity, transform;
 }
 
 /* keep fixed backgrounds working on sections that need parallax */
 html.js-ready #main-left-block[data-scroll]{
-  transform: none !important;
-  will-change: opacity;
+  transform: translate3d(var(--reveal-translate-x), var(--reveal-translate-y), 0) scale(var(--reveal-scale));
+  will-change: opacity, transform;
 }
 
 html.js-ready [data-scroll].is-visible{
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+[data-scroll-child]{
+  opacity: 1;
+  transform: none;
+  --child-translate-x: 0px;
+  --child-translate-y: 24px;
+  --child-scale: .94;
+  --child-duration: .65s;
+  --child-easing: cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+[data-scroll-child].reveal-child-left{
+  --child-translate-x: -45px;
+  --child-translate-y: 0px;
+}
+
+[data-scroll-child].reveal-child-right{
+  --child-translate-x: 45px;
+  --child-translate-y: 0px;
+}
+
+[data-scroll-child].reveal-child-zoom{
+  --child-scale: .9;
+  --child-translate-y: 30px;
+  --child-duration: .7s;
+}
+
+html.js-ready [data-scroll-child]{
+  opacity: 0;
+  transform: translate3d(var(--child-translate-x), var(--child-translate-y), 0) scale(var(--child-scale));
+  transition: opacity var(--child-duration) var(--child-easing), transform var(--child-duration) var(--child-easing);
+  transition-delay: var(--reveal-delay, 0s);
+  will-change: opacity, transform;
+}
+
+html.js-ready [data-scroll-child].is-visible{
+  opacity: 1;
+  transform: translate3d(0, 0, 0) scale(1);
 }
 
 @media (prefers-reduced-motion: reduce){
-  html.js-ready [data-scroll]{
+  html.js-ready [data-scroll],
+  html.js-ready [data-scroll-child]{
     opacity: 1 !important;
     transform: none !important;
     transition-duration: 0.01ms !important;
