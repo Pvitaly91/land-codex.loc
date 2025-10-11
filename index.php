@@ -35,6 +35,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
     };
 
     $errors = [];
+    $spamWindowSeconds = 5 * 60;
+    $now = time();
+    $lastSubmission = isset($_SESSION['contact_last_submit']) ? (int) $_SESSION['contact_last_submit'] : 0;
 
     if ($name === '' || $length($name) < 2) {
         $errors['name'] = "Будь ласка, вкажіть ім'я (мінімум 2 символи).";
@@ -58,6 +61,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
         exit;
     }
 
+    if ($lastSubmission !== 0 && ($now - $lastSubmission) < $spamWindowSeconds) {
+        $retryAfter = $spamWindowSeconds - ($now - $lastSubmission);
+        http_response_code(429);
+        echo json_encode([
+            'success' => false,
+            'message' => 'Ви вже надсилали заявку нещодавно. Будь ласка, спробуйте ще раз через 5 хвилин.',
+            'retry_after' => $retryAfter,
+        ], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
     $name = $sanitize($name);
     $contact = $sanitize($contact);
     $message = $sanitize($message);
@@ -74,6 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
     $mailSent = true;//mail($contactRecipient, $encodedSubject, $emailBody, implode("\r\n", $headers));
 
     if ($mailSent) {
+        $_SESSION['contact_last_submit'] = $now;
         echo json_encode([
             'success' => true,
             'message' => 'Дякуємо! Я звʼяжуся з вами найближчим часом.',

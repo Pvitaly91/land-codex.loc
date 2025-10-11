@@ -242,6 +242,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const status = document.getElementById('contact-status');
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const defaultButtonText = submitButton ? submitButton.textContent : '';
+    const formHideDelay = 360;
+    let hideFormTimer = 0;
     const fieldNames = ['name', 'contact', 'message'];
     const fields = fieldNames.reduce((acc, name) => {
       acc[name] = contactForm.querySelector(`[name="${name}"]`);
@@ -257,11 +259,13 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      status.classList.remove('contact-status--error', 'contact-status--success');
+      status.classList.remove('contact-status--error', 'contact-status--success', 'contact-status--pending', 'contact-status--visible');
 
       if (!text) {
         status.textContent = '';
         status.style.display = 'none';
+        status.setAttribute('aria-hidden', 'true');
+        status.removeAttribute('tabindex');
         return;
       }
 
@@ -271,7 +275,22 @@ document.addEventListener('DOMContentLoaded', () => {
         status.classList.add(type);
       }
 
+      status.classList.add('contact-status--visible');
+      status.setAttribute('aria-hidden', 'false');
       status.textContent = text;
+    };
+
+    const hideFormWithAnimation = () => {
+      if (contactForm.classList.contains('contact-form--hidden')) {
+        return;
+      }
+
+      window.clearTimeout(hideFormTimer);
+      contactForm.classList.add('contact-form--sent');
+      hideFormTimer = window.setTimeout(() => {
+        contactForm.classList.add('contact-form--hidden');
+        contactForm.classList.remove('contact-form--sent');
+      }, formHideDelay);
     };
 
     const clearFieldErrors = () => {
@@ -344,7 +363,8 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      showStatus('Надсилаємо повідомлення…', '');
+      showStatus('Надсилаємо повідомлення…', 'contact-status--pending');
+      contactForm.classList.add('contact-form--submitting');
       submitButton.disabled = true;
       submitButton.textContent = 'Відправлення…';
 
@@ -398,7 +418,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         contactForm.reset();
         clearFieldErrors();
-        contactForm.classList.add('contact-form--hidden');
 
         const successMessage = payload.message || 'Дякуємо! Повідомлення успішно відправлено.';
         showStatus(successMessage, 'contact-status--success');
@@ -410,12 +429,18 @@ document.addEventListener('DOMContentLoaded', () => {
             status.removeAttribute('tabindex');
           }, { once: true });
         }
+
+        contactForm.classList.remove('contact-form--submitting');
+        hideFormWithAnimation();
       } catch (error) {
         console.error('Contact form submission failed', error);
         showStatus('Не вдалося відправити повідомлення. Перевірте підключення до інтернету.', 'contact-status--error');
       } finally {
         submitButton.disabled = false;
         submitButton.textContent = defaultButtonText;
+        if (!contactForm.classList.contains('contact-form--hidden')) {
+          contactForm.classList.remove('contact-form--submitting');
+        }
       }
     });
   }
