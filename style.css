@@ -464,6 +464,29 @@ section.form{
   margin-bottom: 20px;
 }
 
+.form-field{
+  position: relative;
+  max-width: min(600px, 90%);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-error{
+  min-height: 1.2em;
+  margin-top: 4px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #b91c1c;
+  text-align: left;
+  font-weight: 500;
+}
+
+.form input.has-error,
+.form textarea.has-error{
+  border-color: #b91c1c;
+  box-shadow: 0 0 0 1px rgba(185, 28, 28, 0.1);
+}
+
 .contact-status{
   min-height: 24px;
   margin: 10px auto 0;
@@ -478,6 +501,24 @@ section.form{
 
 .contact-status--error{ color: #b91c1c; }
 .contact-status--success{ color: #166534; }
+
+.contact-success{
+  margin: 24px auto 0;
+  max-width: min(600px, 90%);
+  padding: 20px;
+  border-radius: var(--radius);
+  background: #ecfdf5;
+  color: #166534;
+  font-size: 18px;
+  line-height: 1.5;
+  font-weight: 600;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.contact-form--hidden{
+  display: none;
+}
 
 /* глобальна кнопка (залишаю як у вас, щоб не ламати інші місця) */
 button.form-btn{

@@ -162,11 +162,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (contactForm) {
     const status = document.getElementById('contact-status');
+    const successBox = document.getElementById('contact-success');
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const defaultButtonText = submitButton ? submitButton.textContent : '';
-    const nameInput = contactForm.querySelector('input[name="name"]');
-    const contactInput = contactForm.querySelector('input[name="contact"]');
-    const messageInput = contactForm.querySelector('textarea[name="message"]');
+    const fieldNames = ['name', 'contact', 'message'];
+    const fields = fieldNames.reduce((acc, name) => {
+      acc[name] = contactForm.querySelector(`[name="${name}"]`);
+      return acc;
+    }, {});
+    const errorNodes = fieldNames.reduce((acc, name) => {
+      acc[name] = contactForm.querySelector(`[data-error-for="${name}"]`);
+      return acc;
+    }, {});
 
     const showStatus = (text, type) => {
       if (!status) {
@@ -174,38 +181,97 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       status.classList.remove('contact-status--error', 'contact-status--success');
+
+      if (!text) {
+        status.textContent = '';
+        status.style.display = 'none';
+        return;
+      }
+
+      status.style.display = '';
+
       if (type) {
         status.classList.add(type);
       }
+
       status.textContent = text;
     };
+
+    const clearFieldErrors = () => {
+      fieldNames.forEach((name) => {
+        const field = fields[name];
+        const errorNode = errorNodes[name];
+
+        if (field) {
+          field.classList.remove('has-error');
+        }
+
+        if (errorNode) {
+          errorNode.textContent = '';
+        }
+      });
+    };
+
+    const setFieldError = (name, message) => {
+      const field = fields[name];
+      const errorNode = errorNodes[name];
+
+      if (field) {
+        field.classList.toggle('has-error', Boolean(message));
+
+        if (message) {
+          field.setAttribute('aria-invalid', 'true');
+        } else {
+          field.removeAttribute('aria-invalid');
+        }
+      }
+
+      if (errorNode) {
+        errorNode.textContent = message || '';
+      }
+    };
+
+    clearFieldErrors();
+    showStatus('', '');
 
     contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      if (!submitButton || !nameInput || !contactInput || !messageInput) {
+      if (!submitButton) {
         return;
       }
 
-      const nameValue = nameInput.value.trim();
-      const contactValue = contactInput.value.trim();
-      const messageValue = messageInput.value.trim();
+      clearFieldErrors();
+      showStatus('', '');
 
-      if (nameValue.length < 2) {
-        showStatus("Будь ласка, вкажіть ім'я (мінімум 2 символи).", 'contact-status--error');
-        nameInput.focus();
-        return;
+      if (successBox) {
+        successBox.hidden = true;
+        successBox.textContent = '';
       }
 
-      if (contactValue.length < 5) {
-        showStatus('Будь ласка, залиште ваш контакт для зворотного звʼязку.', 'contact-status--error');
-        contactInput.focus();
-        return;
+      const nameValue = fields.name ? fields.name.value.trim() : '';
+      const contactValue = fields.contact ? fields.contact.value.trim() : '';
+      const messageValue = fields.message ? fields.message.value.trim() : '';
+      let firstInvalidField = null;
+
+      if (fields.name && nameValue.length < 2) {
+        setFieldError('name', "Будь ласка, вкажіть ім'я (мінімум 2 символи).");
+        firstInvalidField = firstInvalidField || fields.name;
       }
 
-      if (messageValue.length > 1500) {
-        showStatus('Повідомлення занадто довге. Максимум 1500 символів.', 'contact-status--error');
-        messageInput.focus();
+      if (fields.contact && contactValue.length < 5) {
+        setFieldError('contact', 'Будь ласка, залиште ваш контакт для зворотного звʼязку.');
+        firstInvalidField = firstInvalidField || fields.contact;
+      }
+
+      if (fields.message && messageValue.length > 1500) {
+        setFieldError('message', 'Повідомлення занадто довге. Максимум 1500 символів.');
+        firstInvalidField = firstInvalidField || fields.message;
+      }
+
+      if (firstInvalidField) {
+        showStatus('Перевірте правильність заповнення форми.', 'contact-status--error');
+        firstInvalidField.focus();
         return;
       }
 
@@ -228,24 +294,51 @@ document.addEventListener('DOMContentLoaded', () => {
           body: formData,
         });
 
-        const payload = await response.json();
+        let payload = null;
 
-        if (!response.ok || !payload.success) {
+        try {
+          payload = await response.json();
+        } catch (parseError) {
+          console.error('Failed to parse response', parseError);
+        }
+
+        if (!response.ok || !payload || !payload.success) {
+          if (payload && payload.errors) {
+            const errorKeys = Object.keys(payload.errors);
+            let focused = false;
+
+            errorKeys.forEach((key) => {
+              setFieldError(key, payload.errors[key]);
+              if (!focused && fields[key]) {
+                fields[key].focus();
+                focused = true;
+              }
+            });
+          }
+
           const errorMessage = payload && payload.message ? payload.message : 'Сталася помилка під час відправлення.';
           showStatus(errorMessage, 'contact-status--error');
           return;
         }
 
         contactForm.reset();
-        showStatus(payload.message || 'Дякуємо! Повідомлення успішно відправлено.', 'contact-status--success');
+        clearFieldErrors();
+        contactForm.classList.add('contact-form--hidden');
+
+        const successMessage = payload.message || 'Дякуємо! Повідомлення успішно відправлено.';
+
+        if (successBox) {
+          successBox.textContent = successMessage;
+          successBox.hidden = false;
+        } else {
+          showStatus(successMessage, 'contact-status--success');
+        }
       } catch (error) {
         console.error('Contact form submission failed', error);
         showStatus('Не вдалося відправити повідомлення. Перевірте підключення до інтернету.', 'contact-status--error');
       } finally {
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = defaultButtonText;
-        }
+        submitButton.disabled = false;
+        submitButton.textContent = defaultButtonText;
       }
     });
   }
