@@ -261,7 +261,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (firstInvalidField) {
-        showStatus('Перевірте правильність заповнення форми.', 'contact-status--error');
+        showStatus('', '');
         firstInvalidField.focus();
         return;
       }
@@ -307,8 +307,14 @@ document.addEventListener('DOMContentLoaded', () => {
             });
           }
 
-          const errorMessage = payload && payload.message ? payload.message : 'Сталася помилка під час відправлення.';
-          showStatus(errorMessage, 'contact-status--error');
+          const hasMessage = payload && Object.prototype.hasOwnProperty.call(payload, 'message');
+          const errorMessage = hasMessage ? payload.message : 'Сталася помилка під час відправлення.';
+
+          if (errorMessage) {
+            showStatus(errorMessage, 'contact-status--error');
+          } else {
+            showStatus('', '');
+          }
           return;
         }
 

@@ -54,7 +54,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
         echo json_encode([
             'success' => false,
             'errors' => $errors,
-            'message' => 'Перевірте правильність заповнення форми.',
         ], JSON_UNESCAPED_UNICODE);
         exit;
     }
