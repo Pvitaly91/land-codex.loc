@@ -162,7 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (contactForm) {
     const status = document.getElementById('contact-status');
-    const successBox = document.getElementById('contact-success');
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const defaultButtonText = submitButton ? submitButton.textContent : '';
     const fieldNames = ['name', 'contact', 'message'];
@@ -199,11 +198,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const clearFieldErrors = () => {
       fieldNames.forEach((name) => {
-        const field = fields[name];
         const errorNode = errorNodes[name];
 
-        if (field) {
-          field.classList.remove('has-error');
+        if (fields[name]) {
+          fields[name].removeAttribute('aria-invalid');
         }
 
         if (errorNode) {
@@ -217,8 +215,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const errorNode = errorNodes[name];
 
       if (field) {
-        field.classList.toggle('has-error', Boolean(message));
-
         if (message) {
           field.setAttribute('aria-invalid', 'true');
         } else {
@@ -243,11 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       clearFieldErrors();
       showStatus('', '');
-
-      if (successBox) {
-        successBox.hidden = true;
-        successBox.textContent = '';
-      }
 
       const nameValue = fields.name ? fields.name.value.trim() : '';
       const contactValue = fields.contact ? fields.contact.value.trim() : '';
@@ -323,16 +314,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         contactForm.reset();
         clearFieldErrors();
-        contactForm.classList.add('contact-form--hidden');
-
-        const successMessage = payload.message || 'Дякуємо! Повідомлення успішно відправлено.';
-
-        if (successBox) {
-          successBox.textContent = successMessage;
-          successBox.hidden = false;
-        } else {
-          showStatus(successMessage, 'contact-status--success');
-        }
+        showStatus(payload.message || 'Дякуємо! Повідомлення успішно відправлено.', 'contact-status--success');
       } catch (error) {
         console.error('Contact form submission failed', error);
         showStatus('Не вдалося відправити повідомлення. Перевірте підключення до інтернету.', 'contact-status--error');
