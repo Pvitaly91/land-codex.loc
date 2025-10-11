@@ -597,6 +597,7 @@ h1.main strong {
     width: 220px; height: auto;
   }
 }
+
 @media (max-width: 930px){
   #try-first-leson{
     width: auto; height: auto;
@@ -660,6 +661,10 @@ h1.main strong {
 }
 
 @media (max-width: 768px){
+  #main-left-block{
+    background-attachment: scroll;
+    background-position: center top;
+  }
   .order-lesson{
     width: 52px;
     height: 52px;
