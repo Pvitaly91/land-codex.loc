@@ -422,29 +422,36 @@ $landingPageHtml = <<<HTML
           class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[52px] px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[16px]"
           required
         />
-        <p class="form-error" data-error-for="name" aria-live="polite"></p>
+
+        <div  class="contact-status contact-status--error form-error" data-error-for="name" aria-live="polite" role="status" aria-live="polite"  style="margin-top: 0px"></div>
         <input
           type="text"
           name="contact"
           placeholder="Ваш Viber або Telegram"
           autocomplete="tel"
           class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[52px] px-3 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[16px]"
+
           required
         />
-        <p class="form-error" data-error-for="contact" aria-live="polite"></p>
+         <div  class="contact-status contact-status--error form-error" data-error-for="contact" aria-live="polite" role="status" aria-live="polite"  style="margin-top: 0px"></div>
+    
         <textarea
+        
           name="message"
           placeholder="Ваше повідомлення (необов'язково)"
           class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[108px] px-3 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#7a555b] text-[14px]"
         ></textarea>
-        <p class="form-error" data-error-for="message" aria-live="polite"></p>
+    
+           <div  class="contact-status contact-status--error form-error" data-error-for="message" aria-live="polite" role="status" aria-live="polite"  style="margin-top: 0px"></div>
+    
         <button
+    
           type="submit"
           class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[59px] bg-[#7a555b] text-white text-[18px] lg:text-[20px] font-medium rounded-lg shadow-md hover:bg-[#6b4950] transition"
         >
           Надіслати заявку
         </button>
-        <div id="contact-status" class="contact-status" role="status" aria-live="polite"></div>
+       
       </form>
   </div>
 </section>
