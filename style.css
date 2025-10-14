@@ -565,6 +565,8 @@ section.form{
   content: "";
   width: 34px;
   height: 34px;
+  min-height: 34px;
+  min-width: 34px;
   border-radius: 50%;
   background: rgba(122,85,91,0.12);
   border: 1px solid rgba(122,85,91,0.18);
