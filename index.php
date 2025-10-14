@@ -164,7 +164,29 @@ $landingPageHtml = <<<HTML
           <a class="py-2" href="#services">Послуги</a>
           <a class="py-2" href="#travels">Подорожі</a>
           <a class="py-2" href="#approach">Мій підхід</a>
-         
+
+          <div class="mt-4 border-t border-stone-200 pt-4 text-[15px] leading-[1.5] text-stone-700">
+            <p class="mb-2 font-medium text-stone-900">Слідкуйте за мною у соцмережах:</p>
+            <div class="flex flex-col gap-2">
+              <a
+                href="https://www.instagram.com/dashatutor"
+                class="hover:text-[#7a555b]"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Instagram
+              </a>
+              <a
+                href="https://t.me/dashatutor"
+                class="hover:text-[#7a555b]"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Telegram
+              </a>
+            </div>
+          </div>
+
         </div>
       </div>
     </header>
@@ -189,8 +211,30 @@ $landingPageHtml = <<<HTML
             <a href="#signup" id="try-first-leson" class="reveal-child-left" data-scroll-child>
               Спробувати перший урок безкоштовно
             </a>
-            
-          </div>  
+
+            <div class="hidden md:flex items-center gap-3 mt-8 text-[16px] text-[#4b5563]" data-scroll-child>
+              <span class="font-medium text-[#595236]">Слідкуйте за мною у соцмережах:</span>
+              <div class="flex items-center gap-4">
+                <a
+                  href="https://www.instagram.com/dashatutor"
+                  class="hover:text-[#7a555b] underline-offset-4 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Instagram
+                </a>
+                <a
+                  href="https://t.me/dashatutor"
+                  class="hover:text-[#7a555b] underline-offset-4 hover:underline"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Telegram
+                </a>
+              </div>
+            </div>
+
+          </div>
         </div>
         <div class="relative order-first lg:order-none" id="main-photo" data-scroll>
         
@@ -425,6 +469,28 @@ $landingPageHtml = <<<HTML
       <p class="text-[#4b5563] text-[18px] sm:text-[20px] lg:text-[24px] leading-[1.4] max-w-2xl mx-auto mb-10" data-scroll-child>
         Запишіться на перший пробний урок безкоштовно! Просто заповніть форму, і я зв'яжуся з вами.
       </p>
+
+      <div class="mb-10 flex flex-col items-center justify-center gap-3 text-[16px] sm:text-[18px] text-[#4b5563]" data-scroll-child>
+        <span class="font-medium text-[#595236]">Хочете бути в курсі новин та корисних матеріалів?</span>
+        <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+          <a
+            href="https://www.instagram.com/dashatutor"
+            class="hover:text-[#7a555b] underline-offset-4 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Instagram
+          </a>
+          <a
+            href="https://t.me/dashatutor"
+            class="hover:text-[#7a555b] underline-offset-4 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Telegram
+          </a>
+        </div>
+      </div>
 
       <form id="contact-form" class="space-y-5 reveal-child-zoom" data-scroll-child novalidate>
         <input type="hidden" name="contact_form" value="1" />
