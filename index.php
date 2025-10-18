@@ -18,6 +18,22 @@ $script = 'script';
 $scriptFile = __DIR__ . "/{$script}.js";
 $scriptVersion = file_exists($scriptFile) ? (string) filemtime($scriptFile) : (string) time();
 
+$instagramLinks = [
+    'https://www.instagram.com/dashatutor',
+    'https://www.instagram.com/dashatutor_alt',
+];
+$getRandomInstagramLink = static function () use ($instagramLinks): string {
+    return $instagramLinks[array_rand($instagramLinks)];
+};
+
+$instagramHref1 = htmlspecialchars($getRandomInstagramLink(), ENT_QUOTES, 'UTF-8');
+$instagramHref2 = htmlspecialchars($getRandomInstagramLink(), ENT_QUOTES, 'UTF-8');
+$instagramHref3 = htmlspecialchars($getRandomInstagramLink(), ENT_QUOTES, 'UTF-8');
+$instagramHref4 = htmlspecialchars($getRandomInstagramLink(), ENT_QUOTES, 'UTF-8');
+
+$telegramLink = 'https://t.me/dashatutor';
+$telegramHref = htmlspecialchars($telegramLink, ENT_QUOTES, 'UTF-8');
+
 $contactRecipient = 'tutor@example.com';
 $contactSender = 'no-reply@' . ($_SERVER['SERVER_NAME'] ?? 'example.com');
 
@@ -169,7 +185,7 @@ $landingPageHtml = <<<HTML
            
             <div class="flex flex-col gap-2">
               <a
-                href="https://www.instagram.com/dashatutor"
+                href="{$instagramHref1}"
                 class="social-link hover:text-[#7a555b]"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -178,7 +194,7 @@ $landingPageHtml = <<<HTML
                 <span>Instagram</span>
               </a>
               <a
-                href="https://t.me/dashatutor"
+                href="{$telegramHref}"
                 class="social-link hover:text-[#7a555b]"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -218,7 +234,7 @@ $landingPageHtml = <<<HTML
           
               <div class="flex items-center gap-4" id="social_block">
                 <a
-                  href="https://www.instagram.com/dashatutor"
+                  href="{$instagramHref2}"
                   class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -227,7 +243,7 @@ $landingPageHtml = <<<HTML
                   <span>Instagram</span>
                 </a>
                 <a
-                  href="https://t.me/dashatutor"
+                  href="{$telegramHref}"
                   class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
@@ -478,7 +494,7 @@ $landingPageHtml = <<<HTML
      
         <div class="items-center gap-3 sm:gap-5">
           <a
-            href="https://www.instagram.com/dashatutor"
+            href="{$instagramHref3}"
             class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
@@ -487,7 +503,7 @@ $landingPageHtml = <<<HTML
             <span>Instagram</span>
           </a>
           <a
-            href="https://t.me/dashatutor"
+            href="{$telegramHref}"
             class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
@@ -560,14 +576,14 @@ $landingPageHtml = <<<HTML
   <div data-scroll-child class="reveal-child-right">
     <h5>Contact Us</h5>
     <p> <a
-            href="https://www.instagram.com/dashatutor"
+            href="{$instagramHref4}"
             class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >Instagram</a></p>
     <p>
       <a
-            href="https://t.me/dashatutor"
+            href="{$telegramHref}"
             class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
