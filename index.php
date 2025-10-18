@@ -34,6 +34,87 @@ $instagramHref4 = htmlspecialchars($getRandomInstagramLink(), ENT_QUOTES, 'UTF-8
 $telegramLink = 'https://t.me/dasha_pechenyuk';
 $telegramHref = htmlspecialchars($telegramLink, ENT_QUOTES, 'UTF-8');
 
+$scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://' : 'http://';
+$host = $_SERVER['HTTP_HOST'] ?? 'example.com';
+$requestUri = $_SERVER['REQUEST_URI'] ?? '/';
+$canonicalUrl = $scheme . $host . $requestUri;
+$canonicalHref = htmlspecialchars($canonicalUrl, ENT_QUOTES, 'UTF-8');
+$logoUrl = $scheme . $host . '/img/logo-3.png';
+$logoUrlEscaped = htmlspecialchars($logoUrl, ENT_QUOTES, 'UTF-8');
+
+$metaTitle = 'Репетитор англійської мови онлайн — Dasha Tutor';
+$metaDescription = 'Персональний репетитор англійської мови для дорослих і підлітків. Індивідуальні онлайн-уроки з розмовною практикою, підготовкою до іспитів та гнучким графіком.';
+$metaKeywords = 'репетитор англійської мови, онлайн репетитор англійської, уроки англійської онлайн, індивідуальні заняття англійська';
+$metaTitleEscaped = htmlspecialchars($metaTitle, ENT_QUOTES, 'UTF-8');
+$metaDescriptionEscaped = htmlspecialchars($metaDescription, ENT_QUOTES, 'UTF-8');
+$metaKeywordsEscaped = htmlspecialchars($metaKeywords, ENT_QUOTES, 'UTF-8');
+
+$structuredData = [
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'Person',
+        'name' => 'Dasha Pechenyuk',
+        'jobTitle' => 'Репетитор англійської мови',
+        'description' => 'Персональний репетитор англійської мови для дорослих та підлітків з індивідуальними онлайн-заняттями.',
+        'url' => $canonicalUrl,
+        'image' => $logoUrl,
+        'sameAs' => [
+            'https://www.instagram.com/dasha__english_',
+            'https://www.instagram.com/dasha__pechenyuk',
+            $telegramLink,
+        ],
+        'areaServed' => 'Online',
+        'inLanguage' => 'uk',
+        'makesOffer' => [
+            '@type' => 'Offer',
+            'priceCurrency' => 'UAH',
+            'price' => '550',
+            'priceValidUntil' => date('Y-12-31'),
+            'availability' => 'https://schema.org/InStock',
+            'url' => $canonicalUrl,
+            'description' => 'Індивідуальне онлайн-заняття з репетитором англійської мови тривалістю 60 хвилин.',
+        ],
+        'contactPoint' => [
+            '@type' => 'ContactPoint',
+            'contactType' => 'customer support',
+            'availableLanguage' => ['uk', 'en'],
+            'url' => $telegramLink,
+        ],
+    ],
+    [
+        '@context' => 'https://schema.org',
+        '@type' => 'FAQPage',
+        'mainEntity' => [
+            [
+                '@type' => 'Question',
+                'name' => 'Чому варто обрати онлайн-репетитора англійської мови?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Онлайн-репетитор англійської мови адаптує заняття під ваш графік та цілі, що допомагає швидше заговорити впевнено.',
+                ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Скільки триває індивідуальний урок англійської?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Стандартне онлайн-заняття триває 60 хвилин із балансом граматики, практики мовлення та інтерактивних завдань.',
+                ],
+            ],
+            [
+                '@type' => 'Question',
+                'name' => 'Чи підходить репетитор для підготовки до іспитів?',
+                'acceptedAnswer' => [
+                    '@type' => 'Answer',
+                    'text' => 'Так, програма включає підготовку до НМТ, IELTS та співбесід, з фокусом на ваші реальні цілі.',
+                ],
+            ],
+        ],
+    ],
+];
+
+$structuredDataJson = json_encode($structuredData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?: '';
+
 $contactRecipient = 'tutor@example.com';
 $contactSender = 'no-reply@' . ($_SERVER['SERVER_NAME'] ?? 'example.com');
 
@@ -125,7 +206,25 @@ $landingPageHtml = <<<HTML
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dasha Tutor — Hero Header (Responsive, Desktop-Exact)</title>
+  <title>{$metaTitleEscaped}</title>
+  <meta name="description" content="{$metaDescriptionEscaped}" />
+  <meta name="keywords" content="{$metaKeywordsEscaped}" />
+  <meta name="author" content="Dasha Pechenyuk" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="{$canonicalHref}" />
+  <link rel="alternate" hreflang="uk" href="{$canonicalHref}" />
+  <meta property="og:title" content="{$metaTitleEscaped}" />
+  <meta property="og:description" content="{$metaDescriptionEscaped}" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="{$canonicalHref}" />
+  <meta property="og:image" content="{$logoUrlEscaped}" />
+  <meta property="og:locale" content="uk_UA" />
+  <meta property="og:site_name" content="Dasha Tutor" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="{$metaTitleEscaped}" />
+  <meta name="twitter:description" content="{$metaDescriptionEscaped}" />
+  <meta name="twitter:image" content="{$logoUrlEscaped}" />
+  <script type="application/ld+json">{$structuredDataJson}</script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -146,8 +245,8 @@ $landingPageHtml = <<<HTML
            <button id="menu-button-burger" type="button" class="hidden max-[930px]:block inline-flex items-center justify-center rounded-xl border px-3 py-2" aria-label="Menu" aria-controls="mnav" aria-expanded="false">
               <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h16M3 11h16M3 16h16"/></svg>
             </button>
-          <a href="#" class="flex items-center gap-2 group select-none w-[192px] h-[43px]">
-            <img src="img/logo-3.png">
+          <a href="#" class="flex items-center gap-2 group select-none w-[192px] h-[43px]" aria-label="Dasha Tutor">
+            <img src="img/logo-3.png" alt="Dasha Tutor — репетитор англійської мови" loading="lazy">
           </a>
 
           <!-- Desktop Nav -->
@@ -217,14 +316,29 @@ $landingPageHtml = <<<HTML
         <div class=" lg:mt-[200px]" id="main-block-text" data-scroll>
           <div class="inner_text_block">
             <h1 class="main reveal-child-left" data-scroll-child>
-              <strong>Відкрийте світ англійської</strong>
-              <span>— легко та з задоволенням</span>
+              <strong>Репетитор англійської мови онлайн</strong>
+              <span>— допоможу говорити впевнено й природно</span>
             </h1>
 
             <p class="text-block" data-scroll-child>
-              Привіт, я — Даша! Пропоную персоналізовані онлайн‑уроки, що допоможуть вам впевнено заговорити англійською.
-              Давайте досягати ваших мовних цілей разом!
+              Привіт, я — Даша, репетитор англійської мови з міжнародним досвідом. Готую гнучкі програми для дорослих і підлітків,
+              щоб ви впевнено спілкувалися на роботі, в подорожах та під час іспитів.
             </p>
+
+            <ul class="mt-6 space-y-3 text-[16px] text-[#4b5563]" data-scroll-child>
+              <li class="flex items-start gap-2">
+                <span aria-hidden="true" class="mt-1 text-[#7a555b]">✔</span>
+                <span>Індивідуальні онлайн-уроки з акцентом на реальні ситуації спілкування.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span aria-hidden="true" class="mt-1 text-[#7a555b]">✔</span>
+                <span>Підтримка репетитора англійської мови між заняттями та домашніми завданнями.</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span aria-hidden="true" class="mt-1 text-[#7a555b]">✔</span>
+                <span>Підготовка до НМТ, міжнародних іспитів і співбесід англійською.</span>
+              </li>
+            </ul>
 
             <a href="#signup" id="try-first-leson" class="reveal-child-left" data-scroll-child>
               Спробувати перший урок безкоштовно
@@ -263,13 +377,61 @@ $landingPageHtml = <<<HTML
        
       </div>
     </section>
+    <section id="english-tutor" class="bg-white py-12 md:py-16" data-scroll>
+      <div class="mx-auto max-w-5xl px-6">
+        <h2 class="text-3xl sm:text-4xl font-semibold text-stone-900 text-center md:text-left" data-scroll-child>
+          Репетитор англійської мови онлайн для вашого впевненого прогресу
+        </h2>
+        <p class="mt-4 text-lg text-stone-700" data-scroll-child>
+          Працюю з тими, хто хоче говорити англійською без пауз і страху. Індивідуальні плани та підтримка між уроками допомагають
+          швидко побачити результат, незалежно від стартового рівня.
+        </p>
+        <div class="mt-8 grid gap-6 md:grid-cols-2" data-scroll-child>
+          <div class="rounded-3xl border border-[#f1e3dd] bg-[#fdfaf8] p-6 shadow-sm">
+            <h3 class="text-xl font-semibold text-stone-900">Для дорослих</h3>
+            <p class="mt-3 text-stone-700">
+              Допомагаю прокачати бізнес-англійську, підготуватися до співбесіди та впевнено презентувати себе міжнародним партнерам.
+            </p>
+          </div>
+          <div class="rounded-3xl border border-[#e3f0f6] bg-[#f7fbff] p-6 shadow-sm">
+            <h3 class="text-xl font-semibold text-stone-900">Для підлітків</h3>
+            <p class="mt-3 text-stone-700">
+              Підтягнемо шкільну програму, розберемо складні теми та підготуємося до іспитів із підтримкою репетитора англійської мови.
+            </p>
+          </div>
+        </div>
+        <ul class="mt-8 grid gap-4 md:grid-cols-2 text-stone-700" data-scroll-child>
+          <li class="flex items-start gap-3 rounded-3xl bg-[#f3f0ef] p-4">
+            <span aria-hidden="true" class="mt-1 text-[#7a555b]">★</span>
+            <span>Аналізую ваші цілі та створюю персональну траєкторію навчання.</span>
+          </li>
+          <li class="flex items-start gap-3 rounded-3xl bg-[#eef6f3] p-4">
+            <span aria-hidden="true" class="mt-1 text-[#7a555b]">★</span>
+            <span>Поєдную розмовну практику, граматику та лексику в кожному уроці.</span>
+          </li>
+          <li class="flex items-start gap-3 rounded-3xl bg-[#f5f8ff] p-4">
+            <span aria-hidden="true" class="mt-1 text-[#7a555b]">★</span>
+            <span>Надаю інтерактивні матеріали й записи занять для повторення.</span>
+          </li>
+          <li class="flex items-start gap-3 rounded-3xl bg-[#fff6f8] p-4">
+            <span aria-hidden="true" class="mt-1 text-[#7a555b]">★</span>
+            <span>Супроводжую вас до досягнення результату як особистий репетитор англійської мови.</span>
+          </li>
+        </ul>
+        <div class="mt-10 text-center" data-scroll-child>
+          <a href="#signup" class="inline-flex items-center justify-center rounded-full bg-[#7a555b] px-8 py-3 text-lg font-medium text-white shadow-md transition hover:bg-[#6b4950]">
+            Записатися до репетитора
+          </a>
+        </div>
+      </div>
+    </section>
     <section id="about" class="about" data-scroll>
       <h2 class="title" data-scroll-child>Кілька слів про мене</h2>
-      <p class="text" data-scroll-child>Моя головна мета — не просто навчити вас граматики, а закохати в англійську мову. Я вірю, що навчання має бути комфортним та надихаючим. Саме тому я створюю на уроках невимушену та дружню атмосферу, де кожен учень почувається впевнено, не боїться ставити питання та робити помилки, адже вони — невід'ємна частина прогресу.</p>
+      <p class="text" data-scroll-child>Моя головна мета — не просто навчити вас граматики, а закохати в англійську мову. Як репетитор англійської мови, я вірю, що навчання має бути комфортним та надихаючим. Саме тому я створюю на уроках невимушену та дружню атмосферу, де кожен учень почувається впевнено, не боїться ставити питання та робити помилки, адже вони — невід'ємна частина прогресу.</p>
     </section>
     <section id="services" class="features" data-scroll>
       <h2 class="title" data-scroll-child>Що чекає на вас на наших заняттях?</h2>
-      <p class="text" data-scroll-child>Комплексний підхід до ваших цілей.</p>
+      <p class="text" data-scroll-child>Комплексний підхід до ваших цілей від досвідченого репетитора англійської мови.</p>
       <div class="slider-container">
       <div class="blocks">
         <div class="card reveal-child-zoom" data-scroll-child>
@@ -406,7 +568,48 @@ $landingPageHtml = <<<HTML
       <div class="slider-dots"></div>
       </div>
     </section>
-  
+
+    <section id="faq" class="bg-[#f8f4f2] py-12 md:py-16" data-scroll>
+      <div class="mx-auto max-w-5xl px-6">
+        <h2 class="text-3xl sm:text-4xl font-semibold text-stone-900 text-center md:text-left" data-scroll-child>
+          Часті питання про репетитора англійської мови
+        </h2>
+        <p class="mt-4 text-lg text-stone-700" data-scroll-child>
+          Зібрала відповіді на питання, які найчастіше отримую від майбутніх студентів. Якщо чогось бракує — напишіть мені, і я
+          з радістю підкажу.
+        </p>
+        <div class="mt-8 space-y-4" data-scroll-child>
+          <details class="group rounded-3xl bg-white p-6 shadow-sm">
+            <summary class="cursor-pointer text-xl font-semibold text-stone-900 focus:outline-none group-open:text-[#7a555b]">
+              Які результати дають заняття з репетитором англійської мови?
+            </summary>
+            <p class="mt-3 text-stone-700">
+              Уже за кілька тижнів ви відчуєте, що говорите вільніше, краще розумієте носіїв та будуєте фрази без перекладу. Ми
+              працюємо над вимовою, словником і впевненістю.
+            </p>
+          </details>
+          <details class="group rounded-3xl bg-white p-6 shadow-sm">
+            <summary class="cursor-pointer text-xl font-semibold text-stone-900 focus:outline-none group-open:text-[#7a555b]">
+              Скільки коштує індивідуальний урок і як забронювати місце?
+            </summary>
+            <p class="mt-3 text-stone-700">
+              Онлайн-заняття триває 60 хвилин і коштує 550 грн. Щоб забронювати час, залиште заявку або напишіть мені в Telegram —
+              я відповім протягом дня.
+            </p>
+          </details>
+          <details class="group rounded-3xl bg-white p-6 shadow-sm">
+            <summary class="cursor-pointer text-xl font-semibold text-stone-900 focus:outline-none group-open:text-[#7a555b]">
+              Чи можна поєднувати індивідуальні заняття з підготовкою до іспиту?
+            </summary>
+            <p class="mt-3 text-stone-700">
+              Так, я адаптую програму під конкретний іспит — від НМТ до IELTS. Ви отримаєте план дій, тренування говоріння та
+              письма, а також перевірені матеріали для самостійної практики.
+            </p>
+          </details>
+        </div>
+      </div>
+    </section>
+
 <section id="approach" class="result bg-white py-12 md:py-20" data-scroll>
   <div class="mx-auto max-w-7xl px-6 flex flex-col md:flex-row items-center md:items-start gap-10">
     <!-- Ліва колонка -->
@@ -567,7 +770,7 @@ $landingPageHtml = <<<HTML
 
 <footer data-scroll>
   <!-- Лого (зліва, відступ дає сам footer через padding: 0 100px) -->
-  <img src="img/logo-3.png" alt="Logo" class="reveal-child-zoom" data-scroll-child>
+  <img src="img/logo-3.png" alt="Логотип Dasha Tutor — репетитор англійської мови" class="reveal-child-zoom" data-scroll-child loading="lazy">
 
   <!-- Копірайт (насередині завдяки grid: auto 1fr auto) -->
   <p data-scroll-child>© 2025 Даша | English Tutor. Усі права захищено.</p>
