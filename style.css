@@ -137,6 +137,9 @@ html.js-ready [data-scroll-child].is-visible{
     transition-duration: 0.01ms !important;
     transition-delay: 0s !important;
   }
+  .faq__content{
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* опціональні класи */
@@ -346,6 +349,17 @@ section.about{
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+.faq__content{
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height .35s ease, opacity .35s ease;
+  will-change: max-height, opacity;
+}
+details[open] .faq__content{
+  opacity: 1;
+  max-height: none;
 }
 .faq__summary::-webkit-details-marker{ display: none; }
 details[open] .faq__summary{ color: var(--primary); }
