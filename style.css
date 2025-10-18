@@ -278,6 +278,94 @@ section.about{
   margin: 0 auto 40px;
 }
 
+.section-heading{
+  color: var(--ink);
+  font-size: clamp(28px, 6vw, 42px);
+  font-weight: 500;
+  line-height: clamp(36px, 7vw, 52px);
+}
+.section-heading--left{ text-align: left; }
+.section-heading--center{ text-align: center; margin-left: auto; margin-right: auto; }
+.section-heading--xl{
+  font-size: clamp(32px, 7vw, 60px);
+  line-height: clamp(40px, 8vw, 70px);
+}
+
+.section-body{
+  color: var(--ink-muted);
+  font-size: clamp(16px, 4.5vw, 24px);
+  line-height: 1.55;
+}
+.section-body--left{ text-align: left; }
+.section-body--center{ text-align: center; }
+.section-body--narrow{ max-width: 46ch; margin-left: auto; margin-right: auto; }
+.section-body--accent{
+  color: var(--ink-accent);
+  line-height: 1.5;
+}
+.section-body__highlight{
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.section-card{
+  font-family: "Roboto", sans-serif;
+}
+.section-card__title{
+  color: var(--ink);
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: clamp(18px, 3.5vw, 22px);
+  line-height: 1.4;
+}
+.section-card__text{
+  margin-top: 12px;
+  color: var(--ink-muted);
+  font-family: "Roboto", sans-serif;
+  font-size: clamp(16px, 4vw, 20px);
+  line-height: 1.5;
+}
+
+.section-list{
+  color: var(--ink-muted);
+}
+.section-list__icon{
+  color: var(--rose);
+}
+.section-list__text{
+  color: var(--ink-muted);
+  font-size: clamp(16px, 4vw, 20px);
+  line-height: 1.5;
+}
+
+.faq__summary{
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: clamp(18px, 4vw, 22px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.faq__summary::-webkit-details-marker{ display: none; }
+details[open] .faq__summary{ color: var(--primary); }
+.faq__answer{
+  margin-top: 12px;
+  color: var(--ink-muted);
+  font-size: clamp(16px, 4.5vw, 24px);
+  line-height: 1.55;
+}
+
+.contact-links{
+  color: var(--ink-muted);
+  font-size: clamp(16px, 4vw, 20px);
+}
+
+@media (max-width: 767px){
+  .section-heading--left{ text-align: center; }
+  .section-body--left{ text-align: center; }
+}
+
 /* =========================
    Features
 ========================= */
