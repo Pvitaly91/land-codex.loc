@@ -72,18 +72,40 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const container = document.querySelector('.features .blocks');
-  const cards = container ? container.querySelectorAll('.card') : [];
-  const prevBtn = document.querySelector('.features .slider-arrow.left');
-  const nextBtn = document.querySelector('.features .slider-arrow.right');
-  const dotsWrapper = document.querySelector('.features .slider-dots');
+  const sliderContainers = document.querySelectorAll('[data-slider]');
 
-  if (container && cards.length > 0 && prevBtn && nextBtn && dotsWrapper) {
+  sliderContainers.forEach((slider) => {
+    const track = slider.querySelector('.slider-track');
+    if (!track) {
+      return;
+    }
+
+    const items = Array.from(track.children);
+    const prevBtn = slider.querySelector('.slider-arrow.left');
+    const nextBtn = slider.querySelector('.slider-arrow.right');
+    const dotsWrapper = slider.querySelector('.slider-dots');
+
+    if (!prevBtn || !nextBtn || !dotsWrapper || items.length === 0) {
+      return;
+    }
+
+    const intervalAttr = Number.parseInt(slider.getAttribute('data-slider-interval') ?? '', 10);
+    const interval = Number.isFinite(intervalAttr) && intervalAttr > 0 ? intervalAttr : 110000;
+
+    dotsWrapper.innerHTML = '';
+
+    if (items.length <= 1) {
+      prevBtn.style.display = 'none';
+      nextBtn.style.display = 'none';
+      dotsWrapper.style.display = 'none';
+      return;
+    }
+
     let current = 0;
-    let auto = window.setInterval(nextSlide, 110000);
+    let auto = window.setInterval(nextSlide, interval);
     let scrollTimeout;
 
-    cards.forEach((_, index) => {
+    items.forEach((_, index) => {
       const dot = document.createElement('button');
       if (index === 0) {
         dot.classList.add('active');
@@ -98,10 +120,17 @@ document.addEventListener('DOMContentLoaded', () => {
       dotsWrapper.appendChild(dot);
     });
 
-    function scrollToCurrent() {
-      container.scrollTo({
-        left: cards[current].offsetLeft,
-        behavior: 'smooth',
+    function scrollToCurrent(options = {}) {
+      const behavior = options.instant ? 'auto' : 'smooth';
+      const target = items[current];
+
+      if (!target) {
+        return;
+      }
+
+      track.scrollTo({
+        left: target.offsetLeft,
+        behavior,
       });
       updateDots();
     }
@@ -113,18 +142,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function nextSlide() {
-      current = (current + 1) % cards.length;
+      current = (current + 1) % items.length;
       scrollToCurrent();
     }
 
     function prevSlide() {
-      current = (current - 1 + cards.length) % cards.length;
+      current = (current - 1 + items.length) % items.length;
       scrollToCurrent();
     }
 
     function resetAuto() {
       window.clearInterval(auto);
-      auto = window.setInterval(nextSlide, 110000);
+      auto = window.setInterval(nextSlide, interval);
     }
 
     nextBtn.addEventListener('click', () => {
@@ -137,15 +166,15 @@ document.addEventListener('DOMContentLoaded', () => {
       resetAuto();
     });
 
-    container.addEventListener('scroll', () => {
+    track.addEventListener('scroll', () => {
       window.clearTimeout(scrollTimeout);
       scrollTimeout = window.setTimeout(() => {
-        const scrollLeft = container.scrollLeft;
+        const scrollLeft = track.scrollLeft;
         let closest = 0;
         let min = Number.POSITIVE_INFINITY;
 
-        cards.forEach((card, index) => {
-          const diff = Math.abs(card.offsetLeft - scrollLeft);
+        items.forEach((item, index) => {
+          const diff = Math.abs(item.offsetLeft - scrollLeft);
           if (diff < min) {
             min = diff;
             closest = index;
@@ -156,7 +185,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateDots();
       }, 100);
     });
-  }
+
+    scrollToCurrent({ instant: true });
+  });
 
   const heroSection = document.getElementById('main-left-block');
   const heroMediaQuery = window.matchMedia('(max-width: 1024px)');

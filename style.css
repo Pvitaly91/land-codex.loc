@@ -865,22 +865,22 @@ h1.main strong {
 
 /* мобільний слайдер для .features */
 @media (max-width: 888px){
-	
-	
-	
+
+
+
   .slider-container{ position: relative; }
-  .blocks{
-    display: flex;
+  .slider-container .slider-track{
+    display: flex !important;
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
-    padding: 0 16px;
-    margin-left: 32px;
-            padding-bottom: 60px;
+    padding: 0 16px 60px;
+    margin: 0 0 0 32px;
+    gap: 16px;
   }
-  .blocks::-webkit-scrollbar{ display: none; }
-  .card{
+  .slider-container .slider-track::-webkit-scrollbar{ display: none; }
+  .slider-container .slider-track > *{
     flex: 0 0 100%;
     display: block;
     width: 100%;
@@ -912,6 +912,15 @@ h1.main strong {
     background: #d1d5db;
   }
   .slider-dots button.active{ background: var(--primary); }
+}
+
+@media (max-width: 888px){
+  .section-list-slider .slider-track{
+    list-style: none;
+    margin: 0;
+    margin-left: 0;
+    padding-left: 0;
+  }
 }
 
 @media (max-width: 768px){

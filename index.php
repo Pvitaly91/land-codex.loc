@@ -383,24 +383,29 @@ $landingPageHtml = <<<HTML
             </p>
           </div>
         </div>
-        <ul class="section-list mt-8 grid gap-4 md:grid-cols-2" data-scroll-child>
-          <li class="flex items-start gap-3 rounded-3xl bg-[#f3f0ef] p-4">
-            <span aria-hidden="true" class="section-list__icon mt-1">★</span>
-            <span class="section-list__text">Аналізую ваші цілі та створюю персональну траєкторію навчання.</span>
-          </li>
-          <li class="flex items-start gap-3 rounded-3xl bg-[#eef6f3] p-4">
-            <span aria-hidden="true" class="section-list__icon mt-1">★</span>
-            <span class="section-list__text">Поєдную розмовну практику, граматику та лексику в кожному уроці.</span>
-          </li>
-          <li class="flex items-start gap-3 rounded-3xl bg-[#f5f8ff] p-4">
-            <span aria-hidden="true" class="section-list__icon mt-1">★</span>
-            <span class="section-list__text">Надаю інтерактивні матеріали й записи занять для повторення.</span>
-          </li>
-          <li class="flex items-start gap-3 rounded-3xl bg-[#fff6f8] p-4">
-            <span aria-hidden="true" class="section-list__icon mt-1">★</span>
-            <span class="section-list__text">Супроводжую вас до досягнення результату як особистий репетитор англійської мови.</span>
-          </li>
-        </ul>
+        <div class="section-list-slider slider-container mt-8" data-slider data-scroll-child>
+          <ul class="section-list slider-track grid gap-4 md:grid-cols-2">
+            <li class="flex items-start gap-3 rounded-3xl bg-[#f3f0ef] p-4">
+              <span aria-hidden="true" class="section-list__icon mt-1">★</span>
+              <span class="section-list__text">Аналізую ваші цілі та створюю персональну траєкторію навчання.</span>
+            </li>
+            <li class="flex items-start gap-3 rounded-3xl bg-[#eef6f3] p-4">
+              <span aria-hidden="true" class="section-list__icon mt-1">★</span>
+              <span class="section-list__text">Поєдную розмовну практику, граматику та лексику в кожному уроці.</span>
+            </li>
+            <li class="flex items-start gap-3 rounded-3xl bg-[#f5f8ff] p-4">
+              <span aria-hidden="true" class="section-list__icon mt-1">★</span>
+              <span class="section-list__text">Надаю інтерактивні матеріали й записи занять для повторення.</span>
+            </li>
+            <li class="flex items-start gap-3 rounded-3xl bg-[#fff6f8] p-4">
+              <span aria-hidden="true" class="section-list__icon mt-1">★</span>
+              <span class="section-list__text">Супроводжую вас до досягнення результату як особистий репетитор англійської мови.</span>
+            </li>
+          </ul>
+          <button class="slider-arrow left" type="button" aria-label="Попередній">&#10094;</button>
+          <button class="slider-arrow right" type="button" aria-label="Наступний">&#10095;</button>
+          <div class="slider-dots" role="tablist" aria-label="Перемикання ключових переваг"></div>
+        </div>
         <div class="mt-10 text-center" data-scroll-child>
           <a href="#signup" class="inline-flex items-center justify-center rounded-md  bg-[#7a555b] px-8 py-3 text-lg font-medium text-white shadow-md transition hover:bg-[#6b4950]">
             Записатися до репетитора
@@ -412,8 +417,8 @@ $landingPageHtml = <<<HTML
     <section id="services" class="features" data-scroll>
       <h2 class="title" data-scroll-child>Що чекає на вас на наших заняттях?</h2>
       <p class="text" data-scroll-child>Комплексний підхід до ваших цілей від досвідченого репетитора англійської мови.</p>
-      <div class="slider-container">
-      <div class="blocks">
+      <div class="slider-container" data-slider>
+      <div class="blocks slider-track">
         <div class="card reveal-child-zoom" data-scroll-child>
         
 <h3> <svg xmlns="http://www.w3.org/2000/svg" style="display:inline-block; margin-right: 14px" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 31 31" width="31" height="31" fill="none">
@@ -543,9 +548,9 @@ $landingPageHtml = <<<HTML
           <p>Можливість займатися індивідуально або в парі з другом.</p>
         </div>
       </div>
-      <button class="slider-arrow left" aria-label="Попередній">&#10094;</button>
-      <button class="slider-arrow right" aria-label="Наступний">&#10095;</button>
-      <div class="slider-dots"></div>
+      <button class="slider-arrow left" type="button" aria-label="Попередній">&#10094;</button>
+      <button class="slider-arrow right" type="button" aria-label="Наступний">&#10095;</button>
+      <div class="slider-dots" role="tablist" aria-label="Перемикання послуг"></div>
       </div>
     </section>
 
