@@ -127,7 +127,7 @@ $landingPageHtml = <<<HTML
     <header class="sticky top-0 z-30 bg-white/22  border-b border-stone-200 mx-auto w-full  xl:w-[1100px] lg:h-[110px]" data-scroll>
       <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between h-[80px] sm:h-[80px] lg:h-[110px]" >
-           <button id="menu-button-burger" type="button" class=" inline-flex items-center justify-center rounded-xl border px-3 py-2" aria-label="Menu" aria-controls="mnav" aria-expanded="false">
+           <button id="menu-button-burger" type="button" class="hidden max-[930px]:block inline-flex items-center justify-center rounded-xl border px-3 py-2" aria-label="Menu" aria-controls="mnav" aria-expanded="false">
               <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h16M3 11h16M3 16h16"/></svg>
             </button>
           <a href="#" class="flex items-center gap-2 group select-none w-[192px] h-[43px]">
@@ -166,7 +166,7 @@ $landingPageHtml = <<<HTML
           <a class="py-2" href="#approach">Мій підхід</a>
 
           <div class="mt-4 border-t border-stone-200 pt-4 text-[15px] leading-[1.5] text-stone-700">
-            <p class="mb-2 font-medium text-stone-900">Слідкуйте за мною у соцмережах:</p>
+           
             <div class="flex flex-col gap-2">
               <a
                 href="https://www.instagram.com/dashatutor"
@@ -213,7 +213,7 @@ $landingPageHtml = <<<HTML
             </a>
 
             <div class="hidden md:flex items-center gap-3 mt-8 text-[16px] text-[#4b5563]" data-scroll-child>
-              <span class="font-medium text-[#595236]">Слідкуйте за мною у соцмережах:</span>
+          
               <div class="flex items-center gap-4">
                 <a
                   href="https://www.instagram.com/dashatutor"
@@ -471,7 +471,7 @@ $landingPageHtml = <<<HTML
       </p>
 
       <div class="mb-10 flex flex-col items-center justify-center gap-3 text-[16px] sm:text-[18px] text-[#4b5563]" data-scroll-child>
-        <span class="font-medium text-[#595236]">Хочете бути в курсі новин та корисних матеріалів?</span>
+     
         <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
           <a
             href="https://www.instagram.com/dashatutor"

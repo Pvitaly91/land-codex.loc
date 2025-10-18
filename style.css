@@ -237,7 +237,6 @@ h1.main strong{ font-weight: 600; }
   outline: none;
 }
 
-#manu-button-burger{ display: none; }
 
 /* =========================
    About
@@ -754,7 +753,7 @@ h1.main strong {
     font-size: clamp(16px, 4.5vw, 18px); font-weight: 500; line-height: 1.4;
     margin-top: 60px;
   }
-  #manu-button-burger{ display: block; }
+ 
   nav{ display: none !important; }
 }
 
