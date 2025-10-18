@@ -170,19 +170,21 @@ $landingPageHtml = <<<HTML
             <div class="flex flex-col gap-2">
               <a
                 href="https://www.instagram.com/dashatutor"
-                class="hover:text-[#7a555b]"
+                class="social-link hover:text-[#7a555b]"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Instagram
+                <img src="img/icon-instagram.svg" alt="" class="social-link__icon" aria-hidden="true" />
+                <span>Instagram</span>
               </a>
               <a
                 href="https://t.me/dashatutor"
-                class="hover:text-[#7a555b]"
+                class="social-link hover:text-[#7a555b]"
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                Telegram
+                <img src="img/icon-telegram.svg" alt="" class="social-link__icon" aria-hidden="true" />
+                <span>Telegram</span>
               </a>
             </div>
           </div>
@@ -217,19 +219,21 @@ $landingPageHtml = <<<HTML
               <div class="flex items-center gap-4">
                 <a
                   href="https://www.instagram.com/dashatutor"
-                  class="hover:text-[#7a555b] underline-offset-4 hover:underline"
+                  class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Instagram
+                  <img src="img/icon-instagram.svg" alt="" class="social-link__icon" aria-hidden="true" />
+                  <span>Instagram</span>
                 </a>
                 <a
                   href="https://t.me/dashatutor"
-                  class="hover:text-[#7a555b] underline-offset-4 hover:underline"
+                  class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Telegram
+                  <img src="img/icon-telegram.svg" alt="" class="social-link__icon" aria-hidden="true" />
+                  <span>Telegram</span>
                 </a>
               </div>
             </div>
@@ -475,19 +479,21 @@ $landingPageHtml = <<<HTML
         <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
           <a
             href="https://www.instagram.com/dashatutor"
-            class="hover:text-[#7a555b] underline-offset-4 hover:underline"
+            class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Instagram
+            <img src="img/icon-instagram.svg" alt="" class="social-link__icon" aria-hidden="true" />
+            <span>Instagram</span>
           </a>
           <a
             href="https://t.me/dashatutor"
-            class="hover:text-[#7a555b] underline-offset-4 hover:underline"
+            class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Telegram
+            <img src="img/icon-telegram.svg" alt="" class="social-link__icon" aria-hidden="true" />
+            <span>Telegram</span>
           </a>
         </div>
       </div>
