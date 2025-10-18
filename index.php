@@ -19,8 +19,8 @@ $scriptFile = __DIR__ . "/{$script}.js";
 $scriptVersion = file_exists($scriptFile) ? (string) filemtime($scriptFile) : (string) time();
 
 $instagramLinks = [
-    'https://www.instagram.com/dashatutor',
-    'https://www.instagram.com/dashatutor_alt',
+    'https://www.instagram.com/dasha__english_',
+    'https://www.instagram.com/dasha__pechenyuk',
 ];
 $getRandomInstagramLink = static function () use ($instagramLinks): string {
     return $instagramLinks[array_rand($instagramLinks)];
@@ -31,7 +31,7 @@ $instagramHref2 = htmlspecialchars($getRandomInstagramLink(), ENT_QUOTES, 'UTF-8
 $instagramHref3 = htmlspecialchars($getRandomInstagramLink(), ENT_QUOTES, 'UTF-8');
 $instagramHref4 = htmlspecialchars($getRandomInstagramLink(), ENT_QUOTES, 'UTF-8');
 
-$telegramLink = 'https://t.me/dashatutor';
+$telegramLink = 'https://t.me/dasha_pechenyuk';
 $telegramHref = htmlspecialchars($telegramLink, ENT_QUOTES, 'UTF-8');
 
 $contactRecipient = 'tutor@example.com';
