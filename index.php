@@ -310,32 +310,17 @@ $landingPageHtml = <<<HTML
     <section id="main-left-block" class="relative -mt-0 -mt-[110px] h-[815px]" style="background-color: #ebdcd6;" data-scroll>
       <div class="mx-auto max-w-7xl grid lg:grid-cols-2" >
       
-        <div class=" lg:mt-[200px]" id="main-block-text" data-scroll>
+        <div class=" lg:mt-[170px]" id="main-block-text" data-scroll>
           <div class="inner_text_block">
             <h1 class="main reveal-child-left" data-scroll-child>
-              <strong>Репетитор англійської мови онлайн</strong>
-              <span>— допоможу говорити впевнено й природно</span>
+              <strong>Відкрийте світ англійської</strong>
+              <span>— легко та з задоволенням</span>
             </h1>
 
             <p class="text-block" data-scroll-child>
-              Привіт, я — Даша, репетитор англійської мови з міжнародним досвідом. Готую гнучкі програми для дорослих і підлітків,
-              щоб ви впевнено спілкувалися на роботі, в подорожах та під час іспитів.
+              Привіт, я — Даша! Пропоную персоналізовані онлайн‑уроки, що допоможуть вам впевнено заговорити англійською.
+              Давайте досягати ваших мовних цілей разом!
             </p>
-
-            <ul class="mt-6 space-y-3 text-[16px] text-[#4b5563]" data-scroll-child>
-              <li class="flex items-start gap-2">
-                <span aria-hidden="true" class="mt-1 text-[#7a555b]">✔</span>
-                <span>Індивідуальні онлайн-уроки з акцентом на реальні ситуації спілкування.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span aria-hidden="true" class="mt-1 text-[#7a555b]">✔</span>
-                <span>Підтримка репетитора англійської мови між заняттями та домашніми завданнями.</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span aria-hidden="true" class="mt-1 text-[#7a555b]">✔</span>
-                <span>Підготовка до НМТ, міжнародних іспитів і співбесід англійською.</span>
-              </li>
-            </ul>
 
             <a href="#signup" id="try-first-leson" class="reveal-child-left" data-scroll-child>
               Спробувати перший урок безкоштовно
@@ -375,15 +360,16 @@ $landingPageHtml = <<<HTML
       </div>
     </section>
     <section id="english-tutor" class="bg-white py-12 md:py-16" data-scroll>
-      <div class="mx-auto max-w-5xl px-6">
-        <h2 class="section-heading section-heading--left" data-scroll-child>
+      <div class="mx-auto max-w-7xl px-6 mt-8">
+        <h2 class="title" data-scroll-child>
           Репетитор англійської мови онлайн для вашого впевненого прогресу
         </h2>
-        <p class="section-body section-body--left" data-scroll-child>
+    
+        <p class="section-body  mt-8" data-scroll-child>
           Працюю з тими, хто хоче говорити англійською без пауз і страху. Індивідуальні плани та підтримка між уроками допомагають
           швидко побачити результат, незалежно від стартового рівня.
         </p>
-        <div class="mt-8 grid gap-6 md:grid-cols-2" data-scroll-child>
+        <div class="mt-8 grid gap-6 md:grid-cols-2 " data-scroll-child>
           <div class="section-card rounded-3xl border border-[#f1e3dd] bg-[#fdfaf8] p-6 shadow-sm">
             <h3 class="section-card__title">Для дорослих</h3>
             <p class="section-card__text">
@@ -416,16 +402,13 @@ $landingPageHtml = <<<HTML
           </li>
         </ul>
         <div class="mt-10 text-center" data-scroll-child>
-          <a href="#signup" class="inline-flex items-center justify-center rounded-full bg-[#7a555b] px-8 py-3 text-lg font-medium text-white shadow-md transition hover:bg-[#6b4950]">
+          <a href="#signup" class="inline-flex items-center justify-center rounded-md  bg-[#7a555b] px-8 py-3 text-lg font-medium text-white shadow-md transition hover:bg-[#6b4950]">
             Записатися до репетитора
           </a>
         </div>
       </div>
     </section>
-    <section id="about" class="about" data-scroll>
-      <h2 class="title" data-scroll-child>Кілька слів про мене</h2>
-      <p class="text" data-scroll-child>Моя головна мета — не просто навчити вас граматики, а закохати в англійську мову. Як репетитор англійської мови, я вірю, що навчання має бути комфортним та надихаючим. Саме тому я створюю на уроках невимушену та дружню атмосферу, де кожен учень почувається впевнено, не боїться ставити питання та робити помилки, адже вони — невід'ємна частина прогресу.</p>
-    </section>
+  
     <section id="services" class="features" data-scroll>
       <h2 class="title" data-scroll-child>Що чекає на вас на наших заняттях?</h2>
       <p class="text" data-scroll-child>Комплексний підхід до ваших цілей від досвідченого репетитора англійської мови.</p>
@@ -566,12 +549,15 @@ $landingPageHtml = <<<HTML
       </div>
     </section>
 
+
+
+
     <section id="faq" class="bg-[#f8f4f2] py-12 md:py-16" data-scroll>
-      <div class="mx-auto max-w-5xl px-6">
-        <h2 class="section-heading section-heading--left" data-scroll-child>
+      <div class="mx-auto max-w-7xl px-6">
+        <h2 class="title" data-scroll-child>
           Часті питання про репетитора англійської мови
         </h2>
-        <p class="section-body section-body--left" data-scroll-child>
+        <p class="section-body text-center"  data-scroll-child>
           Зібрала відповіді на питання, які найчастіше отримую від майбутніх студентів. Якщо чогось бракує — напишіть мені, і я
           з радістю підкажу.
         </p>
@@ -580,7 +566,7 @@ $landingPageHtml = <<<HTML
             <summary class="faq__summary">
               Які результати дають заняття з репетитором англійської мови?
             </summary>
-            <p class="faq__answer">
+            <p class="faq__answer text-[19px]">
               Уже за кілька тижнів ви відчуєте, що говорите вільніше, краще розумієте носіїв та будуєте фрази без перекладу. Ми
               працюємо над вимовою, словником і впевненістю.
             </p>
@@ -589,7 +575,7 @@ $landingPageHtml = <<<HTML
             <summary class="faq__summary">
               Як забронювати індивідуальний урок?
             </summary>
-            <p class="faq__answer">
+            <p class="faq__answer text-[19px]">
               Онлайн-заняття триває 60 хвилин. Щоб забронювати час, залиште заявку через форму на сайті або напишіть мені в Telegram —
               я відповім протягом дня.
             </p>
@@ -598,7 +584,7 @@ $landingPageHtml = <<<HTML
             <summary class="faq__summary">
               Чи можна поєднувати індивідуальні заняття з підготовкою до іспиту?
             </summary>
-            <p class="faq__answer">
+            <p class="faq__answer text-[19px]">
               Так, я адаптую програму під конкретний іспит — від НМТ до IELTS. Ви отримаєте план дій, тренування говоріння та
               письма, а також перевірені матеріали для самостійної практики.
             </p>
