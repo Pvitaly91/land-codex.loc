@@ -248,8 +248,9 @@ $landingPageHtml = <<<HTML
 
           <!-- Desktop Nav -->
           <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-[18px] ">
-            <a class="hover:text-stone-900 " href="#about">Про мене</a>
+            <a class="hover:text-stone-900 " href="#english-tutor">Про мене</a>
             <a class="hover:text-stone-900 " href="#services">Послуги</a>
+            <a class="hover:text-stone-900 " href="#faq">FAQ</a>
             <a class="hover:text-stone-900 " href="#travels">Подорожі</a>
             <a class="hover:text-stone-900 " href="#approach">Мій підхід</a>
           </nav>
@@ -272,8 +273,9 @@ $landingPageHtml = <<<HTML
       <!-- Mobile Nav -->
       <div id="mnav" class=" border-t border-stone-200 top-0" style="position: absolute; width: 250px;  top:80px; left: 0px;;" >
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 grid gap-2 text-[19px]">
-          <a class="py-2" href="#about">Про мене</a>
+          <a class="py-2" href="#english-tutor">Про мене</a>
           <a class="py-2" href="#services">Послуги</a>
+          <a class="py-2" href="#faq">FAQ</a>
           <a class="py-2" href="#travels">Подорожі</a>
           <a class="py-2" href="#approach">Мій підхід</a>
 
