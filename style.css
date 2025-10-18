@@ -120,11 +120,12 @@ html.js-ready [data-scroll-child].is-visible{
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  font-size: 18px;
 }
 
 .social-link__icon{
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
   display: inline-block;
 }
 
@@ -677,7 +678,7 @@ button.form-btn{
   .card{ width: 45%; }
 }
 
-#main-block-text div{ padding-right: 20px; }
+#main-block-text div.inner_text_block{ padding-right: 20px; }
 
 @media (max-width: 1200px){
   h1.main{ font-size: clamp(32px, 6vw, 42px); line-height: clamp(40px, 7vw, 52px); }
@@ -692,7 +693,7 @@ button.form-btn{
 }
 
 @media (max-width: 1100px){
-  #main-block-text div{ max-width: 500px; }
+  #main-block-text div.inner_text_block{ max-width: 500px; }
 }
 
 @media (max-width: 1024px){
@@ -705,7 +706,7 @@ button.form-btn{
     margin-left: 0;
     background-color: rgba(255,255,255,0.6);
   }
-  #main-block-text div{
+  #main-block-text div.inner_text_block{
     max-width: 90%;
     margin: 170px 0 0 10%;
     text-align: center;
@@ -718,7 +719,12 @@ button.form-btn{
     background-size: 108%;
     background-position-x: -40px;
     background-position-y: calc(var(--hero-bg-base-y) + var(--hero-bg-offset));
-  }/*
+  }
+  #social_block{
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /*
   #main-left-block.hero-fixed-background{
     will-change: background-position;
   }
@@ -849,7 +855,7 @@ h1.main strong {
     min-height: 370px;
     padding: 30px;
   }
-    #main-block-text div{
+    #main-block-text div.inner_text_block{
  
     margin: 120px 0 0 10%;
 
@@ -873,7 +879,7 @@ h1.main strong {
 
 @media (max-width: 590px){
   #main-block-text{ width: 100%; background-color: rgba(255, 255, 255, 0.1); }
-  #main-block-text div{
+  #main-block-text div.inner_text_block{
    
     margin-left: auto;
     margin-right: auto;
@@ -906,15 +912,15 @@ h1.main strong {
 	    #try-first-leson {
         margin-top: 30px;
     }
-	  /*  #main-block-text div {
+	  /*  #main-block-text div.inner_text_block {
         max-width: 98%;
         margin-left: 5%;
     }
-	#main-block-text div{ padding-right: 20px; }*/
+	#main-block-text div.inner_text_block{ padding-right: 20px; }*/
 }
 
 @media (max-width: 412px){
-    #main-block-text div {
+    #main-block-text div.inner_text_block {
       padding-top: 0px;
     }
   }

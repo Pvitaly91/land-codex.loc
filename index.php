@@ -159,7 +159,7 @@ $landingPageHtml = <<<HTML
 
       <!-- Mobile Nav -->
       <div id="mnav" class=" border-t border-stone-200 top-0" style="position: absolute; width: 250px;  top:80px; left: 0px;;" >
-        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 grid gap-2 text-[16px]">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 grid gap-2 text-[19px]">
           <a class="py-2" href="#about">Про мене</a>
           <a class="py-2" href="#services">Послуги</a>
           <a class="py-2" href="#travels">Подорожі</a>
@@ -199,7 +199,7 @@ $landingPageHtml = <<<HTML
       <div class="mx-auto max-w-7xl grid lg:grid-cols-2" >
       
         <div class=" lg:mt-[200px]" id="main-block-text" data-scroll>
-          <div>
+          <div class="inner_text_block">
             <h1 class="main reveal-child-left" data-scroll-child>
               <strong>Відкрийте світ англійської</strong>
               <span>— легко та з задоволенням</span>
@@ -216,7 +216,7 @@ $landingPageHtml = <<<HTML
 
             <div class="hidden md:flex items-center gap-3 mt-8 text-[16px] text-[#4b5563]" data-scroll-child>
           
-              <div class="flex items-center gap-4">
+              <div class="flex items-center gap-4" id="social_block">
                 <a
                   href="https://www.instagram.com/dashatutor"
                   class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
@@ -476,7 +476,7 @@ $landingPageHtml = <<<HTML
 
       <div class="mb-10 flex flex-col items-center justify-center gap-3 text-[16px] sm:text-[18px] text-[#4b5563]" data-scroll-child>
      
-        <div class="flex flex-col sm:flex-row items-center gap-3 sm:gap-5">
+        <div class="items-center gap-3 sm:gap-5">
           <a
             href="https://www.instagram.com/dashatutor"
             class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
@@ -559,8 +559,20 @@ $landingPageHtml = <<<HTML
   <!-- Меню/контакти (справа, з тим самим 100px через padding контейнера) -->
   <div data-scroll-child class="reveal-child-right">
     <h5>Contact Us</h5>
-    <p>Instagram</p>
-    <p>Telegram</p>
+    <p> <a
+            href="https://www.instagram.com/dashatutor"
+            class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Instagram</a></p>
+    <p>
+      <a
+            href="https://t.me/dashatutor"
+            class="social-link hover:text-[#7a555b] underline-offset-4 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >Telegram</a>
+      </p>
   </div>
 </footer>
 
