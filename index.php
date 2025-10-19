@@ -112,13 +112,13 @@ $structuredData = [
 
 $structuredDataJson = json_encode($structuredData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?: '';
 
-$contactRecipient = 'tutor@example.com';
+$contactRecipient = 'pvitaly91@gmail.com';
 $contactSender = 'no-reply@dashatutor.com.ua';
 $smtpConfig = [
     'host' => 'smtp.dashatutor.com.ua',
     'port' => 587,
     'username' => 'no-reply@dashatutor.com.ua',
-    'password' => 'change_this_password',
+    'password' => 'rV5uH8rI8k',
     'encryption' => 'tls', // Supported values: 'tls', 'ssl', null
     'timeout' => 30,
 ];
