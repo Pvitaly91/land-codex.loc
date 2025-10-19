@@ -140,6 +140,11 @@ html.js-ready [data-scroll-child].is-visible{
   .faq__content{
     transition-duration: 0.01ms !important;
   }
+  .faq__icon,
+  .faq__icon::before,
+  .faq__icon::after{
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* опціональні класи */
@@ -349,6 +354,38 @@ section.about{
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 18px;
+}
+.faq__summary-text{
+  flex: 1 1 auto;
+}
+.faq__icon{
+  position: relative;
+  width: 32px;
+  height: 32px;
+  flex: 0 0 32px;
+  border-radius: 50%;
+  background-color: rgba(122, 85, 91, 0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform .35s ease, background-color .35s ease, box-shadow .35s ease;
+}
+.faq__icon::before,
+.faq__icon::after{
+  content: "";
+  position: absolute;
+  border-radius: 999px;
+  background-color: var(--primary);
+  transition: transform .35s ease, opacity .35s ease, background-color .35s ease;
+}
+.faq__icon::before{
+  width: 14px;
+  height: 2px;
+}
+.faq__icon::after{
+  width: 2px;
+  height: 14px;
 }
 .faq__content{
   overflow: hidden;
@@ -362,6 +399,19 @@ details[open] .faq__content{
   max-height: none;
 }
 .faq__summary::-webkit-details-marker{ display: none; }
+details[open] .faq__icon{
+  background-color: var(--primary);
+  box-shadow: 0 10px 20px rgba(122, 85, 91, 0.25);
+  transform: rotate(180deg);
+}
+details[open] .faq__icon::before{
+  background-color: #fff;
+}
+details[open] .faq__icon::after{
+  opacity: 0;
+  transform: scaleY(0);
+  background-color: #fff;
+}
 details[open] .faq__summary{ color: var(--primary); }
 .faq__answer{
   margin-top: 12px;

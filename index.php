@@ -824,7 +824,8 @@ $landingPageHtml = <<<HTML
         <div class="mt-8 space-y-4" data-scroll-child>
           <details class="group rounded-3xl bg-white p-6 shadow-sm">
             <summary class="faq__summary">
-              Які результати дають заняття з репетитором англійської мови?
+              <span class="faq__summary-text">Які результати дають заняття з репетитором англійської мови?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
             </summary>
             <div class="faq__content">
               <p class="faq__answer text-[19px]">
@@ -835,7 +836,8 @@ $landingPageHtml = <<<HTML
           </details>
           <details class="group rounded-3xl bg-white p-6 shadow-sm">
             <summary class="faq__summary">
-              Як забронювати індивідуальний урок?
+              <span class="faq__summary-text">Як забронювати індивідуальний урок?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
             </summary>
             <div class="faq__content">
               <p class="faq__answer text-[19px]">
@@ -846,7 +848,8 @@ $landingPageHtml = <<<HTML
           </details>
           <details class="group rounded-3xl bg-white p-6 shadow-sm">
             <summary class="faq__summary">
-              Чи можна поєднувати індивідуальні заняття з підготовкою до іспиту?
+              <span class="faq__summary-text">Чи можна поєднувати індивідуальні заняття з підготовкою до іспиту?</span>
+              <span class="faq__icon" aria-hidden="true"></span>
             </summary>
             <div class="faq__content">
               <p class="faq__answer text-[19px]">
