@@ -113,7 +113,176 @@ $structuredData = [
 $structuredDataJson = json_encode($structuredData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?: '';
 
 $contactRecipient = 'tutor@example.com';
-$contactSender = 'no-reply@' . ($_SERVER['SERVER_NAME'] ?? 'example.com');
+$contactSender = 'no-reply@dashatutor.com.ua';
+$smtpConfig = [
+    'host' => 'smtp.dashatutor.com.ua',
+    'port' => 587,
+    'username' => 'no-reply@dashatutor.com.ua',
+    'password' => 'change_this_password',
+    'encryption' => 'tls', // Supported values: 'tls', 'ssl', null
+    'timeout' => 30,
+];
+
+/**
+ * @param array<string, mixed> $config
+ * @param array<int, string>   $headers
+ */
+$sendSmtpMail = static function (array $config, string $from, string $to, string $subject, string $body, array $headers = []): bool {
+    $host = (string)($config['host'] ?? '');
+    $port = (int)($config['port'] ?? 587);
+    $username = (string)($config['username'] ?? '');
+    $password = (string)($config['password'] ?? '');
+    $encryption = $config['encryption'] ?? null;
+    $timeout = (int)($config['timeout'] ?? 30);
+
+    if ($host === '' || $username === '' || $password === '') {
+        return false;
+    }
+
+    $transport = '';
+    if ($encryption === 'ssl') {
+        $transport = 'ssl://';
+    } elseif ($encryption === 'tls') {
+        $transport = 'tcp://';
+    }
+
+    $contextOptions = [];
+    if ($encryption === 'tls') {
+        $contextOptions['ssl'] = [
+            'crypto_method' => STREAM_CRYPTO_METHOD_TLS_CLIENT,
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+        ];
+    }
+
+    $context = stream_context_create($contextOptions);
+    $client = @stream_socket_client(
+        $transport . $host . ':' . $port,
+        $errno,
+        $errstr,
+        $timeout,
+        STREAM_CLIENT_CONNECT,
+        $context
+    );
+
+    if (!is_resource($client)) {
+        return false;
+    }
+
+    stream_set_timeout($client, $timeout);
+
+    $read = static function ($socket): string {
+        $response = '';
+        while (($line = fgets($socket, 515)) !== false) {
+            $response .= $line;
+            if (isset($line[3]) && $line[3] === ' ') {
+                break;
+            }
+        }
+        return $response;
+    };
+
+    $send = static function ($socket, string $command) use ($read): bool {
+        $written = fwrite($socket, $command . "\r\n");
+        if ($written === false) {
+            return false;
+        }
+        $response = $read($socket);
+        return (bool) preg_match('/^[23]\d{2}/', $response);
+    };
+
+    $initialResponse = $read($client);
+    if (!preg_match('/^220/', $initialResponse)) {
+        fclose($client);
+        return false;
+    }
+
+    $domain = $_SERVER['SERVER_NAME'] ?? 'localhost';
+    if (!$send($client, 'EHLO ' . $domain)) {
+        fclose($client);
+        return false;
+    }
+
+    if ($encryption === 'tls') {
+        fwrite($client, "STARTTLS\r\n");
+        $startTlsResponse = $read($client);
+        if (!preg_match('/^220/', $startTlsResponse)) {
+            fclose($client);
+            return false;
+        }
+        $cryptoEnabled = stream_socket_enable_crypto($client, true, STREAM_CRYPTO_METHOD_TLS_CLIENT);
+        if ($cryptoEnabled !== true) {
+            fclose($client);
+            return false;
+        }
+        if (!$send($client, 'EHLO ' . $domain)) {
+            fclose($client);
+            return false;
+        }
+    }
+
+    if (!$send($client, 'AUTH LOGIN')) {
+        fclose($client);
+        return false;
+    }
+
+    if (!$send($client, base64_encode($username))) {
+        fclose($client);
+        return false;
+    }
+
+    if (!$send($client, base64_encode($password))) {
+        fclose($client);
+        return false;
+    }
+
+    if (!$send($client, 'MAIL FROM:<' . $from . '>')) {
+        fclose($client);
+        return false;
+    }
+
+    if (!$send($client, 'RCPT TO:<' . $to . '>')) {
+        fclose($client);
+        return false;
+    }
+
+    if (fwrite($client, "DATA\r\n") === false) {
+        fclose($client);
+        return false;
+    }
+
+    $dataResponse = $read($client);
+    if (!preg_match('/^354/', $dataResponse)) {
+        fclose($client);
+        return false;
+    }
+
+    $headers = array_merge([
+        'Date: ' . gmdate('D, d M Y H:i:s') . ' +0000',
+        'From: ' . $from,
+        'To: ' . $to,
+        'Subject: ' . $subject,
+        'MIME-Version: 1.0',
+        'Content-Type: text/plain; charset=UTF-8',
+    ], $headers);
+
+    $bodyNormalized = preg_replace("/(\r\n|\r|\n)/", "\r\n", $body) ?? $body;
+    $bodySafe = preg_replace('/^\./m', '..', $bodyNormalized) ?? $bodyNormalized;
+    $headersString = implode("\r\n", $headers);
+    $message = $headersString . "\r\n\r\n" . $bodySafe . "\r\n.";
+
+    if (fwrite($client, $message . "\r\n") === false) {
+        fclose($client);
+        return false;
+    }
+
+    $finalResponse = $read($client);
+    $success = preg_match('/^250/', $finalResponse) === 1;
+    $send($client, 'QUIT');
+    fclose($client);
+
+    return $success;
+};
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
     $name = trim((string)($_POST['name'] ?? ''));
@@ -174,12 +343,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
     $emailBody = "Ім'я: {$name}\nКонтакт: {$contact}\nПовідомлення: " . ($message !== '' ? $message : '—');
     $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
     $headers = [
-        'Content-Type: text/plain; charset=UTF-8',
-        'From: ' . $contactSender,
         'Reply-To: ' . $contactSender,
     ];
 
-    $mailSent = true;//mail($contactRecipient, $encodedSubject, $emailBody, implode("\r\n", $headers));
+    $mailSent = $sendSmtpMail($smtpConfig, $contactSender, $contactRecipient, $encodedSubject, $emailBody, $headers);
 
     if ($mailSent) {
         $_SESSION['contact_last_submit'] = $now;
