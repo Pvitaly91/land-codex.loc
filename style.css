@@ -890,7 +890,9 @@ h1.main strong {
     -webkit-overflow-scrolling: touch;
     scroll-behavior: smooth;
     padding: 0 16px 60px;
-    margin: 0 0 0 32px;
+    margin: 0;
+    scroll-padding-left: 16px;
+    scroll-padding-right: 16px;
     gap: 16px;
   }
   .slider-container .slider-track::-webkit-scrollbar{ display: none; }
