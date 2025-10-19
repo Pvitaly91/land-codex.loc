@@ -113,7 +113,223 @@ $structuredData = [
 $structuredDataJson = json_encode($structuredData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?: '';
 
 $contactRecipient = 'tutor@example.com';
-$contactSender = 'no-reply@' . ($_SERVER['SERVER_NAME'] ?? 'example.com');
+$contactSender = 'no-reply@dashatutor.com.ua';
+
+$smtpConfig = [
+    'host' => getenv('SMTP_HOST') ?: 'smtp.dashatutor.com.ua',
+    'port' => (int) (getenv('SMTP_PORT') ?: 465),
+    'username' => getenv('SMTP_USERNAME') ?: 'no-reply@dashatutor.com.ua',
+    'password' => getenv('SMTP_PASSWORD') ?: '',
+    'encryption' => getenv('SMTP_ENCRYPTION') ?: 'ssl', // ssl, tls or empty string
+    'timeout' => 30,
+    'context_options' => [
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true,
+        ],
+    ],
+];
+
+/**
+ * @param array<string, mixed> $config
+ * @param string               $from
+ * @param string               $to
+ * @param string               $subject
+ * @param string               $body
+ * @param array<int, string>   $headers
+ */
+function sendSmtpMail(array $config, string $from, string $to, string $subject, string $body, array $headers = []): bool
+{
+    $host = $config['host'] ?? '';
+    if ($host === '') {
+        return false;
+    }
+
+    $port = isset($config['port']) ? (int) $config['port'] : 25;
+    $username = $config['username'] ?? '';
+    $password = $config['password'] ?? '';
+    $encryption = strtolower((string) ($config['encryption'] ?? ''));
+    $timeout = isset($config['timeout']) ? (int) $config['timeout'] : 30;
+    $contextOptions = $config['context_options'] ?? [];
+    $clientName = $config['client_name'] ?? (gethostname() ?: 'localhost');
+
+    $transport = $host;
+    if ($encryption === 'ssl') {
+        $transport = 'ssl://' . $host;
+    }
+
+    $context = stream_context_create(is_array($contextOptions) ? $contextOptions : []);
+    $socket = @stream_socket_client(
+        sprintf('%s:%d', $transport, $port),
+        $errno,
+        $errstr,
+        $timeout,
+        STREAM_CLIENT_CONNECT,
+        $context
+    );
+
+    if (!is_resource($socket)) {
+        error_log(sprintf('[SMTP] Connection failed: (%d) %s', $errno ?? 0, $errstr ?? 'unknown error'));
+        return false;
+    }
+
+    stream_set_timeout($socket, $timeout);
+
+    $readResponse = static function ($stream): string {
+        $response = '';
+        while (($line = fgets($stream, 515)) !== false) {
+            $response .= $line;
+            if (isset($line[3]) && $line[3] === ' ') {
+                break;
+            }
+        }
+
+        return $response;
+    };
+
+    $expect = static function ($stream, array $expectedCodes) use ($readResponse): string {
+        $response = $readResponse($stream);
+        if ($response === '') {
+            return '';
+        }
+
+        $code = substr($response, 0, 3);
+        if (!in_array($code, $expectedCodes, true)) {
+            error_log(sprintf('[SMTP] Unexpected response: %s', trim($response)));
+            return '';
+        }
+
+        return $response;
+    };
+
+    $sendCommand = static function ($stream, string $command) {
+        fwrite($stream, $command . "\r\n");
+    };
+
+    if ($expect($socket, ['220']) === '') {
+        fclose($socket);
+        return false;
+    }
+
+    $sendCommand($socket, 'EHLO ' . $clientName);
+    if ($expect($socket, ['250']) === '') {
+        fclose($socket);
+        return false;
+    }
+
+    if ($encryption === 'tls') {
+        $sendCommand($socket, 'STARTTLS');
+        if ($expect($socket, ['220']) === '') {
+            fclose($socket);
+            return false;
+        }
+
+        if (!stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
+            error_log('[SMTP] Unable to start TLS encryption.');
+            fclose($socket);
+            return false;
+        }
+
+        $sendCommand($socket, 'EHLO ' . $clientName);
+        if ($expect($socket, ['250']) === '') {
+            fclose($socket);
+            return false;
+        }
+    }
+
+    if ($username !== '' && $password !== '') {
+        $sendCommand($socket, 'AUTH LOGIN');
+        if ($expect($socket, ['334']) === '') {
+            fclose($socket);
+            return false;
+        }
+
+        $sendCommand($socket, base64_encode($username));
+        if ($expect($socket, ['334']) === '') {
+            fclose($socket);
+            return false;
+        }
+
+        $sendCommand($socket, base64_encode($password));
+        if ($expect($socket, ['235']) === '') {
+            fclose($socket);
+            return false;
+        }
+    }
+
+    $sendCommand($socket, sprintf('MAIL FROM:<%s>', $from));
+    if ($expect($socket, ['250']) === '') {
+        fclose($socket);
+        return false;
+    }
+
+    $sendCommand($socket, sprintf('RCPT TO:<%s>', $to));
+    if ($expect($socket, ['250', '251']) === '') {
+        fclose($socket);
+        return false;
+    }
+
+    $sendCommand($socket, 'DATA');
+    if ($expect($socket, ['354']) === '') {
+        fclose($socket);
+        return false;
+    }
+
+    $preparedHeaders = [];
+    $hasSubjectHeader = false;
+    $hasToHeader = false;
+    $hasFromHeader = false;
+
+    foreach ($headers as $headerLine) {
+        if (!is_string($headerLine) || trim($headerLine) === '') {
+            continue;
+        }
+
+        $normalized = strtolower((string) strstr($headerLine, ':', true));
+        if ($normalized === 'subject') {
+            $hasSubjectHeader = true;
+        }
+        if ($normalized === 'to') {
+            $hasToHeader = true;
+        }
+        if ($normalized === 'from') {
+            $hasFromHeader = true;
+        }
+
+        $preparedHeaders[] = trim($headerLine);
+    }
+
+    if (!$hasSubjectHeader) {
+        $preparedHeaders[] = 'Subject: ' . $subject;
+    }
+    if (!$hasToHeader) {
+        $preparedHeaders[] = 'To: ' . $to;
+    }
+    if (!$hasFromHeader) {
+        $preparedHeaders[] = 'From: ' . $from;
+    }
+
+    $preparedHeaders[] = 'Date: ' . gmdate('D, d M Y H:i:s O');
+    $preparedHeaders[] = 'MIME-Version: 1.0';
+
+    $messageBody = implode("\r\n", array_unique($preparedHeaders)) . "\r\n\r\n" . $body;
+    $messageBody = preg_replace("/(\r\n|\r|\n)/", "\r\n", $messageBody ?? '');
+    $messageBody = (string) preg_replace('/^\./m', '..', $messageBody);
+
+    fwrite($socket, $messageBody . "\r\n.\r\n");
+    if ($expect($socket, ['250']) === '') {
+        fclose($socket);
+        return false;
+    }
+
+    $sendCommand($socket, 'QUIT');
+    $expect($socket, ['221']);
+
+    fclose($socket);
+
+    return true;
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
     $name = trim((string)($_POST['name'] ?? ''));
@@ -174,12 +390,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['contact_form'])) {
     $emailBody = "Ім'я: {$name}\nКонтакт: {$contact}\nПовідомлення: " . ($message !== '' ? $message : '—');
     $encodedSubject = '=?UTF-8?B?' . base64_encode($subject) . '?=';
     $headers = [
-        'Content-Type: text/plain; charset=UTF-8',
         'From: ' . $contactSender,
         'Reply-To: ' . $contactSender,
+        'Content-Type: text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding: 8bit',
+        'X-Mailer: PHP/' . PHP_VERSION,
     ];
 
-    $mailSent = true;//mail($contactRecipient, $encodedSubject, $emailBody, implode("\r\n", $headers));
+    try {
+        $mailSent = sendSmtpMail(
+            $smtpConfig,
+            $contactSender,
+            $contactRecipient,
+            $encodedSubject,
+            $emailBody,
+            $headers
+        );
+    } catch (Throwable $exception) {
+        error_log('[SMTP] Exception: ' . $exception->getMessage());
+        $mailSent = false;
+    }
 
     if ($mailSent) {
         $_SESSION['contact_last_submit'] = $now;
