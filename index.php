@@ -3,6 +3,92 @@ declare(strict_types=1);
 
 session_start();
 
+$loadEnv = static function (string $file): array {
+    if (!is_file($file)) {
+        return [];
+    }
+
+    $lines = @file($file, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    if ($lines === false) {
+        return [];
+    }
+
+    $stripQuotes = static function (string $value): string {
+        $length = strlen($value);
+        if ($length >= 2) {
+            $first = $value[0];
+            $last = $value[$length - 1];
+            if (($first === '"' && $last === '"') || ($first === "'" && $last === "'")) {
+                return substr($value, 1, -1);
+            }
+        }
+
+        return $value;
+    };
+
+    $variables = [];
+
+    foreach ($lines as $line) {
+        $trimmed = trim($line);
+
+        if ($trimmed === '') {
+            continue;
+        }
+
+        $firstCharacter = $trimmed[0];
+        if ($firstCharacter === '#' || $firstCharacter === ';') {
+            continue;
+        }
+
+        $parts = explode('=', $line, 2);
+        if (count($parts) !== 2) {
+            continue;
+        }
+
+        $name = trim($parts[0]);
+        if ($name === '') {
+            continue;
+        }
+
+        $value = $stripQuotes(trim($parts[1]));
+        $variables[$name] = $value;
+    }
+
+    return $variables;
+};
+
+$envFile = __DIR__ . '/.env';
+$envValues = $loadEnv($envFile);
+
+foreach ($envValues as $name => $value) {
+    if (!array_key_exists($name, $_ENV)) {
+        $_ENV[$name] = $value;
+    }
+
+    if (!array_key_exists($name, $_SERVER)) {
+        $_SERVER[$name] = $value;
+    }
+
+    putenv($name . '=' . $value);
+}
+
+$getEnvValue = static function (string $key, $default = null) {
+    if (array_key_exists($key, $_ENV)) {
+        return $_ENV[$key];
+    }
+
+    if (array_key_exists($key, $_SERVER)) {
+        return $_SERVER[$key];
+    }
+
+    $value = getenv($key);
+    if ($value === false) {
+        return $default;
+    }
+
+    return $value;
+};
+
 $credentials = [
     'username' => 'admin',
     'password' => 'StrongPass123',
@@ -112,15 +198,15 @@ $structuredData = [
 
 $structuredDataJson = json_encode($structuredData, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) ?: '';
 
-$contactRecipient = 'pvitaly91@gmail.com';
-$contactSender = 'no-reply@dashatutor.com.ua';
+$contactRecipient = (string) $getEnvValue('CONTACT_RECIPIENT', 'pvitaly91@gmail.com');
+$contactSender = (string) $getEnvValue('CONTACT_SENDER', 'no-reply@dashatutor.com.ua');
 $smtpConfig = [
-    'host' => 'smtp.dashatutor.com.ua',
-    'port' => 587,
-    'username' => 'no-reply@dashatutor.com.ua',
-    'password' => 'rV5uH8rI8k',
-    'encryption' => 'tls', // Supported values: 'tls', 'ssl', null
-    'timeout' => 30,
+    'host' => (string) $getEnvValue('SMTP_HOST', 'smtp.dashatutor.com.ua'),
+    'port' => (int) $getEnvValue('SMTP_PORT', 587),
+    'username' => (string) $getEnvValue('SMTP_USERNAME', 'no-reply@dashatutor.com.ua'),
+    'password' => (string) $getEnvValue('SMTP_PASSWORD', 'rV5uH8rI8k'),
+    'encryption' => $getEnvValue('SMTP_ENCRYPTION', 'tls'), // Supported values: 'tls', 'ssl', null
+    'timeout' => (int) $getEnvValue('SMTP_TIMEOUT', 30),
 ];
 
 /**
