@@ -894,16 +894,32 @@ button.form-btn{
 footer div p{ margin-top: 6px; width: 250px; text-align: center; }
 }
 @media (max-width: 1024px){
-	.text-block {
-    
+  /* prevent horizontal reveal offsets from causing page overflow on tablets and below */
+  [data-scroll]{
+    --reveal-translate-x: 0px !important;
+  }
+
+  [data-scroll-child]{
+    --child-translate-x: 0px !important;
+  }
+
+  [data-scroll-child].reveal-child-left,
+  [data-scroll-child].reveal-child-right{
+    --child-translate-x: 0px !important;
+  }
+
+  .text-block{
     color: #41393aff;
   }
-  h1.main span {
+
+  h1.main span{
     color: #41393aff;
-}
-h1.main strong {
+  }
+
+  h1.main strong{
     color: #976f00;
-}
+  }
+
   footer{
     grid-template-columns: 1fr;          /* колона на планшет/мобілку */
     justify-items: center;
@@ -911,8 +927,10 @@ h1.main strong {
     padding: 24px 20px;                  /* менші бокові відступи */
     row-gap: 12px;
   }
+
   footer img{
-    width: 220px; height: auto;
+    width: 220px;
+    height: auto;
   }
 }
 
@@ -994,6 +1012,7 @@ h1.main strong {
     --hero-bg-base-y: 0px;
     background-position-x: center;
   }
+
   .order-lesson{
     width: 52px;
     height: 52px;
