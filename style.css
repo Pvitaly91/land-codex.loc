@@ -236,7 +236,8 @@ h1.main strong{ font-weight: 600; }
   display: inline-block;
   cursor: pointer;
   text-align: center;
-  width: 571px;
+  width: 100%;
+  max-width: 571px;
   height: 65px;
   margin-top: 60px;
   padding: 14px 8px;
