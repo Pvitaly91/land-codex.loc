@@ -500,7 +500,7 @@ $landingPageHtml = <<<HTML
           </a>
 
           <!-- Desktop Nav -->
-          <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-[18px] ">
+          <nav class="hidden md:flex items-center gap-6 lg:gap-8 text-[20px] ">
             <a class="hover:text-stone-900 " href="#english-tutor">Про мене</a>
             <a class="hover:text-stone-900 " href="#services">Послуги</a>
             <a class="hover:text-stone-900 " href="#faq">FAQ</a>
@@ -905,7 +905,7 @@ $landingPageHtml = <<<HTML
         <h3 class="text-[#595236] text-[26px] sm:text-[32px] leading-[1.25] font-medium reveal-child-left" data-scroll-child>
           Занурюйтесь у культуру, а не просто будьте туристом
         </h3>
-        <p class="mt-4 text-[#4B5563] text-[18px] sm:text-[20px] leading-[1.55]" data-scroll-child>
+        <p class="mt-4 text-[#4B5563] text-[20px] sm:text-[20px] leading-[1.55]" data-scroll-child>
           Англійська дозволяє вийти за межі стандартних маршрутів. Розумійте розповіді
           місцевих гідів, спілкуйтеся з новими людьми, дізнавайтеся про їхні традиції
           та отримуйте поради, яких не знайти в путівниках. Саме так народжуються
@@ -920,7 +920,7 @@ $landingPageHtml = <<<HTML
           <h3 class="text-[#595236] text-[26px] sm:text-[32px] leading-[1.25] font-medium reveal-child-right" data-scroll-child>
             Відчуйте впевненість у кожному кроці
           </h3>
-          <p class="mt-4 text-[#4B5563] text-[18px] sm:text-[20px] leading-[1.55] reveal-child-left" data-scroll-child>
+          <p class="mt-4 text-[#4B5563] text-[20px] sm:text-[20px] leading-[1.55] reveal-child-left" data-scroll-child>
             Забудьте про мовні бар'єри та невпевненість. З англійською ви зможете легко
             забронювати готель, замовити саме ту страву, яку хочеться, чи просто запитати
             дорогу у перехожого. Це дарує відчуття справжньої незалежності та спокою в будь-якій країні.
@@ -1004,7 +1004,7 @@ $landingPageHtml = <<<HTML
         <button
     
           type="submit"
-          class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[59px] bg-[#7a555b] text-white text-[18px] lg:text-[20px] font-medium rounded-lg shadow-md hover:bg-[#6b4950] transition"
+          class="w-full sm:w-[80%] lg:w-[60%] mx-auto h-[59px] bg-[#7a555b] text-white text-[20px] lg:text-[20px] font-medium rounded-lg shadow-md hover:bg-[#6b4950] transition"
         >
           Надіслати заявку
         </button>

@@ -963,6 +963,11 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
     scroll-padding-right: 16px;
     gap: 16px;
   }
+
+#english-tutor .slider-container .slider-track{
+    padding: 0 0px 60px;
+  }
+
   .slider-container .slider-track::-webkit-scrollbar{ display: none; }
   .slider-container .slider-track > *{
     flex: 0 0 100%;
@@ -1010,7 +1015,7 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
 @media (max-width: 768px){
   #main-left-block{
     --hero-bg-base-y: 0px;
-    background-position-x: center;
+   
   }
 
   .order-lesson{
@@ -1032,6 +1037,10 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
 }
 
 @media (max-width: 703px){
+  ul.section-list li{
+    padding-left: 40px;
+
+  }
   section.about{
     background-color: #fff;
     min-height: 370px;
@@ -1076,6 +1085,10 @@ footer div p{ margin-top: 6px; width: 250px; text-align: center; }
  
   h1.main{ font-size: clamp(26px, 9vw, 28px); line-height: clamp(34px, 10vw, 44px); }
   #try-first-leson{ margin-top: 60px; font-size:16px;}
+
+  .section-body, .text {
+    font-size:20px !important;
+  }
 }
 @media (max-width: 575px){
 	  #main-left-block {
