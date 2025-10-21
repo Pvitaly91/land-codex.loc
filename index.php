@@ -89,10 +89,24 @@ $getEnvValue = static function (string $key, $default = null) {
     return $value;
 };
 
+$authUsername = (string) $getEnvValue('AUTH_USERNAME', 'admin');
+$authPassword = (string) $getEnvValue('AUTH_PASSWORD', 'StrongPass123');
+
 $credentials = [
-    'username' => 'admin',
-    'password' => 'StrongPass123',
+    'username' => $authUsername,
+    'password' => $authPassword,
 ];
+
+$authEnabledValue = $getEnvValue('AUTH_ENABLED', 'true');
+$authEnabled = filter_var(
+    is_bool($authEnabledValue) ? $authEnabledValue : (string) $authEnabledValue,
+    FILTER_VALIDATE_BOOLEAN,
+    FILTER_NULL_ON_FAILURE
+);
+
+if ($authEnabled === null) {
+    $authEnabled = true;
+}
 
 $rememberCookieName = 'remember_auth';
 $rememberDuration = 30 * 24 * 60 * 60; // 30 days
@@ -1086,59 +1100,65 @@ function validateRememberToken(string $token, string $expectedUsername, string $
 }
 
 $authenticated = $_SESSION['authenticated'] ?? false;
-
-if (!$authenticated && isset($_COOKIE[$rememberCookieName])) {
-    $token = $_COOKIE[$rememberCookieName];
-
-    if (validateRememberToken($token, $credentials['username'], $secretKey)) {
-        $_SESSION['authenticated'] = true;
-        $authenticated = true;
-    } else {
-        setcookie($rememberCookieName, '', [
-            'expires' => time() - 3600,
-            'path' => '/',
-        ]);
-    }
-}
-
 $error = null;
 
-if (!$authenticated && $_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim((string)($_POST['username'] ?? ''));
-    $password = (string)($_POST['password'] ?? '');
-    $remember = isset($_POST['remember']);
+if ($authEnabled) {
+    if (!$authenticated && isset($_COOKIE[$rememberCookieName])) {
+        $token = $_COOKIE[$rememberCookieName];
 
-    if (
-        hash_equals($credentials['username'], $username)
-        && hash_equals($credentials['password'], $password)
-    ) {
-        $_SESSION['authenticated'] = true;
-
-        if ($remember) {
-            $token = createRememberToken($credentials['username'], $secretKey);
-            $cookieOptions = [
-                'expires' => time() + $rememberDuration,
-                'path' => '/',
-                'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
-                'httponly' => true,
-                'samesite' => 'Lax',
-            ];
-            setcookie($rememberCookieName, $token, $cookieOptions);
+        if (validateRememberToken($token, $credentials['username'], $secretKey)) {
+            $_SESSION['authenticated'] = true;
+            $authenticated = true;
         } else {
             setcookie($rememberCookieName, '', [
                 'expires' => time() - 3600,
                 'path' => '/',
             ]);
         }
-
-        header('Location: ' . $_SERVER['PHP_SELF']);
-        exit;
     }
 
-    $error = 'Невірний логін або пароль.';
-}
+    if (!$authenticated && $_SERVER['REQUEST_METHOD'] === 'POST') {
+        $username = trim((string)($_POST['username'] ?? ''));
+        $password = (string)($_POST['password'] ?? '');
+        $remember = isset($_POST['remember']);
 
-$authenticated = $_SESSION['authenticated'] ?? false;
+        if (
+            hash_equals($credentials['username'], $username)
+            && hash_equals($credentials['password'], $password)
+        ) {
+            $_SESSION['authenticated'] = true;
+
+            if ($remember) {
+                $token = createRememberToken($credentials['username'], $secretKey);
+                $cookieOptions = [
+                    'expires' => time() + $rememberDuration,
+                    'path' => '/',
+                    'secure' => isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off',
+                    'httponly' => true,
+                    'samesite' => 'Lax',
+                ];
+                setcookie($rememberCookieName, $token, $cookieOptions);
+            } else {
+                setcookie($rememberCookieName, '', [
+                    'expires' => time() - 3600,
+                    'path' => '/',
+                ]);
+            }
+
+            header('Location: ' . $_SERVER['PHP_SELF']);
+            exit;
+        }
+
+        $error = 'Невірний логін або пароль.';
+    }
+
+    $authenticated = $_SESSION['authenticated'] ?? false;
+} else {
+    $authenticated = true;
+    if (($_SESSION['authenticated'] ?? false) !== true) {
+        $_SESSION['authenticated'] = true;
+    }
+}
 
 if ($authenticated) {
     header('Content-Type: text/html; charset=UTF-8');
