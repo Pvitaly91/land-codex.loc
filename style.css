@@ -31,89 +31,81 @@ html, body{
 /* =========================
    Scroll reveal animations
 ========================= */
-[data-scroll]{
-  opacity: 1;
-  transform: none;
-  --reveal-translate-x: 0px;
-  --reveal-translate-y: 40px;
-  --reveal-scale: 1;
-  --reveal-duration: .6s;
-  --reveal-easing: cubic-bezier(0.4, 0, 0.2, 1);
+[data-scroll-child], #main-photo{
+  --enter-x: 0px;
+  --enter-y: 28px;
+  --enter-scale: 1;
+  --enter-duration: .78s;
+  --enter-animation: block-rise;
 }
 
-section[data-scroll]{
-  --reveal-translate-y: 120px;
-  --reveal-duration: .9s;
-  --reveal-easing: cubic-bezier(0.22, 1, 0.36, 1);
+.reveal-child-left{ --enter-x: -22px; }
+.reveal-child-right{ --enter-x: 22px; }
+.reveal-child-zoom{ --enter-scale: .96; }
+
+.card[data-scroll-child], .section-card[data-scroll-child]{
+  --enter-y: 36px;
+  --enter-scale: .94;
+  --enter-animation: block-pop;
+  --enter-duration: .85s;
 }
 
-#main-left-block[data-scroll]{
-  --reveal-translate-y: 0px;
-  --reveal-translate-x: 0px;
+img[data-scroll-child], #main-photo{
+  --enter-y: 20px;
+  --enter-scale: .97;
+  --enter-animation: block-photo;
+  --enter-duration: 1s;
 }
 
-#main-photo[data-scroll]{
-  --reveal-translate-x: 80px;
-  --reveal-translate-y: 0px;
-  --reveal-duration: .85s;
-}
-
-html.js-ready [data-scroll]{
+/* Content is visible by default; only the initialized observer adds these states. */
+.reveal-pending{
   opacity: 0;
-  transform: translate3d(var(--reveal-translate-x), var(--reveal-translate-y), 0) scale(var(--reveal-scale));
-  transition: opacity var(--reveal-duration) var(--reveal-easing), transform var(--reveal-duration) var(--reveal-easing);
-  transition-delay: var(--reveal-delay, 0s);
+  transform: translate3d(var(--enter-x), var(--enter-y), 0) scale(var(--enter-scale));
+}
+
+.reveal-entering{
+  animation: var(--enter-animation) var(--enter-duration) cubic-bezier(.16, 1, .3, 1) var(--reveal-delay, 0ms) both;
   will-change: opacity, transform;
 }
 
-/* keep fixed backgrounds working on sections that need parallax */
-html.js-ready #main-left-block[data-scroll]{
-  transform: translate3d(var(--reveal-translate-x), var(--reveal-translate-y), 0) scale(var(--reveal-scale));
-  will-change: opacity, transform;
+@keyframes block-rise{
+  from{
+    opacity: 0;
+    transform: translate3d(var(--enter-x), var(--enter-y), 0) scale(var(--enter-scale));
+  }
+  to{ opacity: 1; transform: none; }
 }
 
-html.js-ready [data-scroll].is-visible{
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
+@keyframes block-pop{
+  0%{ opacity: 0; transform: translate3d(0, var(--enter-y), 0) scale(var(--enter-scale)); }
+  65%{ opacity: 1; transform: translate3d(0, -3px, 0) scale(1.01); }
+  100%{ opacity: 1; transform: none; }
 }
 
-[data-scroll-child]{
-  opacity: 1;
-  transform: none;
-  --child-translate-x: 0px;
-  --child-translate-y: 24px;
-  --child-scale: .94;
-  --child-duration: .65s;
-  --child-easing: cubic-bezier(0.33, 1, 0.68, 1);
+@keyframes block-photo{
+  from{
+    opacity: 0;
+    clip-path: inset(0 0 14% 0);
+    transform: translate3d(0, var(--enter-y), 0) scale(var(--enter-scale));
+  }
+  to{ opacity: 1; clip-path: inset(0); transform: none; }
 }
 
-[data-scroll-child].reveal-child-left{
-  --child-translate-x: -45px;
-  --child-translate-y: 0px;
+@media (max-width: 768px){
+  [data-scroll-child], #main-photo{
+    --enter-x: 0px;
+    --enter-y: 20px;
+    --enter-duration: .65s;
+  }
 }
 
-[data-scroll-child].reveal-child-right{
-  --child-translate-x: 45px;
-  --child-translate-y: 0px;
-}
-
-[data-scroll-child].reveal-child-zoom{
-  --child-scale: .9;
-  --child-translate-y: 30px;
-  --child-duration: .7s;
-}
-
-html.js-ready [data-scroll-child]{
-  opacity: 0;
-  transform: translate3d(var(--child-translate-x), var(--child-translate-y), 0) scale(var(--child-scale));
-  transition: opacity var(--child-duration) var(--child-easing), transform var(--child-duration) var(--child-easing);
-  transition-delay: var(--reveal-delay, 0s);
-  will-change: opacity, transform;
-}
-
-html.js-ready [data-scroll-child].is-visible{
-  opacity: 1;
-  transform: translate3d(0, 0, 0) scale(1);
+@media print{
+  .reveal-pending, .reveal-entering{
+    opacity: 1 !important;
+    transform: none !important;
+    clip-path: none !important;
+    animation: none !important;
+  }
 }
 
 .social-link{
@@ -130,12 +122,13 @@ html.js-ready [data-scroll-child].is-visible{
 }
 
 @media (prefers-reduced-motion: reduce){
-  html.js-ready [data-scroll],
-  html.js-ready [data-scroll-child]{
+  html, body, .slider-container .slider-track{ scroll-behavior: auto !important; }
+  .reveal-pending, .reveal-entering{
     opacity: 1 !important;
     transform: none !important;
-    transition-duration: 0.01ms !important;
-    transition-delay: 0s !important;
+    clip-path: none !important;
+    animation: none !important;
+    will-change: auto !important;
   }
   .faq__content{
     transition-duration: 0.01ms !important;
@@ -631,7 +624,6 @@ section.form{
 #contact-form{
   position: relative;
   transition: transform .35s ease, opacity .35s ease;
-  will-change: transform, opacity;
 }
 
 #contact-form.contact-form--submitting{
@@ -894,19 +886,7 @@ button.form-btn{
 footer div p{ margin-top: 6px; width: 250px; text-align: center; }
 }
 @media (max-width: 1024px){
-  /* prevent horizontal reveal offsets from causing page overflow on tablets and below */
-  [data-scroll]{
-    --reveal-translate-x: 0px !important;
-  }
-
-  [data-scroll-child]{
-    --child-translate-x: 0px !important;
-  }
-
-  [data-scroll-child].reveal-child-left,
-  [data-scroll-child].reveal-child-right{
-    --child-translate-x: 0px !important;
-  }
+  [data-scroll-child]{ --enter-x: 0px; }
 
   .text-block{
     color: #41393aff;

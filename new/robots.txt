@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: http://dasha.loc/new/sitemap.xml

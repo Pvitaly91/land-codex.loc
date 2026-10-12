@@ -638,14 +638,14 @@ $landingPageHtml = <<<HTML
           Працюю з тими, хто хоче говорити англійською без пауз і страху. Індивідуальні плани та підтримка між уроками допомагають
           швидко побачити результат, незалежно від стартового рівня.
         </p>
-        <div class="mt-8 grid gap-6 md:grid-cols-2 " data-scroll-child>
-          <div class="section-card rounded-3xl border border-[#f1e3dd] bg-[#fdfaf8] p-6 shadow-sm">
+        <div class="mt-8 grid gap-6 md:grid-cols-2 ">
+          <div class="section-card rounded-3xl border border-[#f1e3dd] bg-[#fdfaf8] p-6 shadow-sm" data-scroll-child>
             <h3 class="section-card__title">Для дорослих</h3>
             <p class="section-card__text">
               Допомагаю прокачати бізнес-англійську, підготуватися до співбесіди та впевнено презентувати себе міжнародним партнерам.
             </p>
           </div>
-          <div class="section-card rounded-3xl border border-[#e3f0f6] bg-[#f7fbff] p-6 shadow-sm">
+          <div class="section-card rounded-3xl border border-[#e3f0f6] bg-[#f7fbff] p-6 shadow-sm" data-scroll-child>
             <h3 class="section-card__title">Для підлітків</h3>
             <p class="section-card__text">
               Підтягнемо шкільну програму, розберемо складні теми та підготуємося до іспитів із підтримкою репетитора англійської мови.
@@ -835,8 +835,8 @@ $landingPageHtml = <<<HTML
           Зібрала відповіді на питання, які найчастіше отримую від майбутніх студентів. Якщо чогось бракує — напишіть мені, і я
           з радістю підкажу.
         </p>
-        <div class="mt-8 space-y-4" data-scroll-child>
-          <details class="group rounded-3xl bg-white p-6 shadow-sm">
+        <div class="mt-8 space-y-4">
+          <details class="group rounded-3xl bg-white p-6 shadow-sm" data-scroll-child>
             <summary class="faq__summary">
               <span class="faq__summary-text">Які результати дають заняття з репетитором англійської мови?</span>
               <span class="faq__icon" aria-hidden="true"></span>
@@ -848,7 +848,7 @@ $landingPageHtml = <<<HTML
               </p>
             </div>
           </details>
-          <details class="group rounded-3xl bg-white p-6 shadow-sm">
+          <details class="group rounded-3xl bg-white p-6 shadow-sm" data-scroll-child>
             <summary class="faq__summary">
               <span class="faq__summary-text">Як забронювати індивідуальний урок?</span>
               <span class="faq__icon" aria-hidden="true"></span>
@@ -860,7 +860,7 @@ $landingPageHtml = <<<HTML
               </p>
             </div>
           </details>
-          <details class="group rounded-3xl bg-white p-6 shadow-sm">
+          <details class="group rounded-3xl bg-white p-6 shadow-sm" data-scroll-child>
             <summary class="faq__summary">
               <span class="faq__summary-text">Чи можна поєднувати індивідуальні заняття з підготовкою до іспиту?</span>
               <span class="faq__icon" aria-hidden="true"></span>

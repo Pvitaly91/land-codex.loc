@@ -1,39 +1,64 @@
 'use strict';
 
-document.documentElement.classList.add('js-ready');
-
 document.addEventListener('DOMContentLoaded', () => {
-  const revealElements = Array.from(document.querySelectorAll('[data-scroll], [data-scroll-child]'));
-  const pairDelayStep = 0.12;
-  const intraPairGap = 0.08;
-  const maxDelay = 0.1;
+  const prefersReducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  // Animate content only: section backgrounds and nested wrappers stay stationary.
+  const revealElements = Array.from(document.querySelectorAll('[data-scroll-child], #main-photo'));
+  let revealObserver;
+  const finishReveal = (element) => {
+    revealObserver?.unobserve(element);
+    element.classList.remove('reveal-pending', 'reveal-entering');
+    element.classList.add('is-visible');
+    element.style.removeProperty('--reveal-delay');
+  };
+  const showAllReveals = () => {
+    revealObserver?.disconnect();
+    revealElements.forEach(finishReveal);
+  };
 
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries, obs) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          obs.unobserve(entry.target);
-        }
+  if ('IntersectionObserver' in window && !prefersReducedMotionQuery.matches) {
+    try {
+      revealObserver = new IntersectionObserver((entries) => {
+        const groupDelays = new Map();
+        entries.filter((entry) => entry.isIntersecting && entry.target.classList.contains('reveal-pending'))
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top
+            || a.boundingClientRect.left - b.boundingClientRect.left)
+          .forEach(({ target }) => {
+            const group = target.closest('section, footer');
+            const index = groupDelays.get(group) || 0;
+            groupDelays.set(group, index + 1);
+            target.style.setProperty('--reveal-delay', `${Math.min(index * 75, 225)}ms`);
+            target.classList.remove('reveal-pending');
+            target.classList.add('reveal-entering');
+            revealObserver.unobserve(target);
+          });
+      }, { threshold: 0, rootMargin: '0px 0px -24px 0px' });
+
+      revealElements.forEach((element) => {
+        revealObserver.observe(element);
+        element.classList.add('reveal-pending');
       });
-    }, {
-      threshold: 0.15,
-      rootMargin: '0px 0px 2% 0px',
-    });
-
-    revealElements.forEach((element, index) => {
-      if (!element.style.getPropertyValue('--reveal-delay')) {
-        const pairIndex = Math.floor(index / 2);
-        const withinPairOffset = (index % 2) * intraPairGap;
-        const delay = Math.min(pairIndex * pairDelayStep + withinPairOffset, maxDelay);
-        element.style.setProperty('--reveal-delay', `${delay}s`);
-      }
-
-      observer.observe(element);
-    });
-  } else {
-    revealElements.forEach((element) => element.classList.add('is-visible'));
+    } catch {
+      showAllReveals();
+    }
   }
+
+  // Release animation styles so form states and other interactions own their transforms.
+  ['animationend', 'animationcancel'].forEach((eventName) => {
+    document.addEventListener(eventName, (event) => {
+      if (event.animationName.startsWith('block-') && event.target.classList.contains('reveal-entering')) {
+        finishReveal(event.target);
+      }
+    });
+  });
+  document.addEventListener('focusin', (event) => {
+    const element = event.target.closest('.reveal-pending, .reveal-entering');
+    if (element) finishReveal(element);
+  });
+  prefersReducedMotionQuery.addEventListener('change', (event) => {
+    if (event.matches) showAllReveals();
+  });
+  window.addEventListener('beforeprint', showAllReveals);
 
   const burgerButton = document.getElementById('menu-button-burger');
   const mobileNav = document.getElementById('mnav');
@@ -63,7 +88,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       event.preventDefault();
-      target.scrollIntoView({ behavior: 'smooth' });
+      target.scrollIntoView({ behavior: prefersReducedMotionQuery.matches ? 'auto' : 'smooth' });
 
       if (mobileNav && burgerButton) {
         mobileNav.classList.remove('open');
@@ -121,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function scrollToCurrent(options = {}) {
-      const behavior = options.instant ? 'auto' : 'smooth';
+      const behavior = options.instant || prefersReducedMotionQuery.matches ? 'auto' : 'smooth';
       const target = items[current];
 
       if (!target) {
@@ -188,8 +213,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     scrollToCurrent({ instant: true });
   });
-
-  const prefersReducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
   const initFaqAccordion = (reduceMotion) => {
     const faqItems = document.querySelectorAll('#faq details');
@@ -295,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const applyOffset = () => {
       rafId = 0;
 
-      if (!heroMediaQuery.matches) {
+      if (!heroMediaQuery.matches || prefersReducedMotionQuery.matches) {
         return;
       }
 
@@ -305,7 +328,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const requestOffset = () => {
-      if (!heroMediaQuery.matches) {
+      if (!heroMediaQuery.matches || prefersReducedMotionQuery.matches) {
         return;
       }
 
@@ -335,7 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const enableHeroParallax = () => {
-      if (heroMediaQuery.matches) {
+      if (heroMediaQuery.matches && !prefersReducedMotionQuery.matches) {
         heroSection.classList.add('hero-fixed-background');
         attachScroll();
         applyOffset();
@@ -353,6 +376,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     enableHeroParallax();
+    prefersReducedMotionQuery.addEventListener('change', enableHeroParallax);
 
     if (typeof heroMediaQuery.addEventListener === 'function') {
       heroMediaQuery.addEventListener('change', enableHeroParallax);
